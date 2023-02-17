@@ -22,27 +22,53 @@ bash -c "$(curl -s https://raw.githubusercontent.com/CFPB/development/main/open-
 
 ----
 
-# Project Title
+# SV-JIM
 
-**Description**:  Put a meaningful, short, plain-language description of what
-this project is trying to accomplish and why it matters.
-Describe the problem(s) this project solves.
-Describe how this software can improve the lives of its audience.
+**Description**:  
+Multi-stage SnakeMake pipeline/workflow for SV calling using multiple long-read and assembly alignment-based 
+SV calling tools with evaluation performed based on consensus using both the Jacccard index measure and Truvari. 
+This workflow produces a comprehensive and highly supported evidence-based SV result set to aid SV studies that 
+require well-supported results.
 
 Other things to include:
 
   - **Technology stack**: Indicate the technological nature of the software, including primary programming language(s) and whether the software is intended as standalone or as a module in a framework or other ecosystem.
-  - **Status**:  Alpha, Beta, 1.1, etc. It's OK to write a sentence, too. The goal is to let interested people know where this project is at. This is also a good place to link to the [CHANGELOG](CHANGELOG.md).
+  - **Status**:  Version 1.0.2 - [CHANGELOG](CHANGELOG.md).
   - **Links to production or demo instances**
   - Describe what sets this apart from related-projects. Linking to another doc or page is OK if this can't be expressed in a sentence or two.
 
 
-**Screenshot**: If the software has visual components, place a screenshot after the description; e.g.,
-
-![](https://raw.githubusercontent.com/cfpb/open-source-project-template/main/screenshot.png)
-
-
 ## Dependencies
+
+SV-JIM is a SnakeMake pipeline that utilizes multiple software tools. Many of these tools are available through conda so the pipeline includes a conda configuration file for user convenience.
+The full list of required software is provided below and includes version information for software versions used during testing:
+
+#### Dependencies installed through the provided conda configuration file
+
+  - biopython 		(1.80)
+  - cutesv 		(2.0.2)
+  - svim 		(1.4.2)
+  - svim-asm 		(1.0.3)
+  - intervaltree	(3.0.2)
+  - scipy		(1.10.0)
+  - mamba		(1.2.0)
+  - numpy		(1.24.2)
+  - snakemake		(7.21.0)
+  - pysam		(0.20.0)
+  - sniffles=2.0	(2.0.7)
+  - pandas		(1.5.3)
+  - matplotlib		(3.6.3)
+  - matplotlib-venn	(0.11.7)
+  - truvari		(3.5.0)
+
+#### Other dependencies
+
+  - SRA-Tools 		(3.0.2)
+  - Minimap2		(2.24-r1122)
+  - SAMTools		(1.16.1)
+  - BCFTools		(1.16)
+  - BEDTools		(2.30.0)
+  - PAV			(2.2.1)
 
 Describe any dependencies that must be installed for this software to work.
 This includes programming languages, databases or other storage mechanisms, build tools, frameworks, and so forth.
@@ -50,19 +76,94 @@ If specific versions of other software are required, or known not to work, call 
 
 ## Installation
 
+As a SnakeMake workflow that employs external tools, the installation only involves cloning this repository:
+
+git clone https://github.com/CMalcolmTodd/SV-JIM
+
+After cloning the SV-JIM repository, the conda dependencies will be loaded by SnakeMake automatically during execution.
+For the remaining dependencies please consult the installation instructions provided by each tool's github/manual
+ and ensure these tools are added to your PATH variable.
+
 Detailed instructions on how to install, configure, and get the project running.
 This should be frequently tested to ensure reliability. Alternatively, link to
 a separate [INSTALL](INSTALL.md) document.
 
 ## Configuration
 
-If the software is configurable, describe it in detail, either here or in other documentation to which you link.
+For configuration, SV-JIM provides a configuration file (config-SV-JIM.yaml) used by SnakeMake to specify the required input files, conda environments, options, and directory information to enable execution.
+A template config file is provided within this repo that features many default values that utilize the provided working directory structure; 
+however, these directory values are entriely configurable if the user prefers to use alternative directories. An example of a complete config file is provided below.
+
+Alternatively, if the user prefers to provide their own configuration file path, then the top line of SV-JIM's provided Snakefile found in the repo's
+ home directory can be updated with new path information for the preferred config file.
+
+SV-JIM also executes PAV which consists of its own SnakeMake pipeline, so please place the required PAV configuration documents 
+(Ex: config.json and assemblies.tsv) within the desired PAV working directory (Ex: ./SV_Calls/PAV/ by default)
+
+Finally, SV-JIM includes a conda environment config file (All-Env.yaml) that can be used to install many of the pipeline's dependencies; however, the provided SnakeMake config file can also be updated to use alternative conda environment files if the user prefers to use separate conda environments that feature specific (or conflicting) software versions. To make these changes please provided updated patch information for each tool's conda environment or leave the path as the default value otherwise.
+
+#### Configuration file example:
+
+threads: 8
+
+refSampleName: "NI100"
+refAssembly: "../Genomes/Bnigra_NI100.v2.genome.fasta"
+
+qrySampleName: "C2"
+qryAssembly: "../Genomes/Bnigra_C2.v1.genome.fasta"
+
+accessionSR: "SRR11906214" #Accession number for Short-reads downloaded from SRA
+accessionLR: "SRR11906206" #Accession number for Long-reads downloaded from SRA
+
+seqTechForLR: "map-ont" # map-ont, map-bp
+srAlignerChoice: "bowtie2" # bwa, bowtie2
+
+minMAPQForSVs: 20
+minSuppReadsForSVs: 10
+minSizeForSVs: 50
+maxSizeForSVs: 300000
+overlapThreshold: 0.5
+
+mainCondaEnvYAML: "./All-Env.yaml"
+bowtie2CondaEnvYAML: "./All-Env.yaml" #"Bowtie-Env.yaml"
+dellyCondaEnvYAML: "./All-Env.yaml" #"DellyEnv.yaml"
+cuteSVCondaEnvYAML: "./All-Env.yaml" #"CuteSV-Env.yaml"
+sniffles2CondaEnvYAML: "./All-Env.yaml" #"Bio-Env.yaml"
+svimCondaEnvYAML: "./All-Env.yaml" #"Bowtie-Env.yaml"
+svimASMCondaEnvYAML: "./All-Env.yaml" #"SVIM-ASM-Env.yaml"
+pavCondaEnvYAML: "./All-Env.yaml" #"PAV-Env.yaml"
+
+genomesFolder: "./Genomes"
+shortReadsFolder: "./Short_Reads"
+longReadsFolder: "./Long_Reads"
+fastQCReportsFolder: "./FastQC_Reports"
+qualimapReportsFolder: "./Qualimap_Reports"
+alignResultsFolder: "./Alignments"
+svResultsFolder: "./SV_Calls"
+intersectResultsFolder: "./Intersections"
+truvariResultsFolder: "./Truvari_Results"
 
 ## Usage
 
-Show users how to use the software.
-Be specific.
-Use appropriate formatting when showing code snippets.
+#### To perform a dry run:
+
+Recommended first step to confirm configuration/settings prior to executions.
+Performing a dry run (-np) Builds the directed acyclic graph representing the outstanding tasks of the workflow and prints the applicable commands to be run at
+each stage of pipeline to allow for review, but doesn't execute any of the related commands.
+
+1) Edit configuration file to inputs to be processed
+2) cd to SV-JIM home directory
+3) Run: snakemake -np --use-conda --cores <# threads>
+
+
+#### To execute SV-JIM once configuration is prepared: 
+
+Builds the directed acyclic graph representing the outstanding tasks of the workflow and begins execution of the underlying software. Note: the order of execution
+for the outstanding tasks can vary between executions.
+
+1) cd to SV-JIM home directory
+2) Run: snakemake --use-conda --cores <# threads>
+
 
 ## How to test the software
 
