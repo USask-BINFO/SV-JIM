@@ -22,12 +22,14 @@ bash -c "$(curl -s https://raw.githubusercontent.com/CFPB/development/main/open-
 
 ----
 
+# Note: this README reflects a work in progress and will be sibject to multiple reworks in the short-term
+
 # SV-JIM
 
 **Description**:  
-Multi-stage SnakeMake pipeline/workflow for SV calling using multiple long-read and assembly alignment-based 
+Multi-stage SnakeMake pipeline/workflow for Structural Variant (SV) calling using multiple long-read and assembly alignment-based 
 SV calling tools with evaluation performed based on consensus using both the Jacccard index measure and Truvari. 
-This workflow produces a comprehensive and highly supported evidence-based SV result set to aid SV studies that 
+This workflow produces a comprehensive evidence-based SV result set to aid SV studies that 
 require well-supported results.
 
 Other things to include:
@@ -37,6 +39,16 @@ Other things to include:
   - **Links to production or demo instances**
   - Describe what sets this apart from related-projects. Linking to another doc or page is OK if this can't be expressed in a sentence or two.
 
+## Supported formats
+
+SV-JIM requires genome assemblies for a reference and query sample in FASTA format and a set of long-reads from the query sample in FASTQ format.
+The input genome assembly files must be pre-downloaded by the user and either placed in the `./Genomes/` folder in the provided workflow directories
+or the path information for there location must be updated in the configuration file prior to execution.
+
+After execution, SV-JIM produces multiple SV result files in Variant Call Format (VCF)
+
+Similarly, the read data can be downloaded in advance and placed in the `./Long_Reads/` directory; however, SV-JIM can also execute an SRA Tools prefetch
+command if provided with only the long-read data's accession number from NCBI.
 
 ## Dependencies
 
@@ -78,29 +90,37 @@ If specific versions of other software are required, or known not to work, call 
 
 As a SnakeMake workflow that employs external tools, the installation only involves cloning this repository:
 
+```
 git clone https://github.com/CMalcolmTodd/SV-JIM
+```
 
-After cloning the SV-JIM repository, the conda dependencies will be loaded by SnakeMake automatically during execution.
+After cloning the SV-JIM repository, the conda dependencies will be loaded by SnakeMake automatically during execution using the included conda env configuration file.
 For the remaining dependencies please consult the installation instructions provided by each tool's github/manual
  and ensure these tools are added to your PATH variable.
 
-Detailed instructions on how to install, configure, and get the project running.
-This should be frequently tested to ensure reliability. Alternatively, link to
-a separate [INSTALL](INSTALL.md) document.
-
 ## Configuration
 
-For configuration, SV-JIM provides a configuration file (config-SV-JIM.yaml) used by SnakeMake to specify the required input files, conda environments, options, and directory information to enable execution.
-A template config file is provided within this repo that features many default values that utilize the provided working directory structure; 
-however, these directory values are entriely configurable if the user prefers to use alternative directories. An example of a complete config file is provided below.
+For configuration, SV-JIM provides a [config file template](config-SV-JIM.yaml) used by SnakeMake to specify the required input files, conda environments, options, and directory information to enable execution.
+The template config file provided within this repo features many default values that utilize the provided working directory structure; 
+however, these values are entriely configurable if the preference is to use alternative directories. An example of a complete config file is provided below.
 
-Alternatively, if the user prefers to provide their own configuration file path, then the top line of SV-JIM's provided Snakefile found in the repo's
- home directory can be updated with new path information for the preferred config file.
+Alternatively, if the user prefers to provide their own configuration file rather than fill in the template, then the top most line of SV-JIM's provided Snakefile in the home directory
+ can be updated with new path information for the preferred config file.
 
-SV-JIM also executes PAV which consists of its own SnakeMake pipeline, so please place the required PAV configuration documents 
-(Ex: config.json and assemblies.tsv) within the desired PAV working directory (Ex: ./SV_Calls/PAV/ by default)
+SV-JIM also executes PAV within the workflow (which consists of its own SnakeMake pipeline), so please place the required PAV configuration documents 
+(Ex: config.json and assemblies.tsv) within the desired PAV working directory (Ex: ./SV_Calls/PAV/ by default).
 
-Finally, SV-JIM includes a conda environment config file (All-Env.yaml) that can be used to install many of the pipeline's dependencies; however, the provided SnakeMake config file can also be updated to use alternative conda environment files if the user prefers to use separate conda environments that feature specific (or conflicting) software versions. To make these changes please provided updated patch information for each tool's conda environment or leave the path as the default value otherwise.
+Finally, SV-JIM includes a [conda config file](All-Env.yaml) that can be used to have SnakeMake install many of the pipeline's dependencies; however, the provided SnakeMake config file can also be 
+updated to use alternative existing conda environment files if using separate conda environments with specific (or conflicting) software versions is preferred. 
+
+These conda configuration files can be generated as follows:
+
+```
+conda env export -n <condaEnvName> -f <fileName>.yaml --from-history
+```
+
+Once the conda config files have been created, please provide updated path information for each tool's conda configuration file or leave the path as the default value otherwise.
+
 
 #### Configuration file example:
 
@@ -153,8 +173,10 @@ each stage of pipeline to allow for review, but doesn't execute any of the relat
 
 1) Edit configuration file to inputs to be processed
 2) cd to SV-JIM home directory
-3) Run: snakemake -np --use-conda --cores <# threads>
-
+3) Run: 
+```
+snakemake -np --use-conda --cores <# threads>
+```
 
 #### To execute SV-JIM once configuration is prepared: 
 
@@ -162,8 +184,10 @@ Builds the directed acyclic graph representing the outstanding tasks of the work
 for the outstanding tasks can vary between executions.
 
 1) cd to SV-JIM home directory
-2) Run: snakemake --use-conda --cores <# threads>
-
+2) Run: 
+```
+snakemake --use-conda --cores <# threads>
+```
 
 ## How to test the software
 
