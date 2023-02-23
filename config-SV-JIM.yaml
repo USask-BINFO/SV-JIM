@@ -1,0 +1,71 @@
+#*****************************************************
+#Input File Configurations
+#*****************************************************
+
+#Reference Sequence Information
+refSampleName: "NI100" # Short ID for user to distinguish files
+refAssembly: "./Workflow_Outputs/Genomes/Bnigra_NI100.v2.genome.fasta" # Path to Reference Fenome fasta file
+refSeqsFile: "./Workflow_Outputs/Genomes/RefSeqsToInclude.txt" # File of REF regions to include (one per line. Ex. Chromosomes only). Can be created with grep "><Chrom_Prefix>" <targetGenome> | tr -d ">"
+
+#Query Sequence Information
+qrySampleName: "C2" # Long ID for user to distinguish files
+qryAssembly: "./Workflow_Outputs/Genomes/Bnigra_C2.v1.genome.fasta" # Path to Query Assembly's fasta file
+qrySeqsFile: "./Workflow_Outputs/Genomes/QrySeqsToInclude.txt" # File of regions to include (one per line. Ex: Chrosomes only). Can be created with grep "><CHROM_PREFIX>" <targetGenome> | tr -d ">"
+
+#Read Input Information
+accessionLR: "SRR11906206" # Accession number for Long-reads downloaded from SRA
+
+
+#*****************************************************
+# Environment and Working Directory Configurations
+#*****************************************************
+
+#Available Threads (Update to reflect hardware available)
+threads: 30
+
+#Designated Working Directory Information (Defaults can be built using 'build-workspace.sh' provided in home directory of repo)
+genomesFolder: "./Workflow_Outputs/Genomes"
+longReadsFolder: "./Workflow_Outputs/Long_Reads"
+qualimapReportsFolder: "./Workflow_Outputs/Qualimap_Reports"
+alignResultsFolder: "./Workflow_Outputs/Alignments"
+svResultsFolder: "./Workflow_Outputs/SV_Calls"
+intersectResultsFolder: "./Workflow_Outputs/Intersections"
+truvariResultsFolder: "./Workflow_Outputs/Truvari_Results"
+
+#Designated Conda Environment Information (Default YAML env file provided)(Note: Using only a single yaml file of all software reduces pipeline execution time)
+cuteSVCondaEnvYAML: "./Rules/All-Env.yaml" # Path to YAML file for conda env that CuteSV is installed in"
+sniffles2CondaEnvYAML: "./Rules/All-Env.yaml" # Path to YAML file for conda env that Sniffles2 is installed in"
+svimCondaEnvYAML: "./Rules/All-Env.yaml" # Path to YAML file for conda env that SVIM is installed in"
+svimASMCondaEnvYAML: "./Rules/All-Env.yaml" # Path to YAML file for conda env that SVIM-ASM is installed in"
+pavCondaEnvYAML: "./Rules/All-Env.yaml" # Path to YAML file for conda environment that PAV dependencies are installed in"
+
+
+#*****************************************************
+# Pipeline Software Configurations
+#*****************************************************
+
+#SRATools Configurations (Default based on Bnigra read data used in testing)
+prefetchMaxSize: "50G" # Maximum file size that will downloaded during prefetch operation 
+
+#Minimap2 Aligner Configurations (for more details see minimap2 --help)
+presetForLR: "map-ont" # Predefined settings based on sequencing tech (Ex: map-ont, map-pb, map-hifi)
+presetForAssemblies: "asm20" # Predefined settings for assembly to ref alignment based on similarity (asm5, asm10, asm20) (see minimap2 --help for similarity thresholds) 
+minimapZDropForLR: "600,200" # Z drop score and Inversion Z drop score parameter in minimap (Default taken from cuteSV paper that compared similar tools)
+srAlignerChoice: "bowtie2" # Choice of aligner for short reads ("bwa" or "bowtie2")
+
+#SAMTools Configurations (Default settings taken from SVIM-ASM paper)
+memSettingForAssemblySort: "4G" # Requested/Required memory amount when sorting minimap2's assembly-to-ref alignment output
+
+#General SV Caller Configurations (Default settings taken from CuteSV paper)
+minMAPQForSVs: 20 # PHRED-scaled quality score (relates to probability of error and ranges from 4-60 w 10=10% error, 20=1%, 30=0.1%, 40=0.01%, 50=0.001%, 60=0.0001%)
+minSuppReadsForSVs: 10 # Evidence threshold for the number of reads the support/indicate the presence of an SV
+minSizeForSVs: 50 # Filtering for min size of the SV to be detected (50 based on common definition for SV min size in literature)
+maxSizeForSVs: 300000 # Filtering maximum size for SV detectable by tools
+
+#CuteSV Configurations (Default settings taken from CuteSV paper, see CuteSV help menu or repo for more details)
+maxClusterBias: 100
+diffRatio: 0.3
+
+#Truvari Bench Configurations (see truvari help menu for more details)
+overlapThreshold: 0.5 # (0.5 [or 50%] is a commonly use setting in several publications. Alternatively, svim-asm paper used 70%) 
+maxRefDistance: 1000 # (Default setting chosen based on configuration used in svim-asm paper)

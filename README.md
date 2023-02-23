@@ -52,7 +52,7 @@ command if provided with only the long-read data's accession number from NCBI.
 
 ## Dependencies
 
-SV-JIM is a SnakeMake pipeline that utilizes multiple software tools. Many of these tools are available through conda so the pipeline includes a conda configuration file for user convenience.
+SV-JIM is a SnakeMake pipeline that utilizes multiple third party software tools. Many of these tools are installable as conda package so the pipeline includes a conda configuration file for user convenience.
 The full list of required software is provided below and includes version information for software versions used during testing:
 
 #### Dependencies installed through the provided conda configuration file
@@ -108,7 +108,7 @@ Alternatively, if the user prefers to provide their own configuration file rathe
  can be updated with new path information for the preferred config file.
 
 SV-JIM also executes PAV within the workflow (which consists of its own SnakeMake pipeline), so please place the required PAV configuration documents 
-(Ex: config.json and assemblies.tsv) within the desired PAV working directory (Ex: ./SV_Calls/PAV/ by default).
+(Ex: `config.json` and `assemblies.tsv`) within the desired PAV working directory (Ex: `./SV_Calls/PAV/` by default).
 
 Finally, SV-JIM includes a [conda config file](All-Env.yaml) that can be used to have SnakeMake install many of the pipeline's dependencies; however, the provided SnakeMake config file can also be 
 updated to use alternative existing conda environment files if using separate conda environments with specific (or conflicting) software versions is preferred. 
@@ -123,20 +123,17 @@ Once the conda config files have been created, please provide updated path infor
 
 
 #### Configuration file example:
-
-threads: 8
+```
+threads: 20
 
 refSampleName: "NI100"
-refAssembly: "../Genomes/Bnigra_NI100.v2.genome.fasta"
+refAssembly: "./Genomes/Bnigra_NI100.v2.genome.fasta"
 
 qrySampleName: "C2"
-qryAssembly: "../Genomes/Bnigra_C2.v1.genome.fasta"
+qryAssembly: "./Genomes/Bnigra_C2.v1.genome.fasta"
 
-accessionSR: "SRR11906214" #Accession number for Short-reads downloaded from SRA
 accessionLR: "SRR11906206" #Accession number for Long-reads downloaded from SRA
-
 seqTechForLR: "map-ont" # map-ont, map-bp
-srAlignerChoice: "bowtie2" # bwa, bowtie2
 
 minMAPQForSVs: 20
 minSuppReadsForSVs: 10
@@ -144,25 +141,21 @@ minSizeForSVs: 50
 maxSizeForSVs: 300000
 overlapThreshold: 0.5
 
-mainCondaEnvYAML: "./All-Env.yaml"
-bowtie2CondaEnvYAML: "./All-Env.yaml" #"Bowtie-Env.yaml"
-dellyCondaEnvYAML: "./All-Env.yaml" #"DellyEnv.yaml"
-cuteSVCondaEnvYAML: "./All-Env.yaml" #"CuteSV-Env.yaml"
-sniffles2CondaEnvYAML: "./All-Env.yaml" #"Bio-Env.yaml"
-svimCondaEnvYAML: "./All-Env.yaml" #"Bowtie-Env.yaml"
-svimASMCondaEnvYAML: "./All-Env.yaml" #"SVIM-ASM-Env.yaml"
-pavCondaEnvYAML: "./All-Env.yaml" #"PAV-Env.yaml"
+mainCondaEnvYAML: "./Rules/All-Env.yaml"
+cuteSVCondaEnvYAML: "./Rules/All-Env.yaml" #"CuteSV-Env.yaml"
+sniffles2CondaEnvYAML: "./Rules/All-Env.yaml" #"Sniffles2-Env.yaml"
+svimCondaEnvYAML: "./Rules/All-Env.yaml" #"SVIM-Env.yaml"
+svimASMCondaEnvYAML: "./Rules/All-Env.yaml" #"SVIM-ASM-Env.yaml"
+pavCondaEnvYAML: "./Rules/All-Env.yaml" #"PAV-Env.yaml"
 
 genomesFolder: "./Genomes"
-shortReadsFolder: "./Short_Reads"
 longReadsFolder: "./Long_Reads"
-fastQCReportsFolder: "./FastQC_Reports"
 qualimapReportsFolder: "./Qualimap_Reports"
 alignResultsFolder: "./Alignments"
 svResultsFolder: "./SV_Calls"
 intersectResultsFolder: "./Intersections"
 truvariResultsFolder: "./Truvari_Results"
-
+```
 ## Usage
 
 #### To perform a dry run:

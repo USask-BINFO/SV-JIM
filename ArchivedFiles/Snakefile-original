@@ -1,0 +1,1204 @@
+configfile: "./config-SV-JIM.yaml"
+
+NUM_THREADS=config["threads"]
+
+GENOME_DIR=config["genomesFolder"]
+SR_DIR=config["shortReadsFolder"]
+LR_DIR=config["longReadsFolder"]
+ALIGN_DIR=config["alignResultsFolder"]
+SV_RESULTS_DIR=config["svResultsFolder"]
+INTERSECT_DIR=config["intersectResultsFolder"]
+TRUVARI_DIR=config["truvariResultsFolder"]
+FASTQC_OUTDIR=config["fastQCReportsFolder"]
+QUALIMAP_OUTDIR=config["qualimapReportsFolder"]
+
+MAIN_CONDA=config["mainCondaEnvYAML"]
+BOWTIE2_CONDA=config["bowtie2CondaEnvYAML"]
+DELLY_CONDA=config["dellyCondaEnvYAML"]
+SNIFFLES_CONDA=config["sniffles2CondaEnvYAML"]
+CUTESV_CONDA=config["cuteSVCondaEnvYAML"]
+SVIM_CONDA=config["svimCondaEnvYAML"]
+SVIM_ASM_CONDA=config["svimASMCondaEnvYAML"]
+PAV_CONDA=config["pavCondaEnvYAML"]
+
+SR_ACCESSION=config["accessionSR"]
+SR_PREFIX=str(SR_DIR+"/"+SR_ACCESSION)
+LR_ACCESSION=config["accessionLR"]
+LR_PREFIX=str(LR_DIR + "/" + LR_ACCESSION)
+
+REF_SAMP_NAME=config["refSampleName"]
+REF_GENOME=config["refAssembly"]
+REF_PREFIX=str(GENOME_DIR + "/" + REF_SAMP_NAME)
+QRY_SAMP_NAME=config["qrySampleName"]
+QRY_GENOME=config["qryAssembly"]
+
+BT2_PREFIX=str(ALIGN_DIR + "/" + REF_SAMP_NAME + ".bowtie2")
+BWA_PREFIX=str(ALIGN_DIR + "/" + REF_SAMP_NAME + ".bwa")
+MNMP2_READS_PREFIX=str(ALIGN_DIR+ "/" + REF_SAMP_NAME + ".minimap2")
+MNMP2_GENOMES_PREFIX=str(ALIGN_DIR+ "/" + REF_SAMP_NAME + "-" + QRY_SAMP_NAME +".minimap2")
+MNMP2_SEQ_PRESET=config["seqTechForLR"]
+
+if(config["srAlignerChoice"] == "bwa"):
+      SR_ALIGNER_PREFIX=BWA_PREFIX
+else:
+      SR_ALIGNER_PREFIX=BT2_PREFIX
+
+MIN_SV_MAPQ=str(config["minMAPQForSVs"])
+MIN_SV_SUPPORT=str(config["minSuppReadsForSVs"])
+MIN_SV_SIZE=str(config["minSizeForSVs"])
+MAX_SV_SIZE=str(config["maxSizeForSVs"])
+MIN_OVERLAP=str(config["overlapThreshold"])
+
+DELLY_PREFIX=str(SV_RESULTS_DIR + "/Delly/" + REF_SAMP_NAME + ".delly")
+CUTESV_PREFIX=str(SV_RESULTS_DIR + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV")
+SNIFFLES_PREFIX=str(SV_RESULTS_DIR + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2")
+SVIM_PREFIX=str(SV_RESULTS_DIR + "/SVIM/" + REF_SAMP_NAME + ".svim")
+SVIM_ASM_PREFIX=str(SV_RESULTS_DIR + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm")
+PAV_PREFIX=str(SV_RESULTS_DIR + "/PAV/" + REF_SAMP_NAME + ".pav")
+
+
+rule all:
+	input:
+                str(DELLY_PREFIX + ".DEL.vcf"),
+                str(DELLY_PREFIX + ".INS.vcf"),
+                str(DELLY_PREFIX + ".DUP.vcf"),
+                str(DELLY_PREFIX + ".INV.vcf"),
+                str(DELLY_PREFIX + ".BND.vcf"),
+                str(INTERSECT_DIR + "/all-LR-callers.results.DEL.vcf"),
+                str(INTERSECT_DIR + "/all-LR-callers.results.INS.vcf"),
+                str(INTERSECT_DIR + "/all-LR-callers.results.DUP.vcf"),
+                str(INTERSECT_DIR + "/all-LR-callers.results.INV.vcf"),
+                str(INTERSECT_DIR + "/all-LR-callers.results.BND.vcf"),
+                str(INTERSECT_DIR + "/PAV-SVIM-ASM.results.DEL.vcf"),
+                str(INTERSECT_DIR + "/PAV-SVIM-ASM.results.INS.vcf"),
+                str(INTERSECT_DIR + "/PAV-SVIM-ASM.results.DUP.vcf"),
+                str(INTERSECT_DIR + "/PAV-SVIM-ASM.results.INV.vcf"),
+                str(INTERSECT_DIR + "/PAV-SVIM-ASM.results.BND.vcf"),
+                str(TRUVARI_DIR + "/SVIM-Sniffles/summary.txt"),
+                str(TRUVARI_DIR + "/SVIM-Sniffles/tp-call.vcf"),
+                str(TRUVARI_DIR + "/SVIM-Sniffles/tp-base.vcf"),
+                str(TRUVARI_DIR + "/SVIM-Sniffles/fp.vcf"),
+                str(TRUVARI_DIR + "/SVIM-Sniffles/fn.vcf"),
+                str(TRUVARI_DIR + "/SVIM-CuteSV/summary.txt"),
+                str(TRUVARI_DIR + "/SVIM-CuteSV/tp-call.vcf"),
+                str(TRUVARI_DIR + "/SVIM-CuteSV/tp-base.vcf"),
+                str(TRUVARI_DIR + "/SVIM-CuteSV/fp.vcf"),
+                str(TRUVARI_DIR + "/SVIM-CuteSV/fn.vcf"),
+                str(TRUVARI_DIR + "/Sniffles-CuteSV/summary.txt"),
+                str(TRUVARI_DIR + "/Sniffles-CuteSV/tp-call.vcf"),
+                str(TRUVARI_DIR + "/Sniffles-CuteSV/tp-base.vcf"),
+                str(TRUVARI_DIR + "/Sniffles-CuteSV/fp.vcf"),
+                str(TRUVARI_DIR + "/Sniffles-CuteSV/fn.vcf"),                
+                str(TRUVARI_DIR + "/PAV-SVIM-ASM/summary.txt"),
+                str(TRUVARI_DIR + "/PAV-SVIM-ASM/tp-call.vcf"),
+                str(TRUVARI_DIR + "/PAV-SVIM-ASM/tp-base.vcf"),
+                str(TRUVARI_DIR + "/PAV-SVIM-ASM/fp.vcf"),
+                str(TRUVARI_DIR + "/PAV-SVIM-ASM/fn.vcf")
+
+rule prefetch_SR_reads:
+        output:
+                str(SR_PREFIX + ".sra")
+        params:
+                SR_PREFIX
+        shell:
+                "prefetch --maxsize 50G -O {params}"
+
+rule prefetch_LR_reads:
+        output:
+                str(LR_PREFIX + ".sra")
+        params:
+                LR_PREFIX
+        shell:
+                "prefetch --maxsize 50G -O {params}"
+
+rule reformat_SR_sra_to_fastq:
+        input:
+                str(SR_PREFIX + ".sra")
+        output:
+                str(SR_PREFIX + "_1.fastq"),
+                str(SR_PREFIX + "_2.fastq")
+        threads: NUM_THREADS
+        params:
+                SR_DIR
+        shell:
+                "fasterq-dump -O {params} --split-files {input}"
+
+rule reformat_LR_sra_to_fastq:
+        input:
+                str(LR_PREFIX + ".sra")
+        output:
+                str(LR_PREFIX + "/" + LR_ACCESSION + ".fastq")
+        threads: NUM_THREADS
+        params:
+                LR_DIR
+        shell:
+                "fasterq-dump -O {params} {input}"
+
+rule preprocess_SR_trimmo:
+        input:
+                str(SR_PREFIX + "_1.fastq"),
+                str(SR_PREFIX + "_2.fastq")
+        output:
+                str(SR_PREFIX + "_1_Paired.fastq"),
+                str(SR_PREFIX + "_1_Unpaired.fastq"),
+                str(SR_PREFIX + "_2_Paired.fastq"),
+                str(SR_PREFIX + "_2_Unpaired.fastq")
+        threads: NUM_THREADS
+        shell:
+                "java -jar $TRIMMO/trimmomatic-0.39.jar PE {input} {output} "
+                "ILLUMINACLIP:$TRIMMO/adapters/TruSeq3-PE.fa:2:30:10 "
+                "LEADING:20 TRAILING:20 SLIDINGWINDOW:4:15 MINLEN:50"
+
+rule perform_read_QA_Strand_One:
+        input:
+                str(SR_PREFIX + "_1.fastq")
+        output:
+                str(FASTQC_OUTDIR + "/" + SR_ACCESSION + "_1_fastqc.html")
+        threads: NUM_THREADS
+        params:
+                FASTQC_OUTDIR
+        shell:
+                "fastqc -t {threads} {input} -o {params}"
+
+rule perform_read_QA_Strand_Two:
+        input:
+                str(SR_PREFIX + "_2.fastq")
+        output:
+                str(FASTQC_OUTDIR + "/" + SR_ACCESSION + "_2_fastqc/" + "fastqc_report.html")
+        threads: NUM_THREADS
+        params:
+                FASTQC_OUTDIR
+        shell:
+                "fastqc -t {threads} {input} -o {params}"
+
+rule align_LR_w_minimap2:
+        input:
+                str(LR_PREFIX + "/" + LR_ACCESSION + ".fastq")
+        output:
+                str(MNMP2_READS_PREFIX + ".sam")
+        threads: 3
+        params:
+                mnmp2Preset=MNMP2_SEQ_PRESET,
+                refGenome=REF_GENOME
+        shell:
+                "minimap2 -t {threads} --MD -a -z 600,200 -x {params.mnmp2Preset} -Y {params.refGenome} {input} > {output}"
+
+rule align_both_assemblies_w_minimap2:
+        input:
+                REF_GENOME,
+                QRY_GENOME
+        output:
+                str(MNMP2_GENOMES_PREFIX + ".sam")
+        threads: 3
+        shell:
+                "minimap2 -a -x asm10 --cs -r2k -t {threads} {input} > {output}" #settings from svim-asm git
+
+rule build_bowtie2_index:
+        input:
+                str(FASTQC_OUTDIR+ "/" + SR_ACCESSION + "_1_fastqc.html"),
+                str(FASTQC_OUTDIR + "/" + SR_ACCESSION + "_2_fastqc/" + "fastqc_report.html")
+        output:
+                str(REF_PREFIX + "_index.1.bt2"),
+                str(REF_PREFIX + "_index.2.bt2"),
+                str(REF_PREFIX + "_index.rev.1.bt2"),
+                str(REF_PREFIX + "_index.rev.2.bt2")
+        threads: NUM_THREADS
+        params:
+                refGenome=REF_GENOME,
+                refPrefix=REF_PREFIX
+        conda:
+                BOWTIE2_CONDA
+        shell: 
+                "bowtie2-build {params.refGenome} {params.refPrefix}_index"
+
+rule align_SR_w_bowtie2:
+        input:
+                str(REF_PREFIX + "_index.1.bt2"),
+                str(REF_PREFIX + "_index.2.bt2"),
+                str(REF_PREFIX + "_index.rev.1.bt2"),
+                str(REF_PREFIX + "_index.rev.2.bt2")
+        output:
+                str(BT2_PREFIX + ".sam")
+        threads: NUM_THREADS
+        params:
+                refPrefix=REF_PREFIX,
+                srPrefix=SR_PREFIX
+        conda:
+                BOWTIE2_CONDA
+        shell:
+                "bowtie2 --threads {threads} -x {params.refPrefix}_index -1 {params.srPrefix}_1_Paired.fastq -2 {params.srPrefix}_2_Paired.fastq -q --no-discordant --very-sensitive --score-min L,-10,-0.1 -S {output}"
+
+rule build_bwa_fm_index:
+        input:
+                str(FASTQC_OUTDIR+ "/" + SR_ACCESSION + "_1_fastqc.html"),
+                str(FASTQC_OUTDIR + "/" + SR_ACCESSION + "_2_fastqc/" + "fastqc_report.html")
+        output:
+                str(REF_GENOME + ".amb"),
+                str(REF_GENOME + ".ann"),
+                str(REF_GENOME + ".bwt"),
+                str(REF_GENOME + ".pac"),
+                str(REF_GENOME + ".sa")
+        params:
+                refGenome=REF_GENOME
+        shell:
+                "bwa index {params.refGenome}"
+
+rule align_SR_w_bwa_mem:
+        input:
+                indexAMB=str(REF_GENOME + ".amb"),
+                indexANN=str(REF_GENOME + ".ann"),
+                indexBWT=str(REF_GENOME + ".bwt"),
+                indexPAC=str(REF_GENOME + ".pac"),
+                indexSA=str(REF_GENOME + ".sa")
+        output:
+                str(BWA_PREFIX + ".sam")
+        threads: NUM_THREADS
+        params:
+                refGenome=REF_GENOME,
+                srPrefix=SR_PREFIX
+        shell:
+                "bwa mem -t {threads} {params.refGenome} {params.srPrefix}_1_Paired.fastq {params.srPrefix}_2_Paired.fastq > {output}"
+
+rule sort_SR_bam_file:
+        input:
+                str(SR_ALIGNER_PREFIX + ".sam")
+        output:
+                str(SR_ALIGNER_PREFIX + ".sorted.bam")
+        threads: NUM_THREADS
+        shell:
+                "samtools sort -@ {threads} -o {output} {input}"
+
+rule index_sorted_SR_bam_file:
+        input:
+                str(SR_ALIGNER_PREFIX + ".sorted.bam")
+        output:
+                str(SR_ALIGNER_PREFIX + ".sorted.bam.bai")
+        threads: NUM_THREADS
+        shell:
+                "samtools index -@ {threads} {input}"
+
+rule sort_LR_bam_file:
+        input:
+                str(MNMP2_READS_PREFIX + ".sam")
+        output:
+                str(MNMP2_READS_PREFIX + ".sorted.bam")
+        threads: NUM_THREADS
+        shell:
+                "samtools sort -@ {threads} -o {output} {input}"
+
+rule index_sorted_LR_bam_file:
+        input:
+                str(MNMP2_READS_PREFIX + ".sorted.bam")
+        output:
+                str(MNMP2_READS_PREFIX + ".sorted.bam.bai")
+        threads: NUM_THREADS
+        shell:
+                "samtools index -@ {threads} {input}"
+
+rule sort_genomes_bam_file:
+        input:
+                str(MNMP2_GENOMES_PREFIX + ".sam")
+        output:
+                str(MNMP2_GENOMES_PREFIX + ".sorted.bam")
+        threads: NUM_THREADS
+        shell:
+                "samtools sort -m4G -@ {threads} -o {output} {input}"
+
+rule index_sorted_genomes_bam_file:
+        input:
+                str(MNMP2_GENOMES_PREFIX + ".sorted.bam")
+        output:
+                str(MNMP2_GENOMES_PREFIX + ".sorted.bam.bai")
+        threads: NUM_THREADS
+        shell:
+                "samtools index -@ {threads} {input}"
+
+rule SR_align_QA_w_Qualimap:
+        input:
+                sortedFile=str(SR_ALIGNER_PREFIX + ".sorted.bam"),
+		indexFile=str(SR_ALIGNER_PREFIX + ".sorted.bam.bai")
+        output:
+                str(QUALIMAP_OUTDIR + "/report.pdf") # update once you know real default name
+        threads: NUM_THREADS
+        params:
+                qualimapOutDir=QUALIMAP_OUTDIR
+        shell:
+                "qualimap bamqc -bam {input.sortedFile} -outdir {params.qualimapOutDir} -outformat PDF --java-mem-size=8G"
+
+rule sv_calling_w_delly_call:
+        input:
+                indexFile=str(SR_ALIGNER_PREFIX + ".sorted.bam.bai"),
+                inputFile=str(SR_ALIGNER_PREFIX + ".sorted.bam")
+        output:
+                str(DELLY_PREFIX+".ALL.bcf")
+        threads: NUM_THREADS
+        params:
+                minMAPQ=MIN_SV_MAPQ,
+                refGenome=REF_GENOME
+        conda:
+                DELLY_CONDA
+        shell:
+                "delly call -q {params.minMAPQ} -o {output} -g {params.refGenome} {input.inputFile}"
+
+rule convert_delly_bcf_to_vcf:
+        input:
+                str(DELLY_PREFIX + ".ALL.bcf")
+        output:
+                str(DELLY_PREFIX + ".ALL.vcf")
+        threads: NUM_THREADS
+        shell:
+                "bcftools view -O v -o {output} {input}"
+
+rule sv_calling_w_cuteSV:
+        input:
+                indexFile=str(MNMP2_READS_PREFIX + ".sorted.bam.bai"),
+                inputFile=str(MNMP2_READS_PREFIX + ".sorted.bam")
+        output:
+                str(CUTESV_PREFIX + ".ALL.vcf")
+        threads: NUM_THREADS
+        params:
+                minSize=MIN_SV_SIZE,
+                maxSize=MAX_SV_SIZE,
+                minSupp=MIN_SV_SUPPORT,
+                refGenome=REF_GENOME,
+                svOutDir=SV_RESULTS_DIR
+        conda:
+                CUTESV_CONDA
+        shell:
+                "cuteSV --min_size {params.minSize} --max_size {params.maxSize} -s {params.minSupp} --max_cluster_bias_INS 100 "
+                "--diff_ratio_merging_INS 0.3 --max_cluster_bias_DEL 100 --diff_ratio_merging_DEL 0.3 {input.inputFile} {params.refGenome} {output} {params.svOutDir}"
+
+rule sv_calling_w_sniffles2:
+        input:
+                indexFile=str(MNMP2_READS_PREFIX + ".sorted.bam.bai"),
+                inputFile=str(MNMP2_READS_PREFIX + ".sorted.bam")		
+        output:
+                str(SNIFFLES_PREFIX + ".ALL.vcf")
+        threads: NUM_THREADS
+        params:
+                minMAPQ=MIN_SV_MAPQ,
+                minSupp=MIN_SV_SUPPORT,
+                minSize=MIN_SV_SIZE,
+                refGenome=REF_GENOME
+        conda:
+                SNIFFLES_CONDA
+        shell:
+                "sniffles --threads {threads} --mapq {params.minMAPQ} --minsupport {params.minSupp} --minsvlen {params.minSize} --reference {params.refGenome} -i {input.inputFile} -v {output}"
+
+rule sv_calling_w_SVIM:
+        input:
+                indexFile=str(MNMP2_READS_PREFIX + ".sorted.bam.bai"),
+                inputFile=str(MNMP2_READS_PREFIX + ".sorted.bam")
+        output:
+                str(SVIM_PREFIX + ".ALL.vcf")
+        threads: 1
+        params:
+                minSize=MIN_SV_SIZE,
+                maxSize=MAX_SV_SIZE,
+                refGenome=REF_GENOME,
+                refName=REF_SAMP_NAME,
+                svimOutDir=str(SV_RESULTS_DIR + "/SVIM/")
+        conda:
+                SVIM_CONDA
+        shell:
+                "svim alignment --min_sv_size {params.minSize} --max_sv_size {params.maxSize} {params.svimOutDir} {input.inputFile} {params.refGenome};"
+                "mv {params.svimOutDir}/variants.vcf {params.svimOutDir}/{params.refName}.svim.ALL.vcf"
+
+rule sv_calling_w_svim_asm:
+        input:
+                indexFile=str(MNMP2_GENOMES_PREFIX + ".sorted.bam.bai"),
+                inputFile=str(MNMP2_GENOMES_PREFIX + ".sorted.bam")
+        output:
+                str(SVIM_ASM_PREFIX + ".ALL.vcf")
+        threads: NUM_THREADS
+        params:
+                minMAPQ=MIN_SV_MAPQ,
+                minSize=MIN_SV_SIZE,
+                maxSize=MAX_SV_SIZE,
+                svOutDir=SV_RESULTS_DIR,
+                refGenome=REF_GENOME
+        conda:
+                SVIM_ASM_CONDA
+        shell:
+                "svim-asm haploid --min_mapq {params.minMAPQ} --min_sv_size {params.minSize} --max_sv_size {params.maxSize} {params.svOutDir} {input.inputFile} {params.refGenome}"
+
+rule sv_calling_w_pav:
+        input:
+                REF_GENOME,
+                QRY_GENOME
+        output:
+                str(QRY_GENOME + ".vcf.gz")
+        threads: NUM_THREADS
+        params:
+                refGenome=REF_GENOME,
+                outputDir=str(SV_RESULTS_DIR + "/PAV/")
+        conda:
+                PAV_CONDA
+        shell:
+#               "snakemake -s $PAV/Snakefile --cores {threads} --rerun-incomplete"
+                "bash ./Scripts/run-PAV-SnakeMake-pipe.sh {threads} {params.outputDir} {params.refGenome}"
+
+rule verify_delly_filtering_w_bcftools:
+        input:
+                str(DELLY_PREFIX + ".ALL.vcf")
+        output:
+                str(DELLY_PREFIX + ".filtered.ALL.vcf")
+        threads: NUM_THREADS
+        params:
+                minSize=MIN_SV_SIZE,
+                maxSize=MAX_SV_SIZE,
+                minSupp=MIN_SV_SUPPORT,
+                minMAPQ=MIN_SV_MAPQ
+        shell:
+                "bcftools filter -e \'INFO/MAPQ<{params.minMAPQ} || (INFO/END-POS)<-{params.maxSize} || (INFO/END-POS)>{params.maxSize} || INFO/PE<{params.minSupp}\' -o {output} {input}"
+
+rule verify_cuteSV_filtering_w_bcftools:
+        input:
+                str(CUTESV_PREFIX + ".ALL.vcf")
+        output:
+                str(CUTESV_PREFIX + ".filtered.ALL.vcf")
+        threads: NUM_THREADS
+        params:
+                minSize=MIN_SV_SIZE,
+                maxSize=MAX_SV_SIZE,
+                minSupp=MIN_SV_SUPPORT,
+                minMAPQ=MIN_SV_MAPQ
+        shell:
+                "bcftools filter -e \'INFO/SVLEN<-{params.maxSize} || INFO/SVLEN>{params.maxSize} || INFO/RE<{params.minSupp}\' -o {output} {input}"
+
+rule verify_sniffles2_filtering_w_bcftools:
+        input:
+                str(SNIFFLES_PREFIX + ".ALL.vcf")
+        output:
+                str(SNIFFLES_PREFIX + ".filtered.ALL.vcf")
+        threads: NUM_THREADS
+        params:
+                minSize=MIN_SV_SIZE,
+                maxSize=MAX_SV_SIZE,
+                minSupp=MIN_SV_SUPPORT,
+                minMAPQ=MIN_SV_MAPQ
+        shell:
+                "bcftools filter -e \'QUAL<{params.minMAPQ} || INFO/SVLEN<-{params.maxSize} || INFO/SVLEN>{params.maxSize} || INFO/SUPPORT<{params.minSupp}\' -o {output} {input}"
+
+rule verify_svim_filtering_w_bcftools:
+        input:
+                str(SVIM_PREFIX + ".ALL.vcf")
+        output:
+                str(SVIM_PREFIX + ".filtered.ALL.vcf")
+        threads: NUM_THREADS
+        params:
+                minSize=MIN_SV_SIZE,
+                maxSize=MAX_SV_SIZE,
+                minSupp=MIN_SV_SUPPORT,
+                minMAPQ=MIN_SV_MAPQ
+        shell:
+                "bcftools filter -e \'QUAL<{params.minMAPQ} || INFO/SVLEN<-{params.maxSize} || INFO/SVLEN>{params.maxSize} || INFO/SUPPORT<{params.minSupp}\' -o {output} {input}"
+
+rule segment_delly_SVs:
+        input:
+                bcfFile=str(DELLY_PREFIX + ".ALL.bcf"),
+                vcfFile=str(DELLY_PREFIX + ".filtered.ALL.vcf")
+        output:
+                str(DELLY_PREFIX + ".DEL.vcf"),
+                str(DELLY_PREFIX + ".INS.vcf"),
+                str(DELLY_PREFIX + ".DUP.vcf"),
+                str(DELLY_PREFIX + ".INV.vcf"),
+                str(DELLY_PREFIX + ".BND.vcf")
+        threads: NUM_THREADS
+        params:
+                DELLY_PREFIX
+        shell:
+                "bash ./Scripts/segment_sv_types_w_bcftools.sh {input.vcfFile} {params}"
+
+#rule segment_delly_DEL_SVs:
+#        input:
+#                bcfFile=str(DELLY_PREFIX + ".ALL.bcf"),
+#                vcfFile=str(DELLY_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(DELLY_PREFIX + ".DEL.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DEL\"\' -o {output} {input.vcfFile}"
+
+#rule segment_delly_INS_SVs:
+#        input:
+#                bcfFile=str(DELLY_PREFIX + ".ALL.bcf"),
+#                vcfFile=str(DELLY_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(DELLY_PREFIX + ".INS.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INS\"\' -o {output} {input.vcfFile}"
+
+#rule segment_delly_DUP_SVs:
+#        input:
+#                bcfFile=str(DELLY_PREFIX + ".ALL.bcf"),
+#                vcfFile=str(DELLY_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(DELLY_PREFIX + ".DUP.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DUP\" || SVTYPE == \"DUP:INT\" || SVTYPE == \"DUP:TANDEM\"\' -o {output} {input.vcfFile}"
+
+#rule segment_delly_INV_SVs:
+#        input:
+#                bcfFile=str(DELLY_PREFIX + ".ALL.bcf"),
+#                vcfFile=str(DELLY_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(DELLY_PREFIX + ".INV.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INV\"\' -o {output} {input.vcfFile}"
+
+#rule segment_delly_BND_SVs:
+#        input:
+#                bcfFile=str(DELLY_PREFIX + ".ALL.bcf"),
+#                vcfFile=str(DELLY_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(DELLY_PREFIX + ".BND.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"BND\"\' -o {output} {input.vcfFile}"
+
+rule segment_cuteSV_SVs:
+        input:
+                str(CUTESV_PREFIX + ".filtered.ALL.vcf")
+        output:
+                str(CUTESV_PREFIX + ".DEL.vcf"),
+                str(CUTESV_PREFIX + ".INS.vcf"),
+                str(CUTESV_PREFIX + ".DUP.vcf"),
+                str(CUTESV_PREFIX + ".INV.vcf"),
+                str(CUTESV_PREFIX + ".BND.vcf")
+        threads: NUM_THREADS
+        params:
+                CUTESV_PREFIX
+        shell:
+                "bash ./Scripts/segment_sv_types_w_bcftools.sh {input} {params}"
+
+#rule segment_cuteSV_DEL_SVs:
+#        input:
+#                str(CUTESV_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(CUTESV_PREFIX + ".DEL.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DEL\"\' -o {output} {input}"
+
+#rule segment_cuteSV_INS_SVs:
+#        input:
+#                str(CUTESV_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(CUTESV_PREFIX + ".INS.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INS\"\' -o {output} {input}"
+
+#rule segment_cuteSV_DUP_SVs:
+#        input:
+#                str(CUTESV_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(CUTESV_PREFIX + ".DUP.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DUP\" || SVTYPE == \"DUP:INT\" || SVTYPE == \"DUP:TANDEM\"\' -o {output} {input}"
+
+#rule segment_cuteSV_INV_SVs:
+#        input:
+#                str(CUTESV_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(CUTESV_PREFIX + ".INV.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INV\"\' -o {output} {input}"
+
+#rule segment_cuteSV_BND_SVs:
+#        input:
+#                str(CUTESV_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(CUTESV_PREFIX + ".BND.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"BND\"\' -o {output} {input}"
+
+rule segment_sniffles2_SVs:
+        input:
+                str(SNIFFLES_PREFIX + ".filtered.ALL.vcf")
+        output:
+                str(SNIFFLES_PREFIX + ".DEL.vcf"),
+                str(SNIFFLES_PREFIX + ".INS.vcf"),
+                str(SNIFFLES_PREFIX + ".DUP.vcf"),
+                str(SNIFFLES_PREFIX + ".INV.vcf"),
+                str(SNIFFLES_PREFIX + ".BND.vcf")
+        threads: NUM_THREADS
+        params:
+                SNIFFLES_PREFIX
+        shell:
+                "bash ./Scripts/segment_sv_types_w_bcftools.sh {input} {params}"
+
+#rule segment_sniffles2_DEL_SVs:
+#        input:
+#                str(SNIFFLES_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(SNIFFLES_PREFIX + ".DEL.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DEL\"\' -o {output} {input}"
+
+#rule segment_sniffles2_INS_SVs:
+#        input:
+#                str(SNIFFLES_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(SNIFFLES_PREFIX + ".INS.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INS\"\' -o {output} {input}"
+
+#rule segment_sniffles2_DUP_SVs:
+#        input:
+#                str(SNIFFLES_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(SNIFFLES_PREFIX + ".DUP.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DUP\" || SVTYPE == \"DUP:INT\" || SVTYPE == \"DUP:TANDEM\"\' -o {output} {input}"
+
+#rule segment_sniffles2_INV_SVs:
+#        input:
+#                str(SNIFFLES_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(SNIFFLES_PREFIX + ".INV.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INV\"\' -o {output} {input}"
+
+#rule segment_sniffles2_BND_SVs:
+#        input:
+#                str(SNIFFLES_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(SNIFFLES_PREFIX + ".BND.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"BND\"\' -o {output} {input}"
+
+rule segment_svim_SVs:
+        input:
+                str(SVIM_PREFIX + ".filtered.ALL.vcf")
+        output:
+                str(SVIM_PREFIX + ".DEL.vcf"),
+                str(SVIM_PREFIX + ".INS.vcf"),
+                str(SVIM_PREFIX + ".DUP.vcf"),
+                str(SVIM_PREFIX + ".INV.vcf"),
+                str(SVIM_PREFIX + ".BND.vcf")
+        threads: NUM_THREADS
+        params:
+                SVIM_PREFIX
+        shell:
+                "bash ./Scripts/segment_sv_types_w_bcftools.sh {input} {params}"
+
+#rule segment_svim_DEL_SVs:
+#        input:
+#                str(SVIM_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(SVIM_PREFIX + ".DEL.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DEL\"\' -o {output} {input}"
+
+#rule segment_svim_INS_SVs:
+#        input:
+#                str(SVIM_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(SVIM_PREFIX + ".INS.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INS\"\' -o {output} {input}"
+
+#rule segment_svim_DUP_SVs:
+#        input:
+#                str(SVIM_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(SVIM_PREFIX + ".DUP.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DUP\" || SVTYPE == \"DUP:INT\" || SVTYPE == \"DUP:TANDEM\"\' -o {output} {input}"
+
+#rule segment_svim_INV_SVs:
+#        input:
+#                str(SVIM_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(SVIM_PREFIX + ".INV.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INV\"\' -o {output} {input}"
+
+#rule segment_svim_BND_SVs:
+#        input:
+#                str(SVIM_PREFIX + ".filtered.ALL.vcf")
+#        output:
+#                str(SVIM_PREFIX + ".BND.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"BND\"\' -o {output} {input}"
+
+rule segment_svim_asm_SVs:
+        input:
+                str(SVIM_ASM_PREFIX + ".ALL.vcf")
+        output:
+                str(SVIM_ASM_PREFIX + ".DEL.vcf"),
+                str(SVIM_ASM_PREFIX + ".INS.vcf"),
+                str(SVIM_ASM_PREFIX + ".DUP.vcf"),
+                str(SVIM_ASM_PREFIX + ".INV.vcf"),
+                str(SVIM_ASM_PREFIX + ".BND.vcf")
+        threads: NUM_THREADS
+        params:
+                SVIM_ASM_PREFIX
+        shell:
+                "bash ./Scripts/segment_sv_types_w_bcftools.sh {input} {params}"
+
+#rule segment_svim_asm_DEL_SVs:
+#        input:
+#                str(SVIM_ASM_PREFIX + ".ALL.vcf")
+#        output:
+#                str(SVIM_ASM_PREFIX + ".DEL.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DEL\"\' -o {output} {input}"
+
+#rule segment_svim_asm_INS_SVs:
+#        input:
+#                str(SVIM_ASM_PREFIX + ".ALL.vcf")
+#        output:
+#                str(SVIM_ASM_PREFIX + ".INS.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INS\"\' -o {output} {input}"
+
+#rule segment_svim_asm_DUP_SVs:
+#        input:
+#                str(SVIM_ASM_PREFIX + ".ALL.vcf")
+#        output:
+#                str(SVIM_ASM_PREFIX + ".DUP.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DUP\" || SVTYPE == \"DUP:INT\" || SVTYPE == \"DUP:TANDEM\"\' -o {output} {input}"
+
+#rule segment_svim_asm_INV_SVs:
+#        input:
+#                str(SVIM_ASM_PREFIX + ".ALL.vcf")
+#        output:
+#                str(SVIM_ASM_PREFIX + ".INV.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INV\"\' -o {output} {input}"
+
+#rule segment_svim_asm_BND_SVs:
+#        input:
+#                str(SVIM_ASM_PREFIX + ".ALL.vcf")
+#        output:
+#                str(SVIM_ASM_PREFIX + ".BND.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"BND\"\' -o {output} {input}"
+
+rule unzip_and_move_pav_results:
+        input:
+               str(QRY_GENOME + ".vcf.gz")
+        output:
+               str(PAV_PREFIX + ".ALL.vcf")
+        threads: NUM_THREADS
+	params:
+               str(SV_RESULTS_DIR +"/PAV/")
+        shell:
+               "gunzip -c {input} > {output}; mv {input} {params}"
+
+rule segment_pav_SVs:
+        input:
+                str(PAV_PREFIX + ".ALL.vcf")
+        output:
+                str(PAV_PREFIX + ".DEL.vcf"),
+                str(PAV_PREFIX + ".INS.vcf"),
+                str(PAV_PREFIX + ".DUP.vcf"),
+                str(PAV_PREFIX + ".INV.vcf"),
+                str(PAV_PREFIX + ".BND.vcf")
+        threads: NUM_THREADS
+        params:
+                PAV_PREFIX
+        shell:
+                "bash ./Scripts/segment_sv_types_w_bcftools.sh {input} {params}"
+
+#rule segment_pav_DEL_SVs:
+#        input:
+#                str(PAV_PREFIX + ".ALL.vcf")
+#        output:
+#                str(PAV_PREFIX + ".DEL.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DEL\"\' -o {output} {input}"
+
+#rule segment_pav_INS_SVs:
+#        input:
+#                str(PAV_PREFIX + ".ALL.vcf")
+#        output:
+#                str(PAV_PREFIX + ".INS.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INS\"\' -o {output} {input}"
+
+#rule segment_pav_DUP_SVs:
+#        input:
+#                str(PAV_PREFIX + ".ALL.vcf")
+#        output:
+#                str(PAV_PREFIX + ".DUP.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"DUP\" || SVTYPE == \"DUP:INT\" || SVTYPE == \"DUP:TANDEM\"\' -o {output} {input}"
+
+#rule segment_pav_INV_SVs:
+#        input:
+#                str(PAV_PREFIX + ".ALL.vcf")
+#        output:
+#                str(PAV_PREFIX + ".INV.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"INV\"\' -o {output} {input}"
+
+#rule segment_pav_BND_SVs:
+#        input:
+#                str(PAV_PREFIX + ".ALL.vcf")
+#        output:
+#                str(PAV_PREFIX + ".BND.vcf")
+#        threads: NUM_THREADS
+#        shell:
+#                "bcftools filter -i \'SVTYPE == \"BND\"\' -o {output} {input}"
+
+rule bedtools_intersect_LR_svim_w_sniffles2:
+        input:
+                snifflesDEL=str(SNIFFLES_PREFIX + ".DEL.vcf"),
+                snifflesINS=str(SNIFFLES_PREFIX + ".INS.vcf"),
+                snifflesDUP=str(SNIFFLES_PREFIX + ".DUP.vcf"),
+                snifflesINV=str(SNIFFLES_PREFIX + ".INV.vcf"), 
+                snifflesBND=str(SNIFFLES_PREFIX + ".BND.vcf"),
+                svimDEL=str(SVIM_PREFIX + ".DEL.vcf"),
+                svimINS=str(SVIM_PREFIX + ".INS.vcf"),
+                svimDUP=str(SVIM_PREFIX + ".DUP.vcf"),
+                svimINV=str(SVIM_PREFIX + ".INV.vcf"),
+                svimBND=str(SVIM_PREFIX + ".BND.vcf")
+        output:
+                delIntersect=str(INTERSECT_DIR + "/SVIM-Sniffles2.results.DEL.vcf"),
+                insIntersect=str(INTERSECT_DIR + "/SVIM-Sniffles2.results.INS.vcf"),
+                dupIntersect=str(INTERSECT_DIR + "/SVIM-Sniffles2.results.DUP.vcf"),
+                invIntersect=str(INTERSECT_DIR + "/SVIM-Sniffles2.results.INV.vcf"),
+                bndIntersect=str(INTERSECT_DIR + "/SVIM-Sniffles2.results.BND.vcf")
+        threads: NUM_THREADS
+        params:
+                minOverlap=MIN_OVERLAP,
+                prefixA=SVIM_PREFIX,
+                allSVA=str(SVIM_PREFIX + ".filtered.ALL.vcf"),
+                prefixB=SNIFFLES_PREFIX,
+                allSVB=str(SNIFFLES_PREFIX + ".filtered.ALL.vcf"),
+                intersectPrefix=str(INTERSECT_DIR + "/SVIM-Sniffles2")
+        shell:
+                "bash ./Scripts/bedtools_intersect_sv_files.sh {params.prefixA} {params.allSVA} {params.prefixB} {params.allSVB} {params.minOverlap} {params.intersectPrefix}"
+                #"""bedtools intersect -f {params} -F {params} -a {input.svimDEL} -b {input.snifflesDEL} | sort | uniq > {output.delIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimINS} -b {input.snifflesINS} | sort | uniq > {output.insIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimDUP} -b {input.snifflesDUP} | sort | uniq > {output.dupIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimINV} -b {input.snifflesINV} | sort | uniq > {output.invIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimBND} -b {input.snifflesBND} | sort | uniq > {output.bndIntersect}
+                #"""
+
+rule truvari_bench_svim_w_sniffles2:
+        input:
+                snifflesInput=str(SNIFFLES_PREFIX + ".filtered.ALL.vcf"),
+                svimInput=str(SVIM_PREFIX + ".filtered.ALL.vcf")
+        output:
+                summaryFile=str(TRUVARI_DIR + "/SVIM-Sniffles/summary.txt"),
+                tpCall=str(TRUVARI_DIR + "/SVIM-Sniffles/tp-call.vcf"),
+                tpBase=str(TRUVARI_DIR + "/SVIM-Sniffles/tp-base.vcf"),
+                fpFile=str(TRUVARI_DIR + "/SVIM-Sniffles/fp.vcf"),
+                fnFile=str(TRUVARI_DIR + "/SVIM-Sniffles/fn.vcf")
+        threads: NUM_THREADS
+        params:
+               refGenome=REF_GENOME,
+               minOverlap=MIN_OVERLAP,
+               minSize=MIN_SV_SIZE,
+               maxSize=MAX_SV_SIZE,
+               intersectDir=INTERSECT_DIR,
+               truvariDir=TRUVARI_DIR,
+               toolsPrefix="SVIM-Sniffles"
+        shell:
+                "bash ./Scripts/compare_sv_files_w_truvari.sh {input.snifflesInput} {input.svimInput} {params.refGenome} {params.minSize} {params.maxSize} {params.minOverlap} "
+                "{params.intersectDir} {params.truvariDir} {params.toolsPrefix}"
+                #"""truvari -f {params.refGenome} -b {input.svimInput} -c {input.snifflesInput} -s {params.minSize} --sizemax {params.maxSize} -r 1000 -p 0 -P {params.minOverlap} --giabreport
+                #   mv {params.intersectDir}/summary.txt {output.summaryFile}
+                #   mv {params.intersectDir}/tp-call.vcf {output.tpCall}
+                #   mv {params.intersectDir}/tp-base.vcf {output.tpBase}
+                #   mv {params.intersectDir}/fp.vcf {output.fpFile}
+                #   mv {params.intersectDir}/fn.vcf {output.fnFile}
+                #"""
+
+rule bedtools_intersect_LR_sniffles2_w_cuteSV:
+        input:
+                snifflesDEL=str(SNIFFLES_PREFIX + ".DEL.vcf"),
+                snifflesINS=str(SNIFFLES_PREFIX + ".INS.vcf"),
+                snifflesDUP=str(SNIFFLES_PREFIX + ".DUP.vcf"),
+                snifflesINV=str(SNIFFLES_PREFIX + ".INV.vcf"),
+                snifflesBND=str(SNIFFLES_PREFIX + ".BND.vcf"),
+                cuteSVDEL=str(CUTESV_PREFIX + ".DEL.vcf"),
+                cuteSVINS=str(CUTESV_PREFIX + ".INS.vcf"),
+                cuteSVDUP=str(CUTESV_PREFIX + ".DUP.vcf"),
+                cuteSVINV=str(CUTESV_PREFIX + ".INV.vcf"),
+                cuteSVBND=str(CUTESV_PREFIX + ".BND.vcf")
+        output:
+                delIntersect=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.DEL.vcf"),
+                insIntersect=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.INS.vcf"),
+                dupIntersect=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.DUP.vcf"),
+                invIntersect=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.INV.vcf"),
+                bndIntersect=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.BND.vcf")
+        threads: NUM_THREADS
+        params:
+                minOverlap=MIN_OVERLAP,
+                prefixA=SNIFFLES_PREFIX,
+                allSVA=str(SNIFFLES_PREFIX + ".filtered.ALL.vcf"),
+                prefixB=CUTESV_PREFIX,
+                allSVB=str(CUTESV_PREFIX + ".filtered.ALL.vcf"),
+                intersectPrefix=str(INTERSECT_DIR + "/Sniffles2-cuteSV")
+        shell: 
+                "bash ./Scripts/bedtools_intersect_sv_files.sh {params.prefixA} {params.allSVA} {params.prefixB} {params.allSVB} {params.minOverlap} {params.intersectPrefix}"
+                #"""bedtools intersect -f {params} -F {params} -a {input.snifflesDEL} -b {input.cuteSVDEL} | sort | uniq > {output.delIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.snifflesINS} -b {input.cuteSVINS} | sort | uniq > {output.insIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.snifflesDUP} -b {input.cuteSVDUP} | sort | uniq > {output.dupIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.snifflesINV} -b {input.cuteSVINV} | sort | uniq > {output.invIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.snifflesBND} -b {input.cuteSVBND} | sort | uniq > {output.bndIntersect}
+                #"""
+
+rule truvari_bench_sniffles2_w_cuteSV:
+        input:
+                snifflesInput=str(SNIFFLES_PREFIX + ".filtered.ALL.vcf"),
+                cuteSVInput=str(CUTESV_PREFIX + ".filtered.ALL.vcf")
+        output:
+                summaryFile=str(TRUVARI_DIR + "/Sniffles-CuteSV/summary.txt"),
+                tpCall=str(TRUVARI_DIR + "/Sniffles-CuteSV/tp-call.vcf"),
+                tpBase=str(TRUVARI_DIR + "/Sniffles-CuteSV/tp-base.vcf"),
+                fpFile=str(TRUVARI_DIR + "/Sniffles-CuteSV/fp.vcf"),
+                fnFile=str(TRUVARI_DIR + "/Sniffles-CuteSV/fn.vcf")
+        threads: NUM_THREADS
+        params:
+               refGenome=REF_GENOME,
+               minOverlap=MIN_OVERLAP,
+               minSize=MIN_SV_SIZE,
+               maxSize=MAX_SV_SIZE,
+               intersectDir=INTERSECT_DIR,
+               truvariDir=TRUVARI_DIR,
+               toolsPrefix="Sniffles-CuteSV"
+        shell:
+                "bash ./Scripts/compare_sv_files_w_truvari.sh {input.snifflesInput} {input.cuteSVInput} {params.refGenome} {params.minSize} {params.maxSize} {params.minOverlap} "
+                "{params.intersectDir} {params.truvariDir} {params.toolsPrefix}"
+                #"""truvari -f {params.refGenome} -b {input.snifflesInput} -c {input.cuteSVInput} -s {params.minSize} --sizemax {params.maxSize} -r 1000 -p 0 -P {params.minOverlap} --giabreport
+                #   mv {params.intersectDir}/summary.txt {output.summaryFile}
+                #   mv {params.intersectDir}/tp-call.vcf {output.tpCall}
+                #   mv {params.intersectDir}/tp-base.vcf {output.tpBase}
+                #   mv {params.intersectDir}/fp.vcf {output.fpFile}
+                #   mv {params.intersectDir}/fn.vcf {output.fnFile}
+                #"""
+
+rule bedtools_intersect_LR_svim_w_cuteSV:
+        input:
+                cuteSVDEL=str(CUTESV_PREFIX + ".DEL.vcf"),
+                cuteSVINS=str(CUTESV_PREFIX + ".INS.vcf"),
+                cuteSVDUP=str(CUTESV_PREFIX + ".DUP.vcf"),
+                cuteSVINV=str(CUTESV_PREFIX + ".INV.vcf"),
+                cuteSVBND=str(CUTESV_PREFIX + ".BND.vcf"),
+                svimDEL=str(SVIM_PREFIX + ".DEL.vcf"),
+                svimINS=str(SVIM_PREFIX + ".INS.vcf"),
+                svimDUP=str(SVIM_PREFIX + ".DUP.vcf"),
+                svimINV=str(SVIM_PREFIX + ".INV.vcf"),
+                svimBND=str(SVIM_PREFIX + ".BND.vcf")
+        output:
+                delIntersect=str(INTERSECT_DIR + "/SVIM-cuteSV.results.DEL.vcf"),
+                insIntersect=str(INTERSECT_DIR + "/SVIM-cuteSV.results.INS.vcf"),
+                dupIntersect=str(INTERSECT_DIR + "/SVIM-cuteSV.results.DUP.vcf"),
+                invIntersect=str(INTERSECT_DIR + "/SVIM-cuteSV.results.INV.vcf"),
+                bndIntersect=str(INTERSECT_DIR + "/SVIM-cuteSV.results.BND.vcf")
+        threads: NUM_THREADS
+        params:
+                minOverlap=MIN_OVERLAP,
+                prefixA=SVIM_PREFIX,
+                allSVA=str(SVIM_PREFIX + ".filtered.ALL.vcf"),
+                prefixB=CUTESV_PREFIX,
+                allSVB=str(CUTESV_PREFIX + ".filtered.ALL.vcf"),
+                intersectPrefix=str(INTERSECT_DIR + "/SVIM-cuteSV")
+        shell:
+                "bash ./Scripts/bedtools_intersect_sv_files.sh {params.prefixA} {params.allSVA} {params.prefixB} {params.allSVB} {params.minOverlap} {params.intersectPrefix}"
+                #"""bedtools intersect -f {params} -F {params} -a {input.svimDEL} -b {input.cuteSVDEL} | sort | uniq > {output.delIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimINS} -b {input.cuteSVINS} | sort | uniq > {output.insIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimDUP} -b {input.cuteSVDUP} | sort | uniq > {output.dupIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimINV} -b {input.cuteSVINV} | sort | uniq > {output.invIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimBND} -b {input.cuteSVBND} | sort | uniq > {output.bndIntersect}
+                #"""
+
+rule truvari_bench_svim_w_cuteSV:
+        input:
+                svimInput=str(SVIM_PREFIX + ".filtered.ALL.vcf"),
+                cuteSVInput=str(CUTESV_PREFIX + ".filtered.ALL.vcf")
+        output:
+                summaryFile=str(TRUVARI_DIR + "/SVIM-CuteSV/summary.txt"),
+                tpCall=str(TRUVARI_DIR + "/SVIM-CuteSV/tp-call.vcf"),
+                tpBase=str(TRUVARI_DIR + "/SVIM-CuteSV/tp-base.vcf"),
+                fpFile=str(TRUVARI_DIR + "/SVIM-CuteSV/fp.vcf"),
+                fnFile=str(TRUVARI_DIR + "/SVIM-CuteSV/fn.vcf")
+        threads: NUM_THREADS
+        params:
+               refGenome=REF_GENOME,
+               minOverlap=MIN_OVERLAP,
+               minSize=MIN_SV_SIZE,
+               maxSize=MAX_SV_SIZE,
+               intersectDir=INTERSECT_DIR,
+               truvariDir=TRUVARI_DIR,
+               toolsPrefix="SVIM-CuteSV"
+        shell:
+                #"""truvari -f {params.refGenome} -b {input.svimInput} -c {input.cuteSVInput} -s {params.minSize} --sizemax {params.maxSize} -r 1000 -p 0 -P {params.minOverlap} --giabreport
+                #   mv {params.intersectDir}/summary.txt {output.summaryFile}
+                #   mv {params.intersectDir}/tp-call.vcf {output.tpCall}
+                #   mv {params.intersectDir}/tp-base.vcf {output.tpBase}
+                #   mv {params.intersectDir}/fp.vcf {output.fpFile}
+                #   mv {params.intersectDir}/fn.vcf {output.fnFile}
+                #"""
+                "bash ./Scripts/compare_sv_files_w_truvari.sh {input.svimInput} {input.cuteSVInput} {params.refGenome} {params.minSize} {params.maxSize} {params.minOverlap} "
+                "{params.intersectDir} {params.truvariDir} {params.toolsPrefix}"
+
+#rule preppend_vcf_header_cuteSniff:
+#         input:
+#                 snifflesDEL=str(SNIFFLES_PREFIX + ".DEL.vcf"),
+#                 snifflesINS=str(SNIFFLES_PREFIX + ".INS.vcf"),
+#                 snifflesDUP=str(SNIFFLES_PREFIX + ".DUP.vcf"),
+#                 snifflesINV=str(SNIFFLES_PREFIX + ".INV.vcf"),
+#                 snifflesBND=str(SNIFFLES_PREFIX + ".BND.vcf"),
+#                 cuteSVDEL=str(CUTESV_PREFIX + ".DEL.vcf"),
+#                 cuteSVINS=str(CUTESV_PREFIX + ".INS.vcf"),
+#                 cuteSVDUP=str(CUTESV_PREFIX + ".DUP.vcf"),
+#                 cuteSVINV=str(CUTESV_PREFIX + ".INV.vcf"),
+#                 cuteSVBND=str(CUTESV_PREFIX + ".BND.vcf"),
+#                 cuteSniffDEL=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.DEL.vcf"),
+#                 cuteSniffINS=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.INS.vcf"),
+#                 cuteSniffDUP=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.DUP.vcf"),
+#                 cuteSniffINV=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.INV.vcf"),
+#                 cuteSniffBND=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.BND.vcf")
+#        output:
+#                cuteSniffDELwHeads=str(INTERSECT_DIR + "/Sniffles2-cuteSV.DEL.vcf"),
+#                cuteSniffINSwHeads=str(INTERSECT_DIR + "/Sniffles2-cuteSV.INS.vcf"),
+#                cuteSniffDUPwHeads=str(INTERSECT_DIR + "/Sniffles2-cuteSV.DUP.vcf"),
+#                cuteSniffINVwHeads=str(INTERSECT_DIR + "/Sniffles2-cuteSV.INV.vcf"),
+#                cuteSniffBNDwHeads=str(INTERSECT_DIR + "/Sniffles2-cuteSV.BND.vcf")
+#         threads: NUM_THREADS
+#        shell:
+#                """grep "^##" {input.snifflesDEL} > {output.cuteSniffDELwHeads}; echo -e "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tSAMPLE" >> {output.cuteSniffDELwHeads}; cat {input.cuteSniffDEL} >> {output.cuteSniffDELwHeads};
+#                grep "^##" {input.snifflesINS} > {output.cuteSniffINSwHeads}; echo -e "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tSAMPLE" >> {output.cuteSniffINSwHeads}; cat {input.cuteSniffINS} >> {output.cuteSniffINSwHeads};
+#                grep "^##" {input.snifflesDUP} > {output.cuteSniffDUPwHeads}; echo -e "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tSAMPLE" >> {output.cuteSniffDUPwHeads}; cat {input.cuteSniffDUP} >> {output.cuteSniffDUPwHeads};
+#                grep "^##" {input.snifflesINV} > {output.cuteSniffINVwHeads}; echo -e "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tSAMPLE" >> {output.cuteSniffINVwHeads}; cat {input.cuteSniffINV} >> {output.cuteSniffINVwHeads};
+#                grep "^##" {input.snifflesBND} > {output.cuteSniffBNDwHeads}; echo -e "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tSAMPLE" >> {output.cuteSniffBNDwHeads}; cat {input.cuteSniffBND} >> {output.cuteSniffBNDwHeads};
+#                """
+
+rule bedtools_intersect_LR_all_callers:
+        input:
+	        cuteSVIMDEL=str(INTERSECT_DIR + "/SVIM-cuteSV.results.DEL.vcf"),
+                cuteSVIMINS=str(INTERSECT_DIR + "/SVIM-cuteSV.results.INS.vcf"),
+                cuteSVIMDUP=str(INTERSECT_DIR + "/SVIM-cuteSV.results.DUP.vcf"),
+                cuteSVIMINV=str(INTERSECT_DIR + "/SVIM-cuteSV.results.INV.vcf"),
+                cuteSVIMBND=str(INTERSECT_DIR + "/SVIM-cuteSV.results.BND.vcf"),
+                cuteSniffDEL=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.DEL.vcf"),
+                cuteSniffINS=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.INS.vcf"),
+                cuteSniffDUP=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.DUP.vcf"),
+                cuteSniffINV=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.INV.vcf"),
+                cuteSniffBND=str(INTERSECT_DIR + "/Sniffles2-cuteSV.results.BND.vcf"),
+                svimDEL=str(SVIM_PREFIX + ".DEL.vcf"),
+                svimINS=str(SVIM_PREFIX + ".INS.vcf"),
+                svimDUP=str(SVIM_PREFIX + ".DUP.vcf"),
+                svimINV=str(SVIM_PREFIX + ".INV.vcf"),
+                svimBND=str(SVIM_PREFIX + ".BND.vcf")
+        output:
+                delIntersect=str(INTERSECT_DIR + "/all-LR-callers.results.DEL.vcf"),
+                insIntersect=str(INTERSECT_DIR + "/all-LR-callers.results.INS.vcf"),
+                dupIntersect=str(INTERSECT_DIR + "/all-LR-callers.results.DUP.vcf"),
+                invIntersect=str(INTERSECT_DIR + "/all-LR-callers.results.INV.vcf"),
+                bndIntersect=str(INTERSECT_DIR + "/all-LR-callers.results.BND.vcf")
+        threads: NUM_THREADS
+        params:
+                minOverlap=MIN_OVERLAP,
+                prefixA=str(INTERSECT_DIR + "/Sniffles2-cuteSV"),
+                allSVA=str(INTERSECT_DIR + "/Sniffles2-cuteSV.DEL.vcf"),
+                prefixB=SVIM_PREFIX,
+                allSVB=str(SVIM_PREFIX + ".filtered.ALL.vcf"),
+                intersectPrefix=str(INTERSECT_DIR + "/all-LR-callers")
+        shell:
+                "bash ./Scripts/bedtools_intersect_sv_files.sh {params.prefixA} {params.allSVA} {params.prefixB} {params.allSVB} {params.minOverlap} {params.intersectPrefix}" 
+                #"""bedtools intersect -f {params} -F {params} -a {input.svimDEL} -b {input.cuteSniffDEL} | sort | uniq > {output.delIntersect}; 
+                #   bedtools intersect -f {params} -F {params} -a {input.svimINS} -b {input.cuteSniffINS} | sort | uniq > {output.insIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimDUP} -b {input.cuteSniffDUP} | sort | uniq > {output.dupIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimINV} -b {input.cuteSniffINV} | sort | uniq > {output.invIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimBND} -b {input.cuteSniffBND} | sort | uniq > {output.bndIntersect}
+                #"""
+
+rule bedtools_intersect_pav_svim_asm:
+        input:
+                svimASMDEL=str(SVIM_ASM_PREFIX + ".DEL.vcf"),
+                svimASMINS=str(SVIM_ASM_PREFIX + ".INS.vcf"),
+                svimASMDUP=str(SVIM_ASM_PREFIX + ".DUP.vcf"),
+                svimASMINV=str(SVIM_ASM_PREFIX + ".INV.vcf"),
+                svimASMBND=str(SVIM_ASM_PREFIX + ".BND.vcf"),
+                pavDEL=str(PAV_PREFIX + ".DEL.vcf"),
+                pavINS=str(PAV_PREFIX + ".INS.vcf"),
+                pavDUP=str(PAV_PREFIX + ".DUP.vcf"),
+                pavINV=str(PAV_PREFIX + ".INV.vcf"),
+                pavBND=str(PAV_PREFIX + ".BND.vcf")
+        output:
+                delIntersect=str(INTERSECT_DIR + "/PAV-SVIM-ASM.results.DEL.vcf"),
+                insIntersect=str(INTERSECT_DIR + "/PAV-SVIM-ASM.results.INS.vcf"),
+                dupIntersect=str(INTERSECT_DIR + "/PAV-SVIM-ASM.results.DUP.vcf"),
+                invIntersect=str(INTERSECT_DIR + "/PAV-SVIM-ASM.results.INV.vcf"),
+                bndIntersect=str(INTERSECT_DIR + "/PAV-SVIM-ASM.results.BND.vcf")
+        threads: NUM_THREADS
+        params:
+                minOverlap=MIN_OVERLAP,
+                prefixA=QRY_GENOME,
+                allSVA=str(QRY_GENOME + ".vcf"),
+                prefixB=SVIM_ASM_PREFIX,
+                allSVB=str(SVIM_ASM_PREFIX + ".ALL.vcf"),
+                intersectPrefix=str(INTERSECT_DIR + "/PAV-SVIM-ASM")
+        shell:
+                "bash ./Scripts/bedtools_intersect_sv_files.sh {params.prefixA} {params.allSVA} {params.prefixB} {params.allSVB} {params.minOverlap} {params.intersectPrefix}"
+                #"""bedtools intersect -f {params} -F {params} -a {input.svimASMDEL} -b {input.pavDEL} | sort | uniq > {output.delIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimASMINS} -b {input.pavINS} | sort | uniq > {output.insIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimASMDUP} -b {input.pavDUP} | sort | uniq > {output.dupIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimASMINV} -b {input.pavINV} | sort | uniq > {output.invIntersect};
+                #   bedtools intersect -f {params} -F {params} -a {input.svimASMBND} -b {input.pavBND} | sort | uniq > {output.bndIntersect}
+                #"""
+
+rule truvari_bench_pav_w_svim_asm:
+        input:
+                pavInput=str(PAV_PREFIX + ".ALL.vcf"),
+                svimASMInput=str(SVIM_ASM_PREFIX + ".ALL.vcf")
+        output:
+                summaryFile=str(TRUVARI_DIR + "/PAV-SVIM-ASM/summary.txt"),
+                tpCall=str(TRUVARI_DIR + "/PAV-SVIM-ASM/tp-call.vcf"),
+                tpBase=str(TRUVARI_DIR + "/PAV-SVIM-ASM/tp-base.vcf"),
+                fpFile=str(TRUVARI_DIR + "/PAV-SVIM-ASM/fp.vcf"),
+                fnFile=str(TRUVARI_DIR + "/PAV-SVIM-ASM/fn.vcf")
+        threads: NUM_THREADS
+        params:
+               refGenome=REF_GENOME, 
+               minOverlap=MIN_OVERLAP,
+               minSize=MIN_SV_SIZE,
+               maxSize=MAX_SV_SIZE,
+               intersectDir=INTERSECT_DIR,
+               truvariDir=TRUVARI_DIR,
+               toolsPrefix="PAV-SVIM-ASM"
+        shell:
+                "bash ./Scripts/compare_sv_files_w_truvari.sh {input.pavInput} {input.svimASMInput} {params.refGenome} {params.minSize} {params.maxSize} {params.minOverlap} "
+                "{params.intersectDir} {params.truvariDir} {params.toolsPrefix}"
+                #"""truvari -f {params.refGenome} -b {input.pavInput} -c {input.svimASMInput} -s {params.minSize} --sizemax {params.maxSize} -r 1000 -p 0 -P {params.minOverlap} --giabreport
+                #   mv {params.intersectDir}/summary.txt {output.summaryFile}
+                #   mv {params.intersectDir}/tp-call.vcf {output.tpCall}
+                #   mv {params.intersectDir}/tp-base.vcf {output.tpBase}
+                #   mv {params.intersectDir}/fp.vcf {output.fpFile}
+                #   mv {params.intersectDir}/fn.vcf {output.fnFile}
+                #"""
