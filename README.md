@@ -22,7 +22,7 @@ bash -c "$(curl -s https://raw.githubusercontent.com/CFPB/development/main/open-
 
 ----
 
-# Note: this README reflects a work in progress and will be sibject to multiple reworks in the short-term
+# Note: this README reflects a work in progress and will be subject to multiple reworks in the short-term
 
 # SV-JIM
 
