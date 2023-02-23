@@ -47,16 +47,16 @@ include: "./Rules/summarize_tool_evaluation_rates.smk"
 #Default rule containing final output file targets to ensure executiong of entire pipeline
 rule all:
         input:
-                str(TRUVARI_DIR + "/Sniffles-SVIM/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/Sniffles-CuteSV/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/SVIM-CuteSV/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/SVIM-ASM-CuteSV/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/SVIM-ASM-Sniffles/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/SVIM-ASM-SVIM/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/PAV-CuteSV/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/PAV-Sniffles/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/PAV-SVIM/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/PAV-SVIM-ASM/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/All-Read-Callers/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/Sniffles-CuteSV-SVIM-ASM-SVIM/calculated_rates.tsv"),
-                str(TRUVARI_DIR + "/All-Callers/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/SVIM-CuteSV/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/PAV-CuteSV/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/All-Read-Callers/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/All-Callers/calculated_rates.tsv")

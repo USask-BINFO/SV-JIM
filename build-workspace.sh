@@ -39,6 +39,10 @@ mkdir $SV_RESULTS/SVIM
 mkdir $SV_RESULTS/SVIM-ASM
 mkdir $SV_RESULTS/PAV
 
+#Add required config files to PAV for user to fill out later
+echo "NAME	HAP1	HAP2" > $SV_RESULTS/PAV/assemblies.tsv
+echo "{" > $SV_RESULTS/PAV/config.json; echo "	reference: \"\"" >> $SV_RESULTS/PAV/config.json; echo "}" >> $SV_RESULTS/PAV/config.json
+
 #Build Intersection Subfolders
 echo "Building intersection set subdirectories!.."
 mkdir $INTERSECTIONS/Sniffles-SVIM

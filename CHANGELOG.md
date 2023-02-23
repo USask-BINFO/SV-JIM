@@ -19,7 +19,8 @@ We follow the [Semantic Versioning 2.0.0](http://semver.org/) format.
 ## 1.0.1 - 2023-02-23
 
 ### Added
-- Converted pipeline to SnakeMake workflow (added files)
+- Converted pipeline to SnakeMake workflow (added files).
+- Added Script to build workspace directories for when pipeline is run with default path configurations
 
 ### Deprecated
 - Nothing.
