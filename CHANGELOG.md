@@ -15,3 +15,17 @@ We follow the [Semantic Versioning 2.0.0](http://semver.org/) format.
 
 ### Fixed
 - Nothing.
+
+## 1.0.1 - 2023-02-23
+
+### Added
+- Converted pipeline to SnakeMake workflow (added files)
+
+### Deprecated
+- Nothing.
+
+### Removed
+- Script-Archive renamed to Archive files and SR SnakeMake components moved here
+
+### Fixed
+- Nothing.

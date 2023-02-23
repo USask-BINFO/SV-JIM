@@ -4,13 +4,13 @@
 
 #Reference Sequence Information
 refSampleName: "NI100" # Short ID for user to distinguish files
-refAssembly: "./Workflow_Outputs/Genomes/Bnigra_NI100.v2.genome.fasta" # Path to Reference Fenome fasta file
-refSeqsFile: "./Workflow_Outputs/Genomes/RefSeqsToInclude.txt" # File of REF regions to include (one per line. Ex. Chromosomes only). Can be created with grep "><Chrom_Prefix>" <targetGenome> | tr -d ">"
+refAssembly: "Workflow_Outputs/Genomes/Bnigra_NI100.v2.genome.fasta" # Path to Reference Fenome fasta file
+refSeqsFile: "Workflow_Outputs/Genomes/RefSeqsToInclude.txt" # File of REF regions to include (one per line. Ex. Chromosomes only). Can be created with grep "><Chrom_Prefix>" <targetGenome> | tr -d ">"
 
 #Query Sequence Information
 qrySampleName: "C2" # Long ID for user to distinguish files
-qryAssembly: "./Workflow_Outputs/Genomes/Bnigra_C2.v1.genome.fasta" # Path to Query Assembly's fasta file
-qrySeqsFile: "./Workflow_Outputs/Genomes/QrySeqsToInclude.txt" # File of regions to include (one per line. Ex: Chrosomes only). Can be created with grep "><CHROM_PREFIX>" <targetGenome> | tr -d ">"
+qryAssembly: "Workflow_Outputs/Genomes/Bnigra_C2.v1.genome.fasta" # Path to Query Assembly's fasta file
+qrySeqsFile: "Workflow_Outputs/Genomes/QrySeqsToInclude.txt" # File of regions to include (one per line. Ex: Chrosomes only). Can be created with grep "><CHROM_PREFIX>" <targetGenome> | tr -d ">"
 
 #Read Input Information
 accessionLR: "SRR11906206" # Accession number for Long-reads downloaded from SRA
@@ -24,20 +24,20 @@ accessionLR: "SRR11906206" # Accession number for Long-reads downloaded from SRA
 threads: 30
 
 #Designated Working Directory Information (Defaults can be built using 'build-workspace.sh' provided in home directory of repo)
-genomesFolder: "./Workflow_Outputs/Genomes"
-longReadsFolder: "./Workflow_Outputs/Long_Reads"
-qualimapReportsFolder: "./Workflow_Outputs/Qualimap_Reports"
-alignResultsFolder: "./Workflow_Outputs/Alignments"
-svResultsFolder: "./Workflow_Outputs/SV_Calls"
-intersectResultsFolder: "./Workflow_Outputs/Intersections"
-truvariResultsFolder: "./Workflow_Outputs/Truvari_Results"
+genomesFolder: "Workflow_Outputs/Genomes"
+longReadsFolder: "Workflow_Outputs/Long_Reads"
+qualimapReportsFolder: "Workflow_Outputs/Qualimap_Reports"
+alignResultsFolder: "Workflow_Outputs/Alignments"
+svResultsFolder: "Workflow_Outputs/SV_Calls"
+intersectResultsFolder: "Workflow_Outputs/Intersections"
+truvariResultsFolder: "Workflow_Outputs/Truvari_Results"
 
 #Designated Conda Environment Information (Default YAML env file provided)(Note: Using only a single yaml file of all software reduces pipeline execution time)
-cuteSVCondaEnvYAML: "./Rules/All-Env.yaml" # Path to YAML file for conda env that CuteSV is installed in"
-sniffles2CondaEnvYAML: "./Rules/All-Env.yaml" # Path to YAML file for conda env that Sniffles2 is installed in"
-svimCondaEnvYAML: "./Rules/All-Env.yaml" # Path to YAML file for conda env that SVIM is installed in"
-svimASMCondaEnvYAML: "./Rules/All-Env.yaml" # Path to YAML file for conda env that SVIM-ASM is installed in"
-pavCondaEnvYAML: "./Rules/All-Env.yaml" # Path to YAML file for conda environment that PAV dependencies are installed in"
+cuteSVCondaEnvYAML: "Rules/All-Env.yaml" # Path to YAML file for conda env that CuteSV is installed in"
+sniffles2CondaEnvYAML: "Rules/All-Env.yaml" # Path to YAML file for conda env that Sniffles2 is installed in"
+svimCondaEnvYAML: "Rules/All-Env.yaml" # Path to YAML file for conda env that SVIM is installed in"
+svimASMCondaEnvYAML: "Rules/All-Env.yaml" # Path to YAML file for conda env that SVIM-ASM is installed in"
+pavCondaEnvYAML: "Rules/All-Env.yaml" # Path to YAML file for conda environment that PAV dependencies are installed in"
 
 
 #*****************************************************
