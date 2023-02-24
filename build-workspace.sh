@@ -1,15 +1,13 @@
 #!/bin/bash
 
-SAMPLE_PREFIX=$1
-
 # Test if existing directory exits. If true terminate process and advise user, otherwise build workspace
-if [ -d "./${SAMPLE_PREFIX}_Workflow_Outputs" ]; then
+if [ -d "./Workflow_Outputs" ]; then
 	echo "Workspace parent directory already exist in the current directory! Terminating..."
 	exit 1
 fi
 
 #Store workspace key areas
-PARENT_DIR=./${SAMPLE_PREFIX}_Workflow_Outputs
+PARENT_DIR=./Workflow_Outputs
 GENOMES=$PARENT_DIR/Genomes
 LR_DIR=$PARENT_DIR/Long_Reads
 ALIGNMENTS=$PARENT_DIR/Alignments
