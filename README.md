@@ -121,41 +121,86 @@ conda env export -n <condaEnvName> -f <fileName>.yaml --from-history
 
 Once the conda config files have been created, please provide updated path information for each tool's conda configuration file or leave the path as the default value otherwise.
 
+### Configuration file options:
+#### Input File Configurations Section
+##### Reference Sequence Information
+ - refSampleName:  Short ID for user to distinguish files (EX: "NI100")
+ - refAssembly: Path to Reference Fenome fasta file (EX: "./Genomes/Bnigra_NI100.fasta")
+ - refSeqsFile: File of regions in the reference genome to include. For example, the chromosomes only. (EX:"./Genomes/RefSeqsToInclude.txt")
+ -- Contents of the target file should contain one region per line. 
+ -- This type of file can be created with ```grep ">[Chrom_Prefix]" [genomeFasta] | tr -d ">" > [refSeqListFile]```
 
-#### Configuration file example:
-```
-threads: 20
+##### Query Sequence Information
+ - qrySampleName:  Short ID for user to distinguish files (EX: "C2")
+ - qryAssembly: Path to Reference Fenome fasta file (EX: "./Genomes/Bnigra_NI100.fasta")
+ - qrySeqsFile: File of regions/contigs in the query assembly to be included. (EX:"./Genomes/QrySeqsToInclude.txt")
+ -- Contents of the target file should contain one region per line. 
+ -- This type of file can be created quickly with ```grep ">[Chrom_Prefix]" [genomeFasta] | tr -d ">" > [qrySeqListFile]```
 
-refSampleName: "NI100"
-refAssembly: "./Genomes/Bnigra_NI100.v2.genome.fasta"
+##### Read Input Information
+ - accessionLR: Accession number for Long-reads downloaded from SRA (EX: "SRR11906206")
 
-qrySampleName: "C2"
-qryAssembly: "./Genomes/Bnigra_C2.v1.genome.fasta"
 
-accessionLR: "SRR11906206" #Accession number for Long-reads downloaded from SRA
-seqTechForLR: "map-ont" # map-ont, map-bp
+#### Environment and Working Directory Configurations
+##### Environment Information
+- threads: Desired number of threads to use during execution based on hardware available (EX: 30)   
 
-minMAPQForSVs: 20
-minSuppReadsForSVs: 10
-minSizeForSVs: 50
-maxSizeForSVs: 300000
-overlapThreshold: 0.5
+##### Working Directory Information 
+Default options can be created easily using the 'build-workspace.sh' script provided in home directory of this repo.
+ - genomesFolder: Path information for the target directory containing the reference and query fasta files. (EX: "./Genomes")
+ - longReadsFolder: Path information for the target directory containing the long read data (in fastq) applicable to the query sample. (EX: "./Long_Reads")
+ - qualimapReportsFolder: Path information for the target directory into which Qualimap reports will be written. (EX: "./Qualimap_Reports")
+ - alignResultsFolder: Path information for the target directory into which minimap2 alignment results will be written. (EX: "./Alignments")
+ - svResultsFolder: Path information for the target parent directory into which all SV caller results will be written. (EX: "./SV_Calls")
+ -- If specifying an alternative directory, please ensure a the following subdirectories are created for use by the pipeline: [CuteSV,Sniffles, SVIM, SVIM-ASM, and PAV]
+ - intersectResultsFolder: Path information for the target parent directory into which all BEDTools intersect results will be written. (EX: "./Intersections")
+ - truvariResultsFolder: Path information for the target parent directory into which all Truvari bench results will be written. (EX:"./Truvari_Results")
 
-mainCondaEnvYAML: "./Rules/All-Env.yaml"
-cuteSVCondaEnvYAML: "./Rules/All-Env.yaml" #"CuteSV-Env.yaml"
-sniffles2CondaEnvYAML: "./Rules/All-Env.yaml" #"Sniffles2-Env.yaml"
-svimCondaEnvYAML: "./Rules/All-Env.yaml" #"SVIM-Env.yaml"
-svimASMCondaEnvYAML: "./Rules/All-Env.yaml" #"SVIM-ASM-Env.yaml"
-pavCondaEnvYAML: "./Rules/All-Env.yaml" #"PAV-Env.yaml"
+##### Conda Environment Information 
+This repo includes a default YAML env file provided that contains all conda related programs as dependencies for use convenience. Additionally, using only a single YAML file featuring all of the required software reduces pipeline execution time since snakemake will regenerate it's own copies of each environment automatically. However, the following seperate options are available should the user require/prefer to use separate environments. Any YAML files to be used should be placed in the Rules subdirectory for SnakeMake to access.
+To use a single conda, please specify the same target YAML file for all five parameters. 
+- cuteSVCondaEnvYAML: Path to YAML file for conda env that CuteSV is installed in. (EX: "All-Env.yaml")
+- sniffles2CondaEnvYAML: Path to YAML file for conda env that Sniffles2 is installed in. (EX: "All-Env.yaml")
+- svimCondaEnvYAML: Path to YAML file for conda env that SVIM is installed in. (EX:"All-Env.yaml")
+- svimASMCondaEnvYAML: Path to YAML file for conda env that SVIM-ASM is installed in. (EX: "All-Env.yaml")
+ - pavCondaEnvYAML: Path to YAML file for conda environment that PAV dependencies are installed in. (EX: "All-Env.yaml")
 
-genomesFolder: "./Genomes"
-longReadsFolder: "./Long_Reads"
-qualimapReportsFolder: "./Qualimap_Reports"
-alignResultsFolder: "./Alignments"
-svResultsFolder: "./SV_Calls"
-intersectResultsFolder: "./Intersections"
-truvariResultsFolder: "./Truvari_Results"
-```
+#### Software Configurations
+##### SRATools Configurations 
+For context, the default value provided is based on the  size of the read data files used during initial testing
+- prefetchMaxSize: Maximum file size that will downloaded during prefetch operation. (EX: "50G")
+
+##### Minimap2 Aligner Configurations (for more details see minimap2 --help)
+For context, the default settings taken from the supplementary information of the orginal [CuteSV](https://github.com/tjiangHIT/cuteSV) and [SVIM-ASM](https://github.com/eldariont/svim-asm) publications since these publications compared the performance of similar software that is used in the pipeline.
+Additional details and options for each setting can also be found in the ```minimap2 --help``` menu.
+- presetForLR: Predefined settings based on sequencing tech. (EX: "map-ont" OR "map-pb" OR "map-hifi", etc.)
+- presetForAssemblies: Predefined settings for query assembly to ref alignment based on maximum allowable sequence divergence. (EX: asm5 OR asm10 OR asm20)
+- minimapZDropForLR: Z drop score and Inversion Z drop score parameter in minimap (EX: "600,200")
+
+##### SAMTools Configurations
+For context, these default settings were taken from the supplementary information from the original [SVIM-ASM](https://github.com/eldariont/svim-asm) publication as this parameter value was successfully used in their testing.
+- memSettingForAssemblySort: Requested/Required memory amount when sorting minimap2's assembly-to-ref alignment output. (EX: "4G")
+
+##### General SV Caller Configurations 
+For context, these default settings were taken from the supplementary information of the [CuteSV](https://github.com/tjiangHIT/cuteSV) publication since this publication demonstrated high quality performance rates when comparing the outputs of similar read-based SV Callers used in the pipeline.
+- minMAPQForSVs: PHRED-scaled quality score that relates to the probability of error for an aligned base (EX: 20)
+-- PHRED scores typically range from 4-60 with 10 representing 10% error, 20 representing 1%, 30 representing 0.1%, and 40 representing 0.01%
+-- Additional details on PHRED-scaled quality scores can be found in the [Phred-scaled quality scores](https://gatk.broadinstitute.org/hc/en-us/articles/360035531872-Phred-scaled-quality-scores) article.
+- minSuppReadsForSVs: Evidence threshold for the number of reads that support/indicate the presence of an SV. (EX: 10)
+- minSizeForSVs: Filtering for min size of the SV to be detected with 50 being the common definition for SV min size in literature. (EX: 50)
+- maxSizeForSVs: Filtering maximum size for SV detectable by tools (EX: 300000)
+
+##### CuteSV Configurations
+As with the general SV configurations above, the default settings are taken from the CuteSV publication. Please see the [CuteSV repo](https://github.com/tjiangHIT/cuteSV) for more details on the significance of these settings.
+- maxClusterBias: 100
+- diffRatio: 0.3
+
+##### Truvari Bench Configurations 
+Default settings inspired by thresholds used in published literature and in the [SVIM-ASM](https://github.com/eldariont/svim-asm) publications' supplementary information. See ```truvari bench --help``` menu for more details on settings.
+- overlapThreshold: Rate of similarity required in the sizes of the SVs locations being compared. (EX: 0.5 [or 50% which is a commonly used threshold in literature])
+- maxRefDistance: Maximum distance (in number of bases) permitted when comparing the reference sequence index reported for the SV locations being compared (EX: 1000) 
+
+
 ## Usage
 
 #### To perform a dry run:

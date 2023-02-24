@@ -32,12 +32,12 @@ svResultsFolder: "Workflow_Outputs/SV_Calls"
 intersectResultsFolder: "Workflow_Outputs/Intersections"
 truvariResultsFolder: "Workflow_Outputs/Truvari_Results"
 
-#Designated Conda Environment Information (Default YAML env file provided)(Note: Using only a single yaml file of all software reduces pipeline execution time)
-cuteSVCondaEnvYAML: "Rules/All-Env.yaml" # Path to YAML file for conda env that CuteSV is installed in"
-sniffles2CondaEnvYAML: "Rules/All-Env.yaml" # Path to YAML file for conda env that Sniffles2 is installed in"
-svimCondaEnvYAML: "Rules/All-Env.yaml" # Path to YAML file for conda env that SVIM is installed in"
-svimASMCondaEnvYAML: "Rules/All-Env.yaml" # Path to YAML file for conda env that SVIM-ASM is installed in"
-pavCondaEnvYAML: "Rules/All-Env.yaml" # Path to YAML file for conda environment that PAV dependencies are installed in"
+#Designated Conda Environment Information (Default YAML env file provided in Rule directory)(Note: Using only a single yaml file of all software reduces pipeline execution time)
+cuteSVCondaEnvYAML: "All-Env.yaml" # YAML file in Rule directory for conda env that CuteSV is installed in"
+sniffles2CondaEnvYAML: "All-Env.yaml" # YAML file in Rule directory for conda env that Sniffles2 is installed in"
+svimCondaEnvYAML: "All-Env.yaml" # YAML file in Rule directory for conda env that SVIM is installed in"
+svimASMCondaEnvYAML: "All-Env.yaml" # YAML file for conda env that SVIM-ASM is installed in"
+pavCondaEnvYAML: "All-Env.yaml" # YAML file in Rule directory for conda environment that PAV dependencies are installed in"
 
 
 #*****************************************************
@@ -51,7 +51,6 @@ prefetchMaxSize: "50G" # Maximum file size that will downloaded during prefetch 
 presetForLR: "map-ont" # Predefined settings based on sequencing tech (Ex: map-ont, map-pb, map-hifi)
 presetForAssemblies: "asm20" # Predefined settings for assembly to ref alignment based on similarity (asm5, asm10, asm20) (see minimap2 --help for similarity thresholds) 
 minimapZDropForLR: "600,200" # Z drop score and Inversion Z drop score parameter in minimap (Default taken from cuteSV paper that compared similar tools)
-srAlignerChoice: "bowtie2" # Choice of aligner for short reads ("bwa" or "bowtie2")
 
 #SAMTools Configurations (Default settings taken from SVIM-ASM paper)
 memSettingForAssemblySort: "4G" # Requested/Required memory amount when sorting minimap2's assembly-to-ref alignment output
