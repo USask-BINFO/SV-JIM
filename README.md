@@ -1,53 +1,22 @@
-#### CFPB Open Source Project Template Instructions
-
-1. Create a new project.
-2. [Copy these files into the new project](#installation)
-3. Update the README, replacing the contents below as prescribed.
-4. Add any libraries, assets, or hard dependencies whose source code will be included
-   in the project's repository to the _Exceptions_ section in the [TERMS](TERMS.md).
-  - If no exceptions are needed, remove that section from TERMS.
-5. If working with an existing code base, answer the questions on the [open source checklist](opensource-checklist.md)
-6. Delete these instructions and everything up to the _Project Title_ from the README.
-7. Write some great software and tell people about it.
-
-> Keep the README fresh! It's the first thing people see and will make the initial impression.
-
-## Installation
-
-To install all of the template files, run the following script from the root of your project's directory:
-
-```
-bash -c "$(curl -s https://raw.githubusercontent.com/CFPB/development/main/open-source-template.sh)"
-```
-
-----
-
-# Note: this README reflects a work in progress and will be subject to multiple reworks in the short-term
-
 # SV-JIM
 
-**Description**:  
-Multi-stage SnakeMake pipeline/workflow for Structural Variant (SV) calling using multiple long-read and assembly alignment-based 
-SV calling tools with evaluation performed based on consensus using both the Jacccard index measure and Truvari. 
-This workflow produces a comprehensive evidence-based SV result set to aid SV studies that 
-require well-supported results.
+## Description
+Multi-stage SnakeMake pipeline/workflow using python and BASH scripts for Structural Variant (SV) calling with multiple third-party long-read and assembly alignment-based 
+SV calling tools. Further, this pipeline performs evaluation of all SV results produced based on consensus between tool output using both the Jacccard index measure and Truvari. 
+This workflow produces a comprehensive evidence-based SV result set to aid SV studies that require well-supported results.
 
-Other things to include:
-
-  - **Technology stack**: Indicate the technological nature of the software, including primary programming language(s) and whether the software is intended as standalone or as a module in a framework or other ecosystem.
   - **Status**:  Version 1.0.2 - [CHANGELOG](CHANGELOG.md).
-  - **Links to production or demo instances**
   - Describe what sets this apart from related-projects. Linking to another doc or page is OK if this can't be expressed in a sentence or two.
 
 ## Supported formats
 
 SV-JIM requires genome assemblies for a reference and query sample in FASTA format and a set of long-reads from the query sample in FASTQ format.
-The input genome assembly files must be pre-downloaded by the user and either placed in the `./Genomes/` folder in the provided workflow directories
+The input genome assembly files must be pre-downloaded by the user and either placed in the `Workflow/Genomes/` folder in the provided workflow directories
 or the path information for there location must be updated in the configuration file prior to execution.
 
 After execution, SV-JIM produces multiple SV result files in Variant Call Format (VCF)
 
-Similarly, the read data can be downloaded in advance and placed in the `./Long_Reads/` directory; however, SV-JIM can also execute an SRA Tools prefetch
+Similarly, the read data can be downloaded in advance and placed in the `Workflow_Outputs/Long_Reads` directory; however, SV-JIM can also execute an SRA Tools prefetch
 command if provided with only the long-read data's accession number from NCBI.
 
 ## Dependencies
@@ -114,7 +83,7 @@ These conda configuration files can be generated as follows:
 conda env export -n <condaEnvName> -f <fileName>.yaml --from-history
 ```
 
-Any additional conda files created must be placed in the ```Rules``` directory to allow for access by SnakeMake during execution and please provide updated file name information for each tool's 
+Any additional conda files created must be placed in the `Rules` directory to allow for access by SnakeMake during execution and please provide updated file name information for each tool's 
 conda file in the SV-JIM config file provided.
 
 ### Configuration file options:
@@ -148,7 +117,6 @@ Default options can be created easily using the 'build-workspace.sh' script prov
  - qualimapReportsFolder: Path information for the target directory into which Qualimap reports will be written. (EX: "./Qualimap_Reports")
  - alignResultsFolder: Path information for the target directory into which minimap2 alignment results will be written. (EX: "./Alignments")
  - svResultsFolder: Path information for the target parent directory into which all SV caller results will be written. (EX: "./SV_Calls")
- 	- If specifying an alternative directory, please ensure a the following subdirectories are created for use by the pipeline: [CuteSV,Sniffles, SVIM, SVIM-ASM, and PAV]
  - intersectResultsFolder: Path information for the target parent directory into which all BEDTools intersect results will be written. (EX: "./Intersections")
  - truvariResultsFolder: Path information for the target parent directory into which all Truvari bench results will be written. (EX:"./Truvari_Results")
 
@@ -201,14 +169,16 @@ Default settings inspired by thresholds used in published literature and in the 
 
 #### 1) Set Up/Pre-work
 
-A) If executing the pipeline using the default working directory, the please run the ```build-workspace.sh``` script provided in the home direcotry of repo to easily the required directories featured in the template config file provided.
+A) If executing the pipeline using the default working directory, the please run the `build-workspace.sh` script provided in the home direcotry of repo to easily the required directories featured in the template config file provided.
 B) Update the provided SV-JIM config file for any non-default values you wish to change
-C) Ensure the target reference genome and query assembly fasta files (or copies) are located in the directory identified in the ``genomesFolder``` parameter within the config file.
-D) Create the files for the ```refSeqsFile``` and ```qrySeqsFile``` containing the target genome/assembly regions to be considered during the pipeline's execution
-	- See ```grep``` command suggestion in the Configuration section above for assistance 
-E) If altering the pipeline's target output directories, please ensure the necessary subdirectories are created for the updated ```svResultsFolder``` ```intersectResultsFolder``` ```truvariResultsFolder``` targets 
-	- Details and sample commands for which subdirectories need to be created can be found in the ```build-workspace.sh``` script provided
-F) ```cd``` to the target PAV output directory and add/update the ```config.json``` and ```assemblies.tsv``` required by PAV (see [Configuring PAV](https://github.com/EichlerLab/pav#configuring-pav) for more details) 
+C) Ensure the target reference genome and query assembly fasta files (or copies) are located in the directory identified in the `genomesFolder` parameter within the config file.
+D) Create the files for the `refSeqsFile` and `qrySeqsFile` containing the target genome/assembly regions to be considered during the pipeline's execution
+	- See `grep` command suggestion in the Configuration section above for assistance 
+E) If altering the pipeline's target output directories, please ensure the necessary subdirectories are created for the updated `svResultsFolder` `intersectResultsFolder` `truvariResultsFolder` targets 
+	- To build the `svResultsFolder`'s subdirectories, please run the `build_svcalls_subdirectories.sh` scipt and provide the alternate directory as an argument (EX: build_svcalls_subdirectories.sh [newTargetDir])
+        - To build the `intersectResultsFolder`'s subdirectories, please run the `build_intersections_subdirectories.sh` scipt and provide the alternate directory as an argument (EX: build_intersections_subdirectories.sh [newTargetDir])
+        - To build the `truvariResultsFolder`'s subdirectories, please run the `build_truvari_subdirectories.sh` scipt and provide the alternate directory as an argument (EX: build_truvari_subdirectories.sh [newTargetDir]) 
+F) `cd` to the target PAV output directory and add/update the `config.json` and `assemblies.tsv` required by PAV (see [Configuring PAV](https://github.com/EichlerLab/pav#configuring-pav) for more details) 
 
 #### 2) Perform a dry run:
 
@@ -219,10 +189,7 @@ Dry runs are also useful as they can identify errors that may occur based on cur
 
 A) Edit configuration file to inputs to be processed
 B) cd to SV-JIM home directory
-C) Run: 
-```
-snakemake -np
-```
+C) Run: ```snakemake -np```
 
 #### 3) Execute SV-JIM once configuration is prepared: 
 
@@ -230,14 +197,12 @@ Builds the directed acyclic graph representing the outstanding tasks of the work
 for the outstanding tasks can vary between executions.
 
 A) cd to SV-JIM home directory
-B) Run: 
-```
-snakemake --use-conda --cores <# threads>
-```
+B) Run: ```snakemake --use-conda --cores <# threads>```
+
 Note:
- - Adding ```--rerun-incompletes``` may be necessary if the pipeline terminates unexpectedly during execution to restart tasks that were in progress at the time.
+ - Adding `--rerun-incompletes` to the command may be necessary if the pipeline terminates unexpectedly during execution to restart tasks that were in progress at the time.
  - Unexpected termination may also result in a locked working directory; however, this lock can be removed by either running ```snakemake --unlock``` in the SV-JIM home directory
- or by deleting the contents of the ```<PAV_Directory>/.snakemake/locks/``` directory if the reported lock was applied by PAV's SnakeMake pipeline.
+ or by deleting the contents of the `<PAV_Directory>/.snakemake/locks/` directory if the reported lock was applied by PAV's SnakeMake pipeline.
 
 ## Pipeline Test Example (Arabidopsis thaliana)
 
@@ -250,26 +215,21 @@ List of current issues
 
 ## Getting help
 
-Please e-mail ```malcolm.todd@usask.ca``` with any support requests. 
+If you have questions, concerns, bug reports, etc, please file an issue in this repository's Issue Tracker or e-mail `malcolm.todd@usask.ca`.
 
-**Example**
+## Future work
 
-If you have questions, concerns, bug reports, etc, please file an issue in this repository's Issue Tracker.
+Have suggestions on how the software can be improved? Please contact `malcolm.todd@usask.ca` with your suggestions/recommendations!
 
-## Getting involved
-
-This section should detail why people should get involved and describe key areas you are
-currently focusing on; e.g., trying to get feedback on features, fixing certain bugs, building
-important pieces, etc.
-
-General instructions on _how_ to contribute should be stated with a link to [CONTRIBUTING](CONTRIBUTING.md).
-
+Current worklist:
+- Add Docstrings to SnakeMake Rules files to improve internal documentation for users
+- Add additional tool combinations to interesect rules and incorporate them into the pipeline on completion
+- Explore use of the union set and how best to aggregate truvari results back into singular SV files
 
 ----
 
-## Open source licensing info
+## MIT licensing info
 1. [LICENSE](LICENSE)
-
 
 ----
 
