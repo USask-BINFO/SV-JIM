@@ -19,7 +19,7 @@ rule truvari_bench_sniffles_w_svim:
                 summaryDUP=str(config["truvariResultsFolder"] + "/Sniffles-SVIM/DUP/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/Sniffles-SVIM/INV/summary.txt"),
                 summaryBND=str(config["truvariResultsFolder"] + "/Sniffles-SVIM/BND/summary.txt")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -63,7 +63,7 @@ rule truvari_bench_sniffles_w_cuteSV:
                 sniffCuteDUPTP=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/DUP/tp-call.vcf"),
                 sniffCuteINVTP=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/INV/tp-call.vcf"),
                 sniffCuteBNDTP=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/BND/tp-call.vcf")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -101,7 +101,7 @@ rule truvari_bench_svim_w_cuteSV:
                 summaryDUP=str(config["truvariResultsFolder"] + "/SVIM-CuteSV/DUP/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/SVIM-CuteSV/INV/summary.txt"),
                 summaryBND=str(config["truvariResultsFolder"] + "/SVIM-CuteSV/BND/summary.txt")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -139,7 +139,7 @@ rule truvari_bench_svim_asm_w_cuteSV:
                 summaryDUP=str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/DUP/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/INV/summary.txt"),
                 summaryBND=str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/BND/summary.txt")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -177,7 +177,7 @@ rule truvari_bench_svim_asm_w_sniffles:
                 summaryDUP=str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/DUP/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/INV/summary.txt"),
                 summaryBND=str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/BND/summary.txt")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -221,7 +221,7 @@ rule truvari_bench_svim_asm_w_svim:
                 svimASMSVIMDUPTP=str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/DUP/tp-call.vcf"),
                 svimASMSVIMINVTP=str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/INV/tp-call.vcf"),
                 svimASMSVIMBNDTP=str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/BND/tp-call.vcf")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -253,7 +253,7 @@ rule truvari_bench_pav_w_cuteSV:
                 summaryDEL=str(config["truvariResultsFolder"] + "/PAV-CuteSV/DEL/summary.txt"),
                 summaryINS=str(config["truvariResultsFolder"] + "/PAV-CuteSV/INS/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/PAV-CuteSV/INV/summary.txt")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -283,7 +283,7 @@ rule truvari_bench_pav_w_sniffles:
                 summaryDEL=str(config["truvariResultsFolder"] + "/PAV-Sniffles/DEL/summary.txt"),
                 summaryINS=str(config["truvariResultsFolder"] + "/PAV-Sniffles/INS/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/PAV-Sniffles/INV/summary.txt")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -313,7 +313,7 @@ rule truvari_bench_pav_w_svim:
                 summaryDEL=str(config["truvariResultsFolder"] + "/PAV-SVIM/DEL/summary.txt"),
                 summaryINS=str(config["truvariResultsFolder"] + "/PAV-SVIM/INS/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/PAV-SVIM/INV/summary.txt")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -343,7 +343,7 @@ rule truvari_bench_pav_w_svim_asm:
                 summaryDEL=str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/DEL/summary.txt"),
                 summaryINS=str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INS/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INV/summary.txt")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -385,7 +385,7 @@ rule truvari_bench_sniffles_cuteSV_svim:
                 summaryDUP=str(config["truvariResultsFolder"] + "/All-Read-Callers/DUP/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/All-Read-Callers/INV/summary.txt"),
                 summaryBND=str(config["truvariResultsFolder"] + "/All-Read-Callers/BND/summary.txt")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -439,7 +439,7 @@ rule truvari_bench_sniffles_cuteSV_svim_asm_svim:
                 tpDEL=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/DEL/tp-call.vcf"),
                 tpINS=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/INS/tp-call.vcf"),
                 tpINV=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/INV/tp-call.vcf")
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],
@@ -475,7 +475,7 @@ rule truvari_bench_pav_sniffles_cuteSV_svim_asm_svim:
                 summaryDEL=str(config["truvariResultsFolder"] + "/All-Callers/DEL/summary.txt"),
                 summaryINS=str(config["truvariResultsFolder"] + "/All-Callers/INS/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/All-Callers/INV/summary.txt"),
-        threads: config["threads"]
+        threads: 10
         params:
                refGenome=REF_FILTERED,
                minOverlap=config["overlapThreshold"],

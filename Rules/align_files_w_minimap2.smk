@@ -21,4 +21,4 @@ rule align_both_assemblies_w_minimap2:
         params:
                 mnmp2Preset=config["presetForAssemblies"]
         shell:
-                "minimap2 -a -x asm10 --cs -r2k -t {threads} {input} > {output}" #settings from svim-asm git
+                "minimap2 -a -x {params.mnmp2Preset} --cs -r2k -t {threads} {input} > {output}" #settings from svim-asm git

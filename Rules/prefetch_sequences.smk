@@ -3,9 +3,9 @@ rule prefetch_LR_reads:
                 str(LR_PREFIX + ".sra")
         params:
                 maxFileSize=config["prefetchMaxSize"],
-                lrPrefix=LR_PREFIX
+                lrAccession=config["accessionLR"]
         shell:
-                "prefetch --maxsize {params.maxFileSize} -O {params.lrPrefix}"
+                "prefetch --maxsize {params.maxFileSize} -o {output} {params.lrAccession}"
 
 rule reformat_LR_sra_to_fastq:
         input:
@@ -16,4 +16,4 @@ rule reformat_LR_sra_to_fastq:
         params:
                 config["longReadsFolder"]
         shell:
-                "fasterq-dump -O {params} {input}"
+                "fasterq-dump --threads {threads} -O {params} {input}"
