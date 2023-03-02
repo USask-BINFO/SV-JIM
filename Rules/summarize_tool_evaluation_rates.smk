@@ -21,88 +21,19 @@ rule evaluate_sniffles_w_svim:
                 "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} BND {input.summaryBND} {output} A;\n"
                 "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
 
-rule evaluate_sniffles_w_cuteSV:
+rule evaluate_cuteSV_w_sniffles:
         input:
                 #summaryALL=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/ALL/summary.txt"),
-                summaryDEL=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/DEL/summary.txt"),
-                summaryINS=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/INS/summary.txt"),
-                summaryDUP=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/DUP/summary.txt"),
-                summaryINV=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/INV/summary.txt"),
-                summaryBND=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/BND/summary.txt")
+                summaryDEL=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/DEL/summary.txt"),
+                summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/INS/summary.txt"),
+                summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/DUP/summary.txt"),
+                summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/INV/summary.txt"),
+                summaryBND=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/BND/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/calculated_rates.tsv")
         threads: config["threads"]
         params:
-               toolA="Sniffles2",
-               toolB="CuteSV"
-        shell:
-                #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DEL {input.summaryDEL} {output} W;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INS {input.summaryINS} {output} A;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DUP {input.summaryDUP} {output} A;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INV {input.summaryINV} {output} A;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} BND {input.summaryBND} {output} A;\n"
-                "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
-
-rule evaluate_svim_w_cuteSV:
-        input:
-                #summaryALL=str(config["truvariResultsFolder"] + "/SVIM-CuteSV/ALL/summary.txt"),
-                summaryDEL=str(config["truvariResultsFolder"] + "/SVIM-CuteSV/DEL/summary.txt"),
-                summaryINS=str(config["truvariResultsFolder"] + "/SVIM-CuteSV/INS/summary.txt"),
-                summaryDUP=str(config["truvariResultsFolder"] + "/SVIM-CuteSV/DUP/summary.txt"),
-                summaryINV=str(config["truvariResultsFolder"] + "/SVIM-CuteSV/INV/summary.txt"),
-                summaryBND=str(config["truvariResultsFolder"] + "/SVIM-CuteSV/BND/summary.txt")
-        output:
-                str(config["truvariResultsFolder"] + "/SVIM-CuteSV/calculated_rates.tsv")
-        threads: config["threads"]
-        params:
-               toolA="SVIM",
-               toolB="CuteSV"
-        shell:
-                #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DEL {input.summaryDEL} {output} W;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INS {input.summaryINS} {output} A;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DUP {input.summaryDUP} {output} A;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INV {input.summaryINV} {output} A;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} BND {input.summaryBND} {output} A;\n"
-                "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
-
-rule evaluate_svim_asm_w_cuteSV:
-        input:
-                #summaryALL=str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/ALL/summary.txt"),
-                summaryDEL=str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/DEL/summary.txt"),
-                summaryINS=str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/INS/summary.txt"),
-                summaryDUP=str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/DUP/summary.txt"),
-                summaryINV=str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/INV/summary.txt"),
-                summaryBND=str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/BND/summary.txt")
-        output:
-                str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/calculated_rates.tsv")
-        threads: config["threads"]
-        params:
-               toolA="SVIM-ASM",
-               toolB="CuteSV"
-        shell:
-                #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DEL {input.summaryDEL} {output} W;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INS {input.summaryINS} {output} A;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DUP {input.summaryDUP} {output} A;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INV {input.summaryINV} {output} A;\n"
-                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} BND {input.summaryBND} {output} A;\n"
-                "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
-
-rule evaluate_svim_asm_w_sniffles:
-        input:
-                #summaryALL=str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/ALL/summary.txt"),
-                summaryDEL=str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/DEL/summary.txt"),
-                summaryINS=str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/INS/summary.txt"),
-                summaryDUP=str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/DUP/summary.txt"),
-                summaryINV=str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/INV/summary.txt"),
-                summaryBND=str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/BND/summary.txt")
-        output:
-                str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/calculated_rates.tsv")
-        threads: config["threads"]
-        params:
-               toolA="SVIM-ASM",
+               toolA="CuteSV",
                toolB="Sniffles2"
         shell:
                 #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
@@ -113,19 +44,19 @@ rule evaluate_svim_asm_w_sniffles:
                 "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} BND {input.summaryBND} {output} A;\n"
                 "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
 
-rule evaluate_svim_asm_w_svim:
+rule evaluate_cuteSV_w_svim:
         input:
-                #summaryALL=str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/ALL/summary.txt"),
-                summaryDEL=str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/DEL/summary.txt"),
-                summaryINS=str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/INS/summary.txt"),
-                summaryDUP=str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/DUP/summary.txt"),
-                summaryINV=str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/INV/summary.txt"),
-                summaryBND=str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/BND/summary.txt")
+                #summaryALL=str(config["truvariResultsFolder"] + "/SVIM-CuteSV/ALL/summary.txt"),
+                summaryDEL=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/DEL/summary.txt"),
+                summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/INS/summary.txt"),
+                summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/DUP/summary.txt"),
+                summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/INV/summary.txt"),
+                summaryBND=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/BND/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/calculated_rates.tsv")
         threads: config["threads"]
         params:
-               toolA="SVIM-ASM",
+               toolA="CuteSV",
                toolB="SVIM"
         shell:
                 #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
@@ -136,18 +67,87 @@ rule evaluate_svim_asm_w_svim:
                 "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} BND {input.summaryBND} {output} A;\n"
                 "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
 
-rule evaluate_pav_w_cuteSV:
+rule evaluate_cuteSV_w_svim_asm:
         input:
-                #summaryALL=str(config["truvariResultsFolder"] + "/PAV-CuteSV/ALL/summary.txt"),
-                summaryDEL=str(config["truvariResultsFolder"] + "/PAV-CuteSV/DEL/summary.txt"),
-                summaryINS=str(config["truvariResultsFolder"] + "/PAV-CuteSV/INS/summary.txt"),
-                summaryINV=str(config["truvariResultsFolder"] + "/PAV-CuteSV/INV/summary.txt")
+                #summaryALL=str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/ALL/summary.txt"),
+                summaryDEL=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/DEL/summary.txt"),
+                summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/INS/summary.txt"),
+                summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/DUP/summary.txt"),
+                summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/INV/summary.txt"),
+                summaryBND=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/BND/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-CuteSV/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/calculated_rates.tsv")
         threads: config["threads"]
         params:
-               toolA="PAV",
-               toolB="CuteSV"
+               toolA="CuteSV",
+               toolB="SVIM-ASM"
+        shell:
+                #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DEL {input.summaryDEL} {output} W;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INS {input.summaryINS} {output} A;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DUP {input.summaryDUP} {output} A;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INV {input.summaryINV} {output} A;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} BND {input.summaryBND} {output} A;\n"
+                "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
+
+rule evaluate_sniffles_w_svim_asm:
+        input:
+                #summaryALL=str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/ALL/summary.txt"),
+                summaryDEL=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/DEL/summary.txt"),
+                summaryINS=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/INS/summary.txt"),
+                summaryDUP=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/DUP/summary.txt"),
+                summaryINV=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/INV/summary.txt"),
+                summaryBND=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/BND/summary.txt")
+        output:
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/calculated_rates.tsv")
+        threads: config["threads"]
+        params:
+               toolA="Sniffles2",
+               toolB="SVIM-ASM"
+        shell:
+                #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DEL {input.summaryDEL} {output} W;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INS {input.summaryINS} {output} A;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DUP {input.summaryDUP} {output} A;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INV {input.summaryINV} {output} A;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} BND {input.summaryBND} {output} A;\n"
+                "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
+
+rule evaluate_svim_w_svim_asm:
+        input:
+                #summaryALL=str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/ALL/summary.txt"),
+                summaryDEL=str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/DEL/summary.txt"),
+                summaryINS=str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/INS/summary.txt"),
+                summaryDUP=str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/DUP/summary.txt"),
+                summaryINV=str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/INV/summary.txt"),
+                summaryBND=str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/BND/summary.txt")
+        output:
+                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/calculated_rates.tsv")
+        threads: config["threads"]
+        params:
+               toolA="SVIM",
+               toolB="SVIM-ASM"
+        shell:
+                #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DEL {input.summaryDEL} {output} W;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INS {input.summaryINS} {output} A;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DUP {input.summaryDUP} {output} A;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INV {input.summaryINV} {output} A;\n"
+                "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} BND {input.summaryBND} {output} A;\n"
+                "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
+
+rule evaluate_cuteSV_w_pav:
+        input:
+                #summaryALL=str(config["truvariResultsFolder"] + "/PAV-CuteSV/ALL/summary.txt"),
+                summaryDEL=str(config["truvariResultsFolder"] + "/CuteSV-PAV/DEL/summary.txt"),
+                summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV/INS/summary.txt"),
+                summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV/INV/summary.txt")
+        output:
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV/calculated_rates.tsv")
+        threads: config["threads"]
+        params:
+               toolA="CuteSV",
+               toolB="PAV"
         shell:
                 #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
                 "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DEL {input.summaryDEL} {output} W;\n"
@@ -212,20 +212,20 @@ rule evaluate_pav_w_svim_asm:
                 "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} INV {input.summaryINV} {output} A;\n"
                 "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
 
-rule evaluate_sniffles_cuteSV_svim:
+rule evaluate_cuteSV_sniffles_svim:
         input:
                 #summaryALL=str(config["truvariResultsFolder"] + "/All-Read-Callers/ALL/summary.txt"),
-                summaryDEL=str(config["truvariResultsFolder"] + "/All-Read-Callers/DEL/summary.txt"),
-                summaryINS=str(config["truvariResultsFolder"] + "/All-Read-Callers/INS/summary.txt"),
-                summaryDUP=str(config["truvariResultsFolder"] + "/All-Read-Callers/DUP/summary.txt"),
-                summaryINV=str(config["truvariResultsFolder"] + "/All-Read-Callers/INV/summary.txt"),
-                summaryBND=str(config["truvariResultsFolder"] + "/All-Read-Callers/BND/summary.txt")
+                summaryDEL=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DEL/summary.txt"),
+                summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INS/summary.txt"),
+                summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DUP/summary.txt"),
+                summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INV/summary.txt"),
+                summaryBND=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/BND/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/All-Read-Callers/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/calculated_rates.tsv")
         threads: config["threads"]
         params:
-               toolA="SVIM",
-               toolB="Sniffles-CuteSV"
+               toolA="CuteSV",
+               toolB="Sniffles-SVIM"
         shell:
                 #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
                 "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DEL {input.summaryDEL} {output} W;\n"
@@ -235,20 +235,20 @@ rule evaluate_sniffles_cuteSV_svim:
                 "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} BND {input.summaryINV} {output} A;\n"
                 "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
 
-rule evaluate_sniffles_cuteSV_svim_asm_svim:
+rule evaluate_cuteSV_sniffles_svim_svim_asm:
         input:
                 #summaryALL=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/ALL/summary.txt"),
-                summaryDEL=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/DEL/summary.txt"),
-                summaryINS=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/INS/summary.txt"),
-                summaryDUP=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/DUP/summary.txt"),
-                summaryINV=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/INV/summary.txt"),
-                summaryBND=str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/BND/summary.txt")
+                summaryDEL=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DEL/summary.txt"),
+                summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INS/summary.txt"),
+                summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DUP/summary.txt"),
+                summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INV/summary.txt"),
+                summaryBND=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/BND/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/calculated_rates.tsv")
         threads: config["threads"]
         params:
-               toolA="Sniffles-CuteSV",
-               toolB="SVIM-ASM-SVIM"
+               toolA="CuteSV-Sniffles",
+               toolB="SVIM-SVIM-ASM"
         shell:
                 #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
                 "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DEL {input.summaryDEL} {output} W;\n"
@@ -258,18 +258,18 @@ rule evaluate_sniffles_cuteSV_svim_asm_svim:
                 "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} BND {input.summaryBND} {output} A;\n"
                 "bash ./Scripts/calculate_total_from_tsv.sh {output} {params.toolA} {params.toolB}"
 
-rule evaluate_pav_sniffles_cuteSV_svim_asm_svim:
+rule evaluate_cuteSV_pav_sniffles_svim_svim_asm:
         input:
                 #summaryALL=str(config["truvariResultsFolder"] + "/All-Callers/ALL/summary.txt"),
-                summaryDEL=str(config["truvariResultsFolder"] + "/All-Callers/DEL/summary.txt"),
-                summaryINS=str(config["truvariResultsFolder"] + "/All-Callers/INS/summary.txt"),
-                summaryINV=str(config["truvariResultsFolder"] + "/All-Callers/INV/summary.txt")
+                summaryDEL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/DEL/summary.txt"),
+                summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INS/summary.txt"),
+                summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INV/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/All-Callers/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/calculated_rates.tsv")
         threads: config["threads"]
         params:
-               toolA="PAV",
-               toolB="Sniffles-CuteSV-SVIM-ASM-SVIM"
+               toolA="CuteSV",
+               toolB="PAV-Sniffles-SVIM-SVIM-ASM"
         shell:
                 #"bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} ALL {input.summaryALL} {output} W;\n"
                 "bash ./Scripts/calculate_iou_from_truvari_pair.sh {params.toolA} {params.toolB} DEL {input.summaryDEL} {output} W;\n"
