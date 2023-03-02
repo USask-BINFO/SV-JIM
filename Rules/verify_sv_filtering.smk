@@ -34,7 +34,8 @@ rule verify_svim_filtering_w_bcftools:
         input:
                 str(SVIM_PREFIX + ".ALL.vcf")
         output:
-                str(SVIM_PREFIX + ".filtered.ALL.vcf")
+                filteredInv=str(SVIM_PREFIX + ".filteredINV.ALL.vcf"),
+                finalFilter=str(SVIM_PREFIX + ".filtered.ALL.vcf")
         threads: config["threads"]
         params:
                 minSize=config["minSizeForSVs"],
@@ -42,14 +43,16 @@ rule verify_svim_filtering_w_bcftools:
                 minSupp=config["minSuppReadsForSVs"],
                 minMAPQ=config["minMAPQForSVs"] 
         shell:
-                "bcftools filter -e \'QUAL<{params.minMAPQ} || INFO/SVLEN<-{params.maxSize} || INFO/SVLEN>{params.maxSize} || INFO/SUPPORT<{params.minSupp}\' -o {output} {input}"
+                "bcftools filter -e \'SVTYPE == \"INV\" && ((INFO/END-POS)<-{params.maxSize} || (INFO/END-POS)>{params.maxSize})\' -o {output.filteredInv} {input};\n"
+                "bcftools filter -e \'QUAL<{params.minMAPQ} || INFO/SVLEN<-{params.maxSize} || INFO/SVLEN>{params.maxSize} || (INFO/END-POS)<-{params.maxSize} || (INFO/END-POS)>{params.maxSize} || INFO/SUPPORT<{params.minSupp}\' -o {output.finalFilter} {output.filteredInv}"
 
 rule verify_svim_asm_filtering_w_bcftools:
         input:
                 str(SVIM_ASM_PREFIX + ".ALL.vcf")
         output:
                 finalFilter=str(SVIM_ASM_PREFIX + ".filtered.ALL.vcf"),
-                removedNs=str(SVIM_ASM_PREFIX + ".ALL.NoN.vcf")
+                removedNs=str(SVIM_ASM_PREFIX + ".ALL.NoN.vcf"),
+                filteredInv=str(SVIM_ASM_PREFIX + ".filteredINV.ALL.vcf")
         threads: config["threads"]
         params:
                 minSize=config["minSizeForSVs"],
@@ -58,7 +61,8 @@ rule verify_svim_asm_filtering_w_bcftools:
                 minMAPQ=config["minMAPQForSVs"] 
         shell:
                 "bcftools filter -e \'REF ~ \"NNN*\" || ALT ~ \"NNN*\"\' -o {output.removedNs} {input};\n"
-                "bcftools filter -e \'INFO/SVLEN<-{params.maxSize} || INFO/SVLEN>{params.maxSize}\' -o {output.finalFilter} {output.removedNs}"
+                "bcftools filter -e \'SVTYPE == \"INV\" && ((INFO/END-POS)<-{params.maxSize} || (INFO/END-POS)>{params.maxSize})\' -o {output.filteredInv} {output.removedNs};\n"
+                "bcftools filter -e \'INFO/SVLEN<-{params.maxSize} || INFO/SVLEN>{params.maxSize}\' -o {output.finalFilter} {output.filteredInv}"
 
 rule verify_pav_filtering_bcftools:
         input:

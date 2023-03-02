@@ -27,4 +27,4 @@ then
 fi
 
 #Execute Truvari Bench to compare the VCF files provided in the script's arguments
-truvari bench -o $OUTPUT_DIR/$SV_TYPE -f $REF_GENOME -b ${SV_FILE_A}.gz -c ${SV_FILE_B}.gz -s $MIN_SIZE --sizemax $MAX_SIZE -r $MAX_REF_DIST -p 0 -P $OVERLAP -C $MAX_REF_DIST
+truvari bench --typeignore -o $OUTPUT_DIR/$SV_TYPE -f $REF_GENOME -b ${SV_FILE_A}.gz -c ${SV_FILE_B}.gz -s $MIN_SIZE --sizemax $MAX_SIZE -r $MAX_REF_DIST -p 0 -P $OVERLAP -C $MAX_REF_DIST
