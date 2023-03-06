@@ -93,14 +93,16 @@ conda file in the SV-JIM config file provided.
  - `refAssembly`: Path to Reference Fenome fasta file (EX: "./Genomes/Bnigra_NI100.fasta")
  - `refSeqsFile`: File of regions in the reference genome to include. For example, the chromosomes only. (EX:"./Genomes/RefSeqsToInclude.txt")
  	- Contents of the target file should contain one region per line. 
- 	- This type of file can be created with ```grep ">[Chrom_Prefix]" [genomeFasta] | tr -d ">" > [refSeqListFile]```
+ 	- This type of file can be created with:
+		-  ```grep ">[Chrom_Prefix]" [genomeFasta] | tr -d ">" > [refSeqListFile]```
 
 ##### Query Sequence Information
  - `qrySampleName`:  Short ID for user to distinguish files (EX: "C2")
  - `qryAssembly`: Path to Reference Fenome fasta file (EX: "./Genomes/Bnigra_NI100.fasta")
  - `qrySeqsFile`: File of regions/contigs in the query assembly to be included. (EX:"./Genomes/QrySeqsToInclude.txt")
  	- Contents of the target file should contain one region per line. 
- 	- This type of file can be created quickly with ```grep ">[Chrom_Prefix]" [genomeFasta] | tr -d ">" > [qrySeqListFile]```
+ 	- This type of file can be created quickly with:
+		- ```grep ">[Chrom_Prefix]" [genomeFasta] | tr -d ">" > [qrySeqListFile]```
 
 ##### Read Input Information
  - `accessionLR`: Accession number for Long-reads downloaded from SRA (EX: "SRR11906206")
@@ -112,14 +114,14 @@ conda file in the SV-JIM config file provided.
 
 ##### Working Directory Information 
 Default options can be created easily using the 'build-workspace.sh' script provided in home directory of this repo.
- - `genomesFolder`: Path information for the target directory containing the reference and query fasta files. (EX: "./Genomes")
- - `longReadsFolder`: Path information for the target directory containing the long read data (in fastq) applicable to the query sample. (EX: "./Long_Reads")
- - `qualimapReportsFolder`: Path information for the target directory into which Qualimap reports will be written. (EX: "./Qualimap_Reports")
- - `alignResultsFolder`: Path information for the target directory into which minimap2 alignment results will be written. (EX: "./Alignments")
- - `svResultsFolder`: Path information for the target parent directory into which all SV caller results will be written. (EX: "./SV_Calls")
- - `intersectResultsFolder`: Path information for the target parent directory into which all BEDTools intersect results will be written. (EX: "./Intersections")
- - `truvariResultsFolder`: Path information for the target parent directory into which all Truvari bench results will be written. (EX:"./Truvari_Results")
- - `aggregatedResultsFolder`: Path information for the target parent directory into which SV results supported by a minimum number of SV callers for each tool will be written. (EX:"./Aggregated_SV_Results")
+ - `genomesFolder`: Path to target directory containing the reference and query fasta files. (EX: "./Genomes")
+ - `longReadsFolder`: Path to target directory containing the long read data (in fastq) applicable to the query sample. (EX: "./Long_Reads")
+ - `qualimapReportsFolder`: Path to target directory into which Qualimap reports will be written. (EX: "./Qualimap_Reports")
+ - `alignResultsFolder`: Path to target directory into which minimap2 alignment results will be written. (EX: "./Alignments")
+ - `svResultsFolder`: Path to parent directory into which all SV caller results will be written. (EX: "./SV_Calls")
+ - `intersectResultsFolder`: Path to parent directory into which all BEDTools intersect results will be written. (EX: "./Intersections")
+ - `truvariResultsFolder`: Path to parent directory into which all Truvari bench results will be written. (EX:"./Truvari_Results")
+ - `aggregatedResultsFolder`: Path to parent directory into which SV results supported by a minimum number of SV callers for each tool will be written. (EX:"./Aggregated_SV_Results")
 
 ##### Conda Environment Information 
 This repo includes a default YAML env file provided that contains all conda related programs as dependencies for use convenience. Additionally, using only a single YAML file featuring all of the required software reduces pipeline execution time since snakemake will regenerate it's own copies of each environment automatically. However, the following seperate options are available should the user require/prefer to use separate environments. Any YAML files to be used should be placed in the Rules subdirectory for SnakeMake to access.
