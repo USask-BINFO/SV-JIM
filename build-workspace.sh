@@ -15,6 +15,7 @@ QUALIMAP_DIR=$PARENT_DIR/Qualimap_Reports
 SV_RESULTS=$PARENT_DIR/SV_Calls
 INTERSECTIONS=$PARENT_DIR/Intersections
 TRUVARI_RESULTS=$PARENT_DIR/Truvari_Results
+AGGREGATED_RESULTS=$PARENT_DIR/Aggregated_SV_Results
 
 echo "Building Parent Directory!.."
 mkdir $PARENT_DIR
@@ -28,9 +29,10 @@ mkdir $QUALIMAP_DIR
 mkdir $SV_RESULTS 
 mkdir $INTERSECTIONS
 mkdir $TRUVARI_RESULTS
-
+mkdir $AGGREGATED_RESULTS
 
 ./build-svcalls-subdirectories.sh $SV_RESULTS
+./build-svcalls-subdirectories.sh $AGGREGATED_RESULTS
 ./build-intersection-subdirectories.sh $INTERSECTIONS
 ./build-truvari-subdirectories.sh $TRUVARI_RESULTS
 ##Build SV Result Subfolders
@@ -40,6 +42,14 @@ mkdir $TRUVARI_RESULTS
 #mkdir $SV_RESULTS/SVIM
 #mkdir $SV_RESULTS/SVIM-ASM
 #mkdir $SV_RESULTS/PAV
+
+##Build SV Result Subfolders
+#echo "Building Aggregated SV result subdirectories for each SV caller!.."
+#mkdir $AGGREGATED_RESULTS/CuteSV
+#mkdir $AGGREGATED_RESULTS/Sniffles
+#mkdir $AGGREGATED_RESULTS/SVIM
+#mkdir $AGGREGATED_RESULTS/SVIM-ASM
+#mkdir $AGGREGATED_RESULTS/PAV
 
 ##Add required config files to PAV for user to fill out later
 #echo "NAME	HAP1	HAP2" > $SV_RESULTS/PAV/assemblies.tsv

@@ -1,6 +1,6 @@
 rule align_LR_w_minimap2:
         input:
-                str(LR_PREFIX + "/" + LR_ACCESSION + ".fastq")
+                str(LR_PREFIX + ".fastq")
         output:
                 str(MNMP2_READS_PREFIX + ".sam")
         threads: 3

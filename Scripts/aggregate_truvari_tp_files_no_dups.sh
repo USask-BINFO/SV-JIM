@@ -6,12 +6,12 @@ COMBO_EXTENT=$1
 shift
 
 TP_FILEs=""
-for DIR in $*
+for FILE in $*
 do
-	bcftools sort -o $DIR/tp.sorted.vcf $DIR/tp.vcf
-	bgzip -c $DIR/tp.sorted.vcf > $DIR/tp.sorted.vcf.gz
-	tabix $DIR/tp.sorted.vcf.gz
-	TP_FILES="$DIR/tp.sorted.vcf.gz $TP_FILES"
+	#bcftools sort -o $DIR/tp.sorted.vcf $DIR/tp.vcf
+	bgzip -c $FILE > $FILE.gz
+	tabix $FILE.gz
+	TP_FILES="$FILE.gz $TP_FILES"
 done
 
 echo "Combining VCF files for each type to $OUTPUT_FILE!.."

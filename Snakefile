@@ -40,23 +40,54 @@ include: "./Rules/assembly_based_sv_calling.smk"
 include: "./Rules/verify_sv_filtering.smk"
 include: "./Rules/segment_sv_by_type.smk"
 
-include: "./Rules/intersect_sv_files.smk"
+#include: "./Rules/intersect_sv_files.smk"
 include: "./Rules/truvari_bench_sv_files.smk"
+include: "./Rules/combine_types_vcfs_to_all.smk"
 include: "./Rules/summarize_tool_evaluation_rates.smk"
+include: "./Rules/determine_sv_sets_min_callers.smk"
+include: "./Rules/remove_duplicate_aggregate_file_entries.smk"
 
 #Default rule containing final output file targets to ensure executiong of entire pipeline
 rule all:
         input:
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM/calculated_rates.tsv"),
-                str(config["truvariResultsFolder"] + "/Sniffles-CuteSV/calculated_rates.tsv"),
-                str(config["truvariResultsFolder"] + "/SVIM-CuteSV/calculated_rates.tsv"),
-                str(config["truvariResultsFolder"] + "/SVIM-ASM-CuteSV/calculated_rates.tsv"),
-                str(config["truvariResultsFolder"] + "/SVIM-ASM-Sniffles/calculated_rates.tsv"),
-                str(config["truvariResultsFolder"] + "/SVIM-ASM-SVIM/calculated_rates.tsv"),
-                str(config["truvariResultsFolder"] + "/PAV-CuteSV/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV/calculated_rates.tsv"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles/calculated_rates.tsv"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM/calculated_rates.tsv"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/calculated_rates.tsv"),
-                str(config["truvariResultsFolder"] + "/All-Read-Callers/calculated_rates.tsv"),
-                str(config["truvariResultsFolder"] + "/Sniffles-CuteSV-SVIM-ASM-SVIM/calculated_rates.tsv"),
-                str(config["truvariResultsFolder"] + "/All-Callers/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/calculated_rates.tsv"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/calculated_rates.tsv"),
+                str(config["aggregatedResultsFolder"] + "/CuteSV/tp.minTwo.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/CuteSV/tp.minThree.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/CuteSV/tp.minFour.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/PAV/tp.minTwo.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/PAV/tp.minThree.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/PAV/tp.minFour.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/Sniffles/tp.minTwo.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/Sniffles/tp.minThree.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/Sniffles/tp.minFour.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/SVIM/tp.minTwo.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/SVIM/tp.minThree.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/SVIM/tp.minFour.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minTwo.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minThree.unique.sorted.vcf"),
+                str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minFour.unique.sorted.vcf")

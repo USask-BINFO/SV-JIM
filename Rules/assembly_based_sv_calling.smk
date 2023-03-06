@@ -40,4 +40,4 @@ rule unzip_and_rename_pav_results:
         params:
                str(SV_RESULTS_DIR +"/PAV/")
         shell:
-               "gunzip -c {input} > {output}; mv {input} {params}"
+               "gunzip -c {input} > {output};"
