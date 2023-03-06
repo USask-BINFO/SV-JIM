@@ -52,7 +52,6 @@ prefetchMaxSize: "50G" # Maximum file size that will downloaded during prefetch 
 presetForLR: "map-ont" # Predefined settings based on sequencing tech (Ex: map-ont, map-pb, map-hifi)
 presetForAssemblies: "asm20" # Predefined settings for assembly to ref alignment based on similarity (asm5, asm10, asm20) (see minimap2 --help for similarity thresholds) 
 minimapZDropForLR: "600,200" # Z drop score and Inversion Z drop score parameter in minimap (Default taken from cuteSV paper that compared similar tools)
-srAlignerChoice: "bowtie2" # Choice of aligner for short reads ("bwa" or "bowtie2")
 
 #SAMTools Configurations (Default settings taken from SVIM-ASM paper)
 memSettingForAssemblySort: "4G" # Requested/Required memory amount when sorting minimap2's assembly-to-ref alignment output
