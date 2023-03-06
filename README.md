@@ -138,7 +138,7 @@ To use a single conda, please specify the same target YAML file for all five par
  - `sniffles2CondaEnvYAML`: Path to YAML file for conda env that Sniffles2 is installed in. (EX: "All-Env.yaml")
  - `svimCondaEnvYAML`: Path to YAML file for conda env that SVIM is installed in. (EX:"All-Env.yaml")
  - `svimASMCondaEnvYAML`: Path to YAML file for conda env that SVIM-ASM is installed in. (EX: "All-Env.yaml")
- - `pavCondaEnvYAML`: Path to YAML file for conda environment that PAV dependencies are installed in. (EX: "All-Env.yaml")
+ - `pavCondaEnvYAML`: Path to YAML file for conda environment with PAV dependencies installed. (EX: "All-Env.yaml")
 
 #### Software Configurations
 ##### SRATools Configurations 
@@ -148,22 +148,24 @@ For context, the default value provided is based on the  size of the read data f
 ##### Minimap2 Aligner Configurations (for more details see minimap2 --help)
 For context, the default settings taken from the supplementary information of the orginal [CuteSV](https://github.com/tjiangHIT/cuteSV) and [SVIM-ASM](https://github.com/eldariont/svim-asm) publications since these publications compared the performance of similar software that is used in the pipeline.
 Additional details and options for each setting can also be found in the ```minimap2 --help``` menu.
- - `presetForLR`: Predefined settings based on sequencing tech. (EX: "map-ont" OR "map-pb" OR "map-hifi", etc.)
- - `presetForAssemblies`: Predefined settings for query assembly to ref alignment based on maximum allowable sequence divergence. (EX: asm5 OR asm10 OR asm20)
+ - `presetForLR`: Predefined settings based on sequencing tech. 
+	- (EX: "map-ont" OR "map-pb" OR "map-hifi", etc.)
+ - `presetForAssemblies`: Predefined settings for query assembly to ref alignment based on maximum allowable sequence divergence. 
+	- (EX: asm5 OR asm10 OR asm20)
  - `minimapZDropForLR`: Z drop score and Inversion Z drop score parameter in minimap (EX: "600,200")
 
 
 ##### SAMTools Configurations
 For context, these default settings were taken from the supplementary information from the original [SVIM-ASM](https://github.com/eldariont/svim-asm) publication as this parameter value was successfully used in their testing.
- - `memSettingForAssemblySort`: Requested/Required memory amount when sorting minimap2's assembly-to-ref alignment output. (EX: "4G")
+ - `memSettingForAssemblySort`: Memory required for sorting minimap2's assembly-to-ref alignment output. (EX: "4G")
 
 ##### General SV Caller Configurations 
 For context, these default settings were taken from the supplementary information of the [CuteSV](https://github.com/tjiangHIT/cuteSV) publication since this publication demonstrated high quality performance rates when comparing the outputs of similar read-based SV Callers used in the pipeline.
- - `minMAPQForSVs`: PHRED-scaled quality score that relates to the probability of error for an aligned base (EX: 20)
+ - `minMAPQForSVs`: PHRED-scaled quality score for the probability of error for an aligned base (EX: 20)
 	- PHRED scores typically range from 4-60 with 10 representing 10% error, 20 representing 1%, 30 representing 0.1%, and 40 representing 0.01%
 	- Additional details on PHRED-scaled quality scores can be found in the [Phred-scaled quality scores](https://gatk.broadinstitute.org/hc/en-us/articles/360035531872-Phred-scaled-quality-scores) article.
- - `minSuppReadsForSVs`: Evidence threshold for the number of reads that support/indicate the presence of an SV. (EX: 10)
- - `minSizeForSVs`: Filtering for min size of the SV to be detected with 50 being the common definition for SV min size in literature. (EX: 50)
+ - `minSuppReadsForSVs`: Min number of reads that support/indicate the presence of an SV. (EX: 10)
+ - `minSizeForSVs`: Min size of SVs to be detected [50 is the common definition in literature]. (EX: 50)
  - `maxSizeForSVs`: Filtering maximum size for SV detectable by tools (EX: 300000)
 
 ##### CuteSV Configurations
