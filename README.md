@@ -239,8 +239,6 @@ Current worklist:
  - Update Rules and Scripts to use zipped data input to improve memory footprint
  - Research parallelization options for each tool and refine threads argument for each rule
  - Add Docstrings to SnakeMake Rules files to improve internal documentation for users
- - Add additional tool combinations to interesect rules and incorporate them into the pipeline on completion
- - Explore use of the union set and how best to aggregate truvari results back into singular SV files
 
 ----
 
