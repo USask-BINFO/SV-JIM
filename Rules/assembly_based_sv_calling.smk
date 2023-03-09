@@ -14,6 +14,7 @@ rule sv_calling_w_svim_asm:
         conda:
                 config["svimASMCondaEnvYAML"]
         shell:
+                "mkdir -p {params.svOutDir};\n"
                 "svim-asm haploid --min_mapq {params.minMAPQ} --min_sv_size {params.minSize} --max_sv_size {params.maxSize} {params.svOutDir} {input.inputFile} {params.refGenome};"
                 "mv {params.svOutDir}/variants.vcf {output}"
 
@@ -25,12 +26,13 @@ rule sv_calling_w_pav:
                 str(SV_RESULTS_DIR + "/PAV/pav_"+ QRY_SAMP_NAME + ".vcf.gz")
         threads: config["threads"]
         params:
-                outputDir=str(SV_RESULTS_DIR + "/PAV/"),
+                svOutDir=str(SV_RESULTS_DIR + "/PAV/"),
                 qryID=QRY_SAMP_NAME
         conda:
                 config["pavCondaEnvYAML"]
         shell:
-                "bash ./Scripts/run-PAV-SnakeMake-pipe.sh {threads} {params.outputDir} {input} {params.qryID}"
+                "mkdir -p {params.svOutDir};\n"
+                "bash ./Scripts/run-PAV-SnakeMake-pipe.sh {threads} {params.svOutDir} {input} {params.qryID}"
 
 rule unzip_and_rename_pav_results:
         input:

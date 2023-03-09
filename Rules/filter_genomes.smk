@@ -5,9 +5,11 @@ rule extract_chroms_from_reference:
                 REF_FILTERED
         threads: config["threads"]
         params:
-                config["refSeqsFile"]
+                seqNames=config["refSeqsFile"],
+                genomesDir=GENOME_DIR
         shell:
-                "bash ./Scripts/filter_genome_fasta.sh {input} {params} {output}"
+                "mkdir -p {params.genomesDir};\n"
+                "bash ./Scripts/filter_genome_fasta.sh {input} {params.seqNames} {output}"
 
 rule extract_chroms_from_query:
         input:
@@ -16,6 +18,8 @@ rule extract_chroms_from_query:
                 QRY_FILTERED
         threads: config["threads"]
         params:
-                config["qrySeqsFile"]
+                seqNames=config["qrySeqsFile"],
+                genomesDir=GENOME_DIR
         shell:
-                "bash ./Scripts/filter_genome_fasta.sh {input} {params} {output}"
+                "mkdir -p {params.genomesDir};\n"
+                "bash ./Scripts/filter_genome_fasta.sh {input} {params.seqNames} {output}"

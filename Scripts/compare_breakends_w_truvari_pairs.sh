@@ -20,6 +20,7 @@ bgzip -c ${SV_FILE_B}.sorted > ${SV_FILE_B}.gz
 tabix ${SV_FILE_B}.gz
 
 #Truvari creates the output directory during execution and won't overwrite an existing directory. Remove target $OUTPUT_DIR if it already exists.
+mkdir -p $OUTPUT_DIR
 if [ -d $OUTPUT_DIR/$SV_TYPE ]
 then
 	echo "$OUTPUT_DIR already exists! Removing to allow truvari to run!.. "

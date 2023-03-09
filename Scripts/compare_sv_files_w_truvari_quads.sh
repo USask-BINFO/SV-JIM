@@ -27,6 +27,10 @@ bcftools sort -o ${TRUVARI_DIR_B}/tp-base.sorted.vcf $TRUVARI_DIR_B/tp-base.vcf
 bgzip -c ${TRUVARI_DIR_B}/tp-base.sorted.vcf > ${TRUVARI_DIR_B}/tp-base.sorted.vcf.gz
 tabix ${TRUVARI_DIR_B}/tp-base.sorted.vcf.gz
 
+#Ensure parent directories set up before Truvari execution
+mkdir -p $OUTPUT_DIR/$SV_TYPE/Call
+mkdir -p $OUTPUT_DIR/$SV_TYPE/Base
+
 #Truvari creates the output directory during execution and won't overwrite an existing directory. Remove target $OUTPUT_DIR if it already exists.
 if [ -d $OUTPUT_DIR/$SV_TYPE/Call/FromTPCall ]
 then

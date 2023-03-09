@@ -14,6 +14,10 @@ do
 	TP_FILES="$FILE.gz $TP_FILES"
 done
 
+#Ensure parent directories set up before bcftools execution
+mkdir -p $SV_DIR
+
+#Aggregate and sort remaining input files
 echo "Combining VCF files for each type to $OUTPUT_FILE!.."
 bcftools concat --allow-overlaps --remove-duplicates -o $SV_DIR/tp.$COMBO_EXTENT.vcf -O v `echo $TP_FILES`
 bcftools sort -o $SV_DIR/tp.$COMBO_EXTENT.sorted.vcf $SV_DIR/tp.$COMBO_EXTENT.vcf

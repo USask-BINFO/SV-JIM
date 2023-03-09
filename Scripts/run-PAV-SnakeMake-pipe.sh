@@ -16,15 +16,8 @@ then
 	faidx ${REF_GENOME}.gz
 fi
 
-#Check to see if target PAV output directory exists based on config value entered, and create if not
-if [ ! -d $ANALYSIS_DIR ]
-then
-	mkdir $ANALYSIS_DIR
-fi
-
 #Build config.json for PAV based on inputs
 echo "{" > $ANALYSIS_DIR/config.json; echo "	reference: \"${REF_GENOME}\"" >> $ANALYSIS_DIR/config.json; echo "}" >> $ANALYSIS_DIR/config.json
-
 
 #Add required query information file to PAV before starting execution
 echo "NAME	HAP1	HAP2" > $ANALYSIS_DIR/assemblies.tsv

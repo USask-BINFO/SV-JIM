@@ -19,6 +19,9 @@ bcftools sort -o ${SV_FILE_B}.sorted $SV_FILE_B
 bgzip -c ${SV_FILE_B}.sorted > ${SV_FILE_B}.gz
 tabix ${SV_FILE_B}.gz
 
+#Ensure parent directories set up before Truvari execution
+mkdir -p $OUTPUT_DIR
+
 #Truvari creates the output directory during execution and won't overwrite an existing directory. Remove target $OUTPUT_DIR if it already exists.
 if [ -d $OUTPUT_DIR/$SV_TYPE ]
 then
