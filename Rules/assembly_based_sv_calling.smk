@@ -3,7 +3,7 @@ rule sv_calling_w_svim_asm:
                 indexFile=str(MNMP2_GENOMES_PREFIX + ".sorted.bam.bai"),
                 inputFile=str(MNMP2_GENOMES_PREFIX + ".sorted.bam")
         output:
-                str(SVIM_ASM_PREFIX + ".ALL.vcf")
+                str(SVIM_ASM_PREFIX + ".ALL.unfiltered.vcf")
         threads: config["threads"]
         params:
                 minMAPQ=config["minMAPQForSVs"],
@@ -25,17 +25,18 @@ rule sv_calling_w_pav:
                 str(SV_RESULTS_DIR + "/PAV/pav_"+ QRY_SAMP_NAME + ".vcf.gz")
         threads: config["threads"]
         params:
-                outputDir=str(SV_RESULTS_DIR + "/PAV/")
+                outputDir=str(SV_RESULTS_DIR + "/PAV/"),
+                qryID=QRY_SAMP_NAME
         conda:
                 config["pavCondaEnvYAML"]
         shell:
-                "bash ./Scripts/run-PAV-SnakeMake-pipe.sh {threads} {params.outputDir} {input.refGenome}"
+                "bash ./Scripts/run-PAV-SnakeMake-pipe.sh {threads} {params.outputDir} {input} {params.qryID}"
 
 rule unzip_and_rename_pav_results:
         input:
                str(SV_RESULTS_DIR + "/PAV/pav_"+ QRY_SAMP_NAME + ".vcf.gz")
         output:
-               str(PAV_PREFIX + ".ALL.vcf")
+               str(PAV_PREFIX + ".ALL.unfiltered.vcf")
         threads: config["threads"]
         params:
                str(SV_RESULTS_DIR +"/PAV/")

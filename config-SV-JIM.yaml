@@ -21,7 +21,7 @@ accessionLR: "SRR11906206" # Accession number for Long-reads downloaded from SRA
 #*****************************************************
 
 #Available Threads (Update to reflect hardware available)
-threads: 100
+threads: 50
 
 #Designated Working Directory Information (Defaults can be built using 'build-workspace.sh' provided in home directory of repo)
 genomesFolder: "Workflow_Outputs/Genomes"

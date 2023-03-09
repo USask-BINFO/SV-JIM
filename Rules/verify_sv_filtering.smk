@@ -1,6 +1,6 @@
 rule verify_cuteSV_filtering_w_bcftools:
         input:
-                str(CUTESV_PREFIX + ".ALL.vcf")
+                str(CUTESV_PREFIX + ".ALL.unfiltered.vcf")
         output:
                 finalFilter=str(CUTESV_PREFIX + ".filtered.ALL.vcf"),
                 removedNs=str(CUTESV_PREFIX + ".ALL.NoN.vcf")
@@ -16,7 +16,7 @@ rule verify_cuteSV_filtering_w_bcftools:
 
 rule verify_sniffles2_filtering_w_bcftools:
         input:
-                str(SNIFFLES_PREFIX + ".ALL.vcf")
+                str(SNIFFLES_PREFIX + ".ALL.unfiltered.vcf")
         output:
                 finalFilter=str(SNIFFLES_PREFIX + ".filtered.ALL.vcf"),
                 removedNs=str(SNIFFLES_PREFIX + ".ALL.NoN.vcf")
@@ -32,7 +32,7 @@ rule verify_sniffles2_filtering_w_bcftools:
 
 rule verify_svim_filtering_w_bcftools:
         input:
-                str(SVIM_PREFIX + ".ALL.vcf")
+                str(SVIM_PREFIX + ".ALL.unfiltered.vcf")
         output:
                 filteredInv=str(SVIM_PREFIX + ".filteredINV.ALL.vcf"),
                 finalFilter=str(SVIM_PREFIX + ".filtered.ALL.vcf")
@@ -48,7 +48,7 @@ rule verify_svim_filtering_w_bcftools:
 
 rule verify_svim_asm_filtering_w_bcftools:
         input:
-                str(SVIM_ASM_PREFIX + ".ALL.vcf")
+                str(SVIM_ASM_PREFIX + ".ALL.unfiltered.vcf")
         output:
                 finalFilter=str(SVIM_ASM_PREFIX + ".filtered.ALL.vcf"),
                 removedNs=str(SVIM_ASM_PREFIX + ".ALL.NoN.vcf"),
@@ -66,7 +66,7 @@ rule verify_svim_asm_filtering_w_bcftools:
 
 rule verify_pav_filtering_bcftools:
         input:
-                str(PAV_PREFIX + ".ALL.vcf")
+                str(PAV_PREFIX + ".ALL.unfiltered.vcf")
         output:
                 finalFilter=str(PAV_PREFIX + ".filtered.ALL.vcf"),
                 removedNs=str(PAV_PREFIX + ".ALL.NoN.vcf")

@@ -3,7 +3,10 @@
 CORES=$1
 ANALYSIS_DIR=$2
 REF_GENOME=$3
+QRY_GENOME=$4
+QRY_ID=$5
 WORKING_DIR=`pwd` # Stores pipeline's working directory to allow for return
+
 
 #PAV Snakemake operates on zipped ref genome file, verify it exists before proceeding
 if [ ! -f ${REF_GENOME}.gz ]
@@ -12,6 +15,20 @@ then
 	bgzip -c $REF_GENOME > ${REF_GENOME}.gz
 	faidx ${REF_GENOME}.gz
 fi
+
+#Check to see if target PAV output directory exists based on config value entered, and create if not
+if [ ! -d $ANALYSIS_DIR ]
+then
+	mkdir $ANALYSIS_DIR
+fi
+
+#Build config.json for PAV based on inputs
+echo "{" > $ANALYSIS_DIR/config.json; echo "	reference: \"${REF_GENOME}\"" >> $ANALYSIS_DIR/config.json; echo "}" >> $ANALYSIS_DIR/config.json
+
+
+#Add required query information file to PAV before starting execution
+echo "NAME	HAP1	HAP2" > $ANALYSIS_DIR/assemblies.tsv
+echo "$QRY_ID	$QRY_GENOME" >> $ANALYSIS_DIR/assemblies.tsv
 
 #Change to PAV working directory before starting per instruction on PAV repo
 echo "Changing directory to $ANALYSIS_DIR and starting PAV's SnakeMake pipeline!.."

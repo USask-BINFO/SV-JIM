@@ -3,7 +3,7 @@ rule sv_calling_w_cuteSV:
                 indexFile=str(MNMP2_READS_PREFIX + ".sorted.bam.bai"),
                 inputFile=str(MNMP2_READS_PREFIX + ".sorted.bam")
         output:
-                str(CUTESV_PREFIX + ".ALL.vcf")
+                str(CUTESV_PREFIX + ".ALL.unfiltered.vcf")
         threads: config["threads"]
         params:
                 minSize=config["minSizeForSVs"],
@@ -25,7 +25,7 @@ rule sv_calling_w_sniffles2:
                 indexFile=str(MNMP2_READS_PREFIX + ".sorted.bam.bai"),
                 inputFile=str(MNMP2_READS_PREFIX + ".sorted.bam")
         output:
-                str(SNIFFLES_PREFIX + ".ALL.vcf")
+                str(SNIFFLES_PREFIX + ".ALL.unfiltered.vcf")
         threads: config["threads"]
         params:
                 minMAPQ=config["minMAPQForSVs"],
@@ -43,7 +43,7 @@ rule sv_calling_w_SVIM:
                 indexFile=str(MNMP2_READS_PREFIX + ".sorted.bam.bai"),
                 inputFile=str(MNMP2_READS_PREFIX + ".sorted.bam")
         output:
-                str(SVIM_PREFIX + ".ALL.vcf")
+                str(SVIM_PREFIX + ".ALL.unfiltered.vcf")
         threads: 1
         params:
                 minSize=config["minSizeForSVs"],
@@ -55,4 +55,4 @@ rule sv_calling_w_SVIM:
                 config["svimCondaEnvYAML"]
         shell:
                 "svim alignment --min_sv_size {params.minSize} --max_sv_size {params.maxSize} {params.svimOutDir} {input.inputFile} {params.refGenome};"
-                "mv {params.svimOutDir}/variants.vcf {params.svimOutDir}/{params.refName}.svim.ALL.vcf"
+                "mv {params.svimOutDir}/variants.vcf {params.svimOutDir}/{params.refName}.svim.ALL.unfiltered.vcf"

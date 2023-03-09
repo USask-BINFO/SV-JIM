@@ -14,3 +14,5 @@ fi
 #Extract regions of interest based on contents of the CHROM_LIST_FILE path provided
 echo "Extracting regions specified in $REGIONS_LIST..."
 samtools faidx $GENOME_FILE -r $REGIONS_LIST > $OUTPUT_FILE
+bgzip -c $OUTPUT_FILE > $OUTPUT_FILE.gz
+samtools faidx $OUTPUT_FILE.gz
