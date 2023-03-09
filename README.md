@@ -224,13 +224,14 @@ Due to it'ds size, the experiment's input sequence data should be obtained from 
 	- Path: [data/MPIPZ/MPIPZJiao2020/releases/current/strains/Ler/](https://1001genomes.org/data/MPIPZ/MPIPZJiao2020/releases/current/strains/Ler/)
  - Query Read Data: PRJEB31147 
 	- Available through ENA
-	- Run Accession: ERR3415826 [FTP Download link](ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR341/006/ERR3415826/ERR3415826_subreads.fastq.gz)
+	- Run Accession: [ERR3415826](https://www.ebi.ac.uk/ena/browser/view/ERR3415826)
 
 #### Experiment set up
 The provided config file should already contain many of the necessary configurations, but please make the following updates:
 
- 1. Update the chromosome headewr information in the TAIR10 reference genome to be more concise/clear within the output and to match the Ler chrom IDs 
-	- Ex: change longer chromosome 1 header in TAIR10 to '>chr1` (repeat all chromosomes by searching for '>' characters that begin each header)
+ 1. Update the chromosome header information in the TAIR10 reference genome to be more concise/clear within the output and to match the Ler chrom IDs 
+	- Ex: change longer chromosome 1 header in TAIR10 to `>chr1` 
+	- Repeat for all chromosomes by searching for the '>' characters that begin each header
  2. Generate a `RefSeqsToInclude.txt` and `QrySeqsToInclude.txt` using the grep instructions in the Config section to identify the sequences to be included from both genomes.
  3. Unzip and rename the downloaded ERR3415826 reads FASTQ file to ERR3415826.fastq to be consistent with the config file value provided. 
  4. Update provided config file's `refAssembly`, `refSeqsFile`, `qryAssembly`, and `qrySeqsFile` values to reflect the user's local path information for where the input data files are stored
