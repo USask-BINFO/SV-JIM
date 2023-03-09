@@ -1,28 +1,28 @@
 # SV-JIM
 
 ## Description
-Multi-stage SnakeMake pipeline/workflow using python and BASH scripts for Structural Variant (SV) calling with multiple third-party long-read and assembly alignment-based 
-SV calling tools. Further, this pipeline performs evaluation of all SV results produced based on consensus between tool output using both the Jacccard index measure and Truvari. 
-This workflow produces a comprehensive evidence-based SV result set to aid SV studies that require well-supported results.
+Multi-stage Snakemake pipeline that combines python and BASH scripts for Structural Variant (SV) calling with multiple third-party long-read and assembly alignment-based 
+SV calling tools. In addition, this pipeline evaluates all SV results produced based on their consistency with other tools using the Jacccard index measure and Truvari. 
+This workflow simplifies the generation of a comprehensive evidence-based SV result set and to aid SV studies that require well-supported SV results.
 
   - **Status**:  Version 1.0.2 - [CHANGELOG](CHANGELOG.md).
-  - Describe what sets this apart from related-projects. Linking to another doc or page is OK if this can't be expressed in a sentence or two.
 
 ## Supported formats
 
-SV-JIM requires genome assemblies for a reference and query sample in FASTA format and a set of long-reads from the query sample in FASTQ format.
-The input genome assembly files must be pre-downloaded by the user and either placed in the `Workflow/Genomes/` folder in the provided workflow directories
-or the path information for there location must be updated in the configuration file prior to execution.
+SV-JIM requires genome assemblies from both a reference and query sample in FASTA format and a long-reads FASTQ file containing reads that belongs to query sample.
+The input genome assembly files must be pre-downloaded by the user and the path information must be updated in the configuration file prior to execution. Similarly,
+the read file can also be provided before execution; however, the pipeline also supports prefetching read data with SRATools based on the accession information added
+to the config file.
 
-After execution, SV-JIM produces multiple SV result files in Variant Call Format (VCF)
-
-Similarly, the read data can be downloaded in advance and placed in the `Workflow_Outputs/Long_Reads` directory; however, SV-JIM can also execute an SRA Tools prefetch
-command if provided with only the long-read data's accession number from NCBI.
-
+After execution, SV-JIM produces multiple SV result files in Variant Call Format (VCF), including the original outputs, intersections for specific tool combinations, 
+and aggregated SV results on the basis of minimum supporting callers (Ex: minTwo or minThree).
+ 
 ## Dependencies
 
-SV-JIM is a SnakeMake pipeline that utilizes multiple third party software tools. Many of these tools are installable as conda package so the pipeline includes a conda configuration file for user convenience.
-The full list of required software is provided below and includes version information for software versions used during testing:
+SV-JIM is a Snakemake pipeline that utilizes multiple third party software tools. Many of these tools are installable as conda package so the pipeline includes
+a conda configuration file for user convenience.
+
+The full list of required software is provided below and includes version information for the software versions that were used during testing:
 
 #### Dependencies installed through the provided conda configuration file
 
@@ -51,40 +51,36 @@ The full list of required software is provided below and includes version inform
   - BEDTools		(2.30.0)
   - PAV			(2.2.1)
 
-Describe any dependencies that must be installed for this software to work.
-This includes programming languages, databases or other storage mechanisms, build tools, frameworks, and so forth.
-If specific versions of other software are required, or known not to work, call that out.
+Additionally, the pipeline must be launched from an environment with Snakemake installed.
 
 ## Installation
 
-As a SnakeMake workflow that employs external tools, the installation only involves cloning this repository:
+As a Snakemake workflow that employs external tools, the installation only involves cloning this repository:
 
 ```
 git clone https://github.com/CMalcolmTodd/SV-JIM
 ```
 
-After cloning the SV-JIM repository, the conda dependencies will be loaded by SnakeMake automatically during execution using the included conda env configuration file.
-For the remaining dependencies please consult the installation instructions provided by each tool's github/manual
- and ensure these tools are added to your PATH variable.
+After cloning the SV-JIM repository, the conda dependencies will be loaded by Snakemake automatically during execution based on the included conda env configuration file.
+For the remaining dependencies please consult the installation instructions provided by each tool's github/manual and ensure these tools are added to your PATH variable.
 
 ## Configuration
 
-For configuration, SV-JIM provides a [config file template](config-SV-JIM.yaml) used by SnakeMake to specify the required input files, conda environments, options, and directory information to enable execution.
-The template config file provided within this repo features many default values that utilize the provided working directory structure; 
-however, these values are configurable if the preference is to use alternative directories. 
-Additional details on each of the available parameters is provided in later in this section.
+For configuration, SV-JIM provides a [config file template](config-SV-JIM.yaml) used by Snakemake to specify the required input files, conda environments, options, and 
+directory information to enable execution. The provided template config file features many default values that utilize the provided working directory structure; 
+however, these values are configurable if the preference is to use alternative directories. Further details on each of the available parameters is provided in later in this section.
 
-Finally, SV-JIM includes a [conda config file](All-Env.yaml) that can be used to have SnakeMake install many of the pipeline's dependencies; however, the provided SnakeMake config file can also be 
-updated to use alternative existing conda environment files if using separate conda environments with specific (or conflicting) software versions is preferred. 
+Finally, SV-JIM includes a [conda environment file](All-Env.yaml) that permits Snakemake to install many of the pipeline's dependencies; however, the provided pipeline config file can also be 
+updated to use alternative conda environment files if using separate conda environments with specific/non-conflicting software versions is required.
 
-These conda configuration files can be generated as follows:
+If an alternative conda environment is preferable, a conda environment file can be generated as follows:
 
 ```
 conda env export -n <condaEnvName> -f <fileName>.yaml --from-history
 ```
 
-Any additional conda files created must be placed in the `Rules` directory to allow for access by SnakeMake during execution and please provide updated file name information for each tool's 
-conda file in the SV-JIM config file provided.
+Any additional conda files created must be placed in the `Rules` directory to allow for access by Snakemake during execution and please provide updated file name information for each tool's 
+conda file in the pipeline's config file.
 
 ### Configuration file options:
 #### Input File Configurations Section
@@ -132,8 +128,11 @@ Default options can be created easily using the 'build-workspace.sh' script prov
 	- (EX:"./Aggregated_SV_Results")
 
 ##### Conda Environment Information 
-This repo includes a default YAML env file provided that contains all conda related programs as dependencies for use convenience. Additionally, using only a single YAML file featuring all of the required software reduces pipeline execution time since snakemake will regenerate it's own copies of each environment automatically. However, the following seperate options are available should the user require/prefer to use separate environments. Any YAML files to be used should be placed in the Rules subdirectory for SnakeMake to access.
-To use a single conda, please specify the same target YAML file for all five parameters. 
+This repo includes a YAML env file provided that contains all conda related dependency programs for user convenience. Additionally, using a single environment file with all
+of the required software reduces pipeline execution time since snakemake will regenerate it's own copies of each environment automatically. 
+However, the following separate options are available should the user require/prefer to use separate environments. Any YAML files to be used should be placed in the `Rules` subdirectory for Snakemake to access.
+
+To use a single conda environment, please specify the same target YAML file for all five parameters. 
  - `cuteSVCondaEnvYAML`: Path to YAML file for conda env that CuteSV is installed in. (EX: "All-Env.yaml")
  - `sniffles2CondaEnvYAML`: Path to YAML file for conda env that Sniffles2 is installed in. (EX: "All-Env.yaml")
  - `svimCondaEnvYAML`: Path to YAML file for conda env that SVIM is installed in. (EX:"All-Env.yaml")
@@ -156,7 +155,7 @@ Additional details and options for each setting can also be found in the ```mini
 
 
 ##### SAMTools Configurations
-For context, these default settings were taken from the supplementary information from the original [SVIM-ASM](https://github.com/eldariont/svim-asm) publication as this parameter value was successfully used in their testing.
+For context, these default settings were taken from the supplementary information from the original [SVIM-ASM](https://github.com/eldariont/svim-asm) publication since this parameter value was successfully used in their testing.
  - `memSettingForAssemblySort`: Memory required for sorting minimap2's assembly-to-ref alignment output. (EX: "4G")
 
 ##### General SV Caller Configurations 
@@ -183,16 +182,11 @@ Default settings inspired by thresholds used in published literature and in the 
 
 #### A) Set Up/Pre-work
 
- 1. If executing the pipeline using the default working directory, the please run the `build-workspace.sh` script provided in the home direcotry of repo to easily the required directories featured in the template config file provided.
- 2. Update the provided SV-JIM config file for any non-default values you wish to change
- 3. Ensure the target reference genome and query assembly fasta files (or copies) are located in the directory identified in the `genomesFolder` parameter within the config file.
- 4. Create the files for the `refSeqsFile` and `qrySeqsFile` containing the target genome/assembly regions to be considered during the pipeline's execution
+ 1. Update the provided SV-JIM config file to reflect the target input sequence information and update any setting values you wish to change from the defaults
+ 2. Create the files for the `refSeqsFile` and `qrySeqsFile` to specify only the target genome/assembly chroms/contigs to be considered during the pipeline's execution
 	- See `grep` command suggestion in the Configuration section above for assistance 
- 5. If altering the pipeline's target output directories, please ensure the necessary subdirectories are created for the updated `svResultsFolder` `intersectResultsFolder` `truvariResultsFolder` targets 
-	- To build the `svResultsFolder`'s subdirectories, please run the `build_svcalls_subdirectories.sh` scipt and provide the alternate directory as an argument (EX: build_svcalls_subdirectories.sh [newTargetDir])
-        - To build the `intersectResultsFolder`'s subdirectories, please run the `build_intersections_subdirectories.sh` scipt and provide the alternate directory as an argument (EX: build_intersections_subdirectories.sh [newTargetDir])
-        - To build the `truvariResultsFolder`'s subdirectories, please run the `build_truvari_subdirectories.sh` scipt and provide the alternate directory as an argument (EX: build_truvari_subdirectories.sh [newTargetDir]) 
- 6. `cd` to the target PAV output directory and add/update the `config.json` and `assemblies.tsv` required by PAV (see [Configuring PAV](https://github.com/EichlerLab/pav#configuring-pav) for more details) 
+ 3. Note: If the input read files cannot/won't be fetched from SRA, please ensure the read's fastq file is unzipped and is named '<LR Accession>.fastq' consistent with the value provided in the config file to ensure 
+Snakemake will not make an attempt to prefetch them unnecessarily.
 
 #### B) Perform a dry run:
 
@@ -201,8 +195,8 @@ Performing a dry run (-np) Builds the directed acyclic graph representing the ou
 each stage of pipeline to allow for review, but doesn't execute any of the related commands. 
 Dry runs are also useful as they can identify errors that may occur based on current configurations and pre-work completed.
 
- 1. Edit configuration file to inputs to be processed
- 2. cd to SV-JIM home directory
+ 1. cd to SV-JIM home directory
+ 2. Update configuration file to reflect inputs to be processed
  3. Run: ```snakemake -np```
 
 #### C) Execute SV-JIM once configuration is prepared: 
@@ -216,12 +210,35 @@ for the outstanding tasks can vary between executions.
 Note:
  - Adding `--rerun-incompletes` to the command may be necessary if the pipeline terminates unexpectedly during execution to restart tasks that were in progress at the time.
  - Unexpected termination may also result in a locked working directory; however, this lock can be removed by either running ```snakemake --unlock``` in the SV-JIM home directory
- or by deleting the contents of the `<PAV_Directory>/.snakemake/locks/` directory if the reported lock was applied by PAV's SnakeMake pipeline.
+ or by deleting the contents of the `<PAV_Directory>/.snakemake/locks/` directory if the reported lock was applied by PAV's Snakemake pipeline.
 
 ## Pipeline Test Example (Arabidopsis thaliana)
 
 #### Input data
-If the software includes automated tests, detail how to run those tests.
+Due to it'ds size, the experiment's input sequence data should be obtained from the publicly accessible resources below:
+ - Reference Genome: TAIR10
+	- Available through the NCBI's RefSeq Genomes FTP server
+	- DB Path: [/genomes/refseq/plant/Arabidopsis_thaliana/reference](https://ftp.ncbi.nlm.nih.gov/genomes/refseq/plant/Arabidopsis_thaliana/reference/)
+ - Query Assembly: Ler
+	- Available through 1001 Genomes Data center
+	- Path: [data/MPIPZ/MPIPZJiao2020/releases/current/strains/Ler/](https://1001genomes.org/data/MPIPZ/MPIPZJiao2020/releases/current/strains/Ler/)
+ - Query Read Data: PRJEB31147 
+	- Available through ENA
+	- Run Accession: ERR3415826 [FTP Download link](ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR341/006/ERR3415826/ERR3415826_subreads.fastq.gz)
+
+#### Experiment set up
+The provided config file should already contain many of the necessary configurations, but please make the following updates:
+
+ 1. Update the chromosome headewr information in the TAIR10 reference genome to be more concise/clear within the output and to match the Ler chrom IDs 
+	- Ex: change longer chromosome 1 header in TAIR10 to '>chr1` (repeat all chromosomes by searching for '>' characters that begin each header)
+ 2. Generate a `RefSeqsToInclude.txt` and `QrySeqsToInclude.txt` using the grep instructions in the Config section to identify the sequences to be included from both genomes.
+ 3. Unzip and rename the downloaded ERR3415826 reads FASTQ file to ERR3415826.fastq to be consistent with the config file value provided. 
+ 4. Update provided config file's `refAssembly`, `refSeqsFile`, `qryAssembly`, and `qrySeqsFile` values to reflect the user's local path information for where the input data files are stored
+
+#### Running the experiment
+Once configured the pipeline can be executed similar to the usage instructions above:
+
+ 1. Run: ```snakemake --use-conda --cores <# threads>``` 
 
 ## Known issues
 
@@ -236,9 +253,9 @@ If you have questions, concerns, bug reports, etc, please file an issue in this 
 Have suggestions on how the software can be improved? Please contact `malcolm.todd@usask.ca` with your suggestions/recommendations!
 
 Current worklist:
- - Update Rules and Scripts to use zipped data input to improve memory footprint
- - Research parallelization options for each tool and refine threads argument for each rule
- - Add Docstrings to SnakeMake Rules files to improve internal documentation for users
+ - Update Rules and Scripts to use zipped data inputs to improve memory footprint
+ - Research parallelization options/caps for each tool and refine threads argument for each rule
+ - Add Docstrings to Snakemake Rules files to improve internal documentation for users
 
 ----
 

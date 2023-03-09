@@ -3,17 +3,17 @@
 #*****************************************************
 
 #Reference Sequence Information
-refSampleName: "NI100" # Short ID for user to distinguish files
-refAssembly: "Workflow_Outputs/Genomes/Bnigra_NI100.v2.genome.fasta" # Path to Reference Fenome fasta file
-refSeqsFile: "Workflow_Outputs/Genomes/RefSeqsToInclude.txt" # File of REF regions to include (one per line. Ex. Chromosomes only). Can be created with grep "><Chrom_Prefix>" <targetGenome> | tr -d ">"
+refSampleName: "TAIR10" # Short ID for user to distinguish files
+refAssembly: "../Arabidopsis_Data/TAIR10.1.all.fna" # Path to Reference Fenome fasta file
+refSeqsFile: "../Arabidopsis_Data/RefSeqsToInclude.txt" # File of REF regions to include (one per line. Ex. Chromosomes only). Can be created with grep "><Chrom_Prefix>" <targetGenome> | tr -d ">"
 
 #Query Sequence Information
-qrySampleName: "C2" # Long ID for user to distinguish files
-qryAssembly: "Workflow_Outputs/Genomes/Bnigra_C2.v1.genome.fasta" # Path to Query Assembly's fasta file
-qrySeqsFile: "Workflow_Outputs/Genomes/QrySeqsToInclude.txt" # File of regions to include (one per line. Ex: Chrosomes only). Can be created with grep "><CHROM_PREFIX>" <targetGenome> | tr -d ">"
+qrySampleName: "Ler" # Long ID for user to distinguish files
+qryAssembly: "../Arabidopsis_Data/Ler.chr.all.v2.0.fasta" # Path to Query Assembly's fasta file
+qrySeqsFile: "../Arabidopsis_Data/RefSeqsToInclude.txt" # File of regions to include (one per line. Ex: Chrosomes only). Can be created with grep "><CHROM_PREFIX>" <targetGenome> | tr -d ">"
 
 #Read Input Information
-accessionLR: "SRR11906206" # Accession number for Long-reads downloaded from SRA
+accessionLR: "ERR3415826" # Accession number for Long-reads (downloaded from SRA)
 
 
 #*****************************************************
@@ -25,7 +25,7 @@ threads: 50
 
 #Designated Working Directory Information (Defaults can be built using 'build-workspace.sh' provided in home directory of repo)
 genomesFolder: "Workflow_Outputs/Genomes"
-longReadsFolder: "Workflow_Outputs/Long_Reads"
+longReadsFolder: "../Arabidopsis_Data" #"Workflow_Outputs/Long_Reads"
 qualimapReportsFolder: "Workflow_Outputs/Qualimap_Reports"
 alignResultsFolder: "Workflow_Outputs/Alignments"
 svResultsFolder: "Workflow_Outputs/SV_Calls"
@@ -49,7 +49,7 @@ pavCondaEnvYAML: "All-Env.yaml" # Path to YAML file for conda environment that P
 prefetchMaxSize: "50G" # Maximum file size that will downloaded during prefetch operation 
 
 #Minimap2 Aligner Configurations (for more details see minimap2 --help)
-presetForLR: "map-ont" # Predefined settings based on sequencing tech (Ex: map-ont, map-pb, map-hifi)
+presetForLR: "map-pb" # Predefined settings based on sequencing tech (Ex: map-ont, map-pb, map-hifi)
 presetForAssemblies: "asm20" # Predefined settings for assembly to ref alignment based on similarity (asm5, asm10, asm20) (see minimap2 --help for similarity thresholds) 
 minimapZDropForLR: "600,200" # Z drop score and Inversion Z drop score parameter in minimap (Default taken from cuteSV paper that compared similar tools)
 

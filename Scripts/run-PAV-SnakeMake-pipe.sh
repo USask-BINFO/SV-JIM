@@ -17,11 +17,13 @@ then
 fi
 
 #Build config.json for PAV based on inputs
-echo "{" > $ANALYSIS_DIR/config.json; echo "	reference: \"${REF_GENOME}\"" >> $ANALYSIS_DIR/config.json; echo "}" >> $ANALYSIS_DIR/config.json
+REF_ABS_PATH=`echo "$(cd "$(dirname "$REF_GENOME")"; pwd)/$(basename "$REF_GENOME")"` #Convert Relative to Abs path for PAV Config
+echo "{" > $ANALYSIS_DIR/config.json; echo "	\"reference\": \"${REF_ABS_PATH}.gz\"" >> $ANALYSIS_DIR/config.json; echo "}" >> $ANALYSIS_DIR/config.json
 
 #Add required query information file to PAV before starting execution
+QRY_ABS_PATH=`echo "$(cd "$(dirname "$QRY_GENOME")"; pwd)/$(basename "$QRY_GENOME")"` #Convert Relative to Abs path for PAV Config
 echo "NAME	HAP1	HAP2" > $ANALYSIS_DIR/assemblies.tsv
-echo "$QRY_ID	$QRY_GENOME" >> $ANALYSIS_DIR/assemblies.tsv
+echo "$QRY_ID	$QRY_ABS_PATH" >> $ANALYSIS_DIR/assemblies.tsv
 
 #Change to PAV working directory before starting per instruction on PAV repo
 echo "Changing directory to $ANALYSIS_DIR and starting PAV's SnakeMake pipeline!.."
