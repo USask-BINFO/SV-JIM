@@ -5,6 +5,8 @@ rule verify_cuteSV_filtering_w_bcftools:
                 finalFilter=str(CUTESV_PREFIX + ".filtered.ALL.vcf"),
                 removedNs=str(CUTESV_PREFIX + ".ALL.NoN.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Filtering.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 minSize=config["minSizeForSVs"],
                 maxSize=config["maxSizeForSVs"],
@@ -21,6 +23,8 @@ rule verify_sniffles2_filtering_w_bcftools:
                 finalFilter=str(SNIFFLES_PREFIX + ".filtered.ALL.vcf"),
                 removedNs=str(SNIFFLES_PREFIX + ".ALL.NoN.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Filtering.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 minSize=config["minSizeForSVs"],
                 maxSize=config["maxSizeForSVs"],
@@ -37,6 +41,8 @@ rule verify_svim_filtering_w_bcftools:
                 filteredInv=str(SVIM_PREFIX + ".filteredINV.ALL.vcf"),
                 finalFilter=str(SVIM_PREFIX + ".filtered.ALL.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Filtering.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 minSize=config["minSizeForSVs"],
                 maxSize=config["maxSizeForSVs"],
@@ -54,6 +60,8 @@ rule verify_svim_asm_filtering_w_bcftools:
                 removedNs=str(SVIM_ASM_PREFIX + ".ALL.NoN.vcf"),
                 filteredInv=str(SVIM_ASM_PREFIX + ".filteredINV.ALL.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Filtering.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 minSize=config["minSizeForSVs"],
                 maxSize=config["maxSizeForSVs"],
@@ -71,6 +79,8 @@ rule verify_pav_filtering_bcftools:
                 finalFilter=str(PAV_PREFIX + ".filtered.ALL.vcf"),
                 removedNs=str(PAV_PREFIX + ".ALL.NoN.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Filtering.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 minSize=config["minSizeForSVs"]-1,
                 maxSize=config["maxSizeForSVs"],

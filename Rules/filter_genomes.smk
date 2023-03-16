@@ -4,6 +4,8 @@ rule extract_chroms_from_reference:
         output:
                 REF_FILTERED
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Alignment.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 seqNames=config["refSeqsFile"],
                 genomesDir=GENOME_DIR
@@ -17,6 +19,8 @@ rule extract_chroms_from_query:
         output:
                 QRY_FILTERED
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Alignment.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 seqNames=config["qrySeqsFile"],
                 genomesDir=GENOME_DIR

@@ -5,6 +5,8 @@ rule sv_calling_w_svim_asm:
         output:
                 str(SVIM_ASM_PREFIX + ".ALL.unfiltered.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Assembly.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 minMAPQ=config["minMAPQForSVs"],
                 minSize=config["minSizeForSVs"],
@@ -25,6 +27,8 @@ rule sv_calling_w_pav:
         output:
                 str(SV_RESULTS_DIR + "/PAV/pav_"+ QRY_SAMP_NAME + ".vcf.gz")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Assembly.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 svOutDir=str(SV_RESULTS_DIR + "/PAV/"),
                 qryID=QRY_SAMP_NAME
@@ -40,6 +44,8 @@ rule unzip_and_rename_pav_results:
         output:
                str(PAV_PREFIX + ".ALL.unfiltered.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Assembly.benchmarking.tsv"), BENCH_REPEAT)
         params:
                str(SV_RESULTS_DIR +"/PAV/")
         shell:

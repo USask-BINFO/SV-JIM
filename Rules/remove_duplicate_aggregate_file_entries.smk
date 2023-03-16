@@ -8,6 +8,8 @@ rule remove_dups_cuteSV_aggregates:
                 uniqueThree=str(config["aggregatedResultsFolder"] + "/CuteSV/tp.minThree.unique.sorted.vcf"),
                 uniqueFour=str(config["aggregatedResultsFolder"] + "/CuteSV/tp.minFour.unique.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         shell:
                 "uniq {input.minTwo} > {output.uniqueTwo};\n"
                 "uniq {input.minThree} > {output.uniqueThree};\n"
@@ -23,6 +25,8 @@ rule remove_dups_pav_aggregates:
                 uniqueThree=str(config["aggregatedResultsFolder"] + "/PAV/tp.minThree.unique.sorted.vcf"),
                 uniqueFour=str(config["aggregatedResultsFolder"] + "/PAV/tp.minFour.unique.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         shell:
                 "uniq {input.minTwo} > {output.uniqueTwo};\n"
                 "uniq {input.minThree} > {output.uniqueThree};\n"
@@ -38,6 +42,8 @@ rule remove_dups_sniffles_aggregates:
                 uniqueThree=str(config["aggregatedResultsFolder"] + "/Sniffles/tp.minThree.unique.sorted.vcf"),
                 uniqueFour=str(config["aggregatedResultsFolder"] + "/Sniffles/tp.minFour.unique.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         shell:
                 "uniq {input.minTwo} > {output.uniqueTwo};\n"
                 "uniq {input.minThree} > {output.uniqueThree};\n"
@@ -53,6 +59,8 @@ rule remove_dups_svim_aggregates:
                 uniqueThree=str(config["aggregatedResultsFolder"] + "/SVIM/tp.minThree.unique.sorted.vcf"),
                 uniqueFour=str(config["aggregatedResultsFolder"] + "/SVIM/tp.minFour.unique.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         shell:
                 "uniq {input.minTwo} > {output.uniqueTwo};\n"
                 "uniq {input.minThree} > {output.uniqueThree};\n"
@@ -68,6 +76,8 @@ rule remove_dups_svim_asm_aggregates:
                 uniqueThree=str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minThree.unique.sorted.vcf"),
                 uniqueFour=str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minFour.unique.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         shell:
                 "uniq {input.minTwo} > {output.uniqueTwo};\n"
                 "uniq {input.minThree} > {output.uniqueThree};\n"

@@ -4,6 +4,8 @@ rule align_LR_w_minimap2:
         output:
                 str(MNMP2_READS_PREFIX + ".sam")
         threads: 3
+        benchmark: 
+                repeat(str(BENCH_DIR + "/Alignment.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 mnmp2Preset=config["presetForLR"],
                 zDrop=config["minimapZDropForLR"],
@@ -21,6 +23,8 @@ rule align_both_assemblies_w_minimap2:
         output:
                 str(MNMP2_GENOMES_PREFIX + ".sam")
         threads: 3
+        benchmark:
+                repeat(str(BENCH_DIR + "/Alignment.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 mnmp2Preset=config["presetForAssemblies"],
                 alignOutDir=ALIGN_DIR

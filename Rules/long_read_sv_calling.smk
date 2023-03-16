@@ -5,6 +5,8 @@ rule sv_calling_w_cuteSV:
         output:
                 str(CUTESV_PREFIX + ".ALL.unfiltered.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.LongReads.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 minSize=config["minSizeForSVs"],
                 maxSize=config["maxSizeForSVs"],
@@ -28,6 +30,8 @@ rule sv_calling_w_sniffles2:
         output:
                 str(SNIFFLES_PREFIX + ".ALL.unfiltered.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.LongReads.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 minMAPQ=config["minMAPQForSVs"],
                 minSupp=config["minSuppReadsForSVs"],
@@ -48,6 +52,8 @@ rule sv_calling_w_SVIM:
         output:
                 str(SVIM_PREFIX + ".ALL.unfiltered.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.LongReads.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 minSize=config["minSizeForSVs"],
                 maxSize=config["maxSizeForSVs"],

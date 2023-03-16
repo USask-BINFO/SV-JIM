@@ -3,6 +3,8 @@ rule prefetch_LR_reads:
                 config["readFilesList"]
         output:
                 prefetchConfirm=str(LR_PREFIX + ".sra")
+        benchmark:
+                repeat(str(BENCH_DIR + "/Prefetch.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 maxFileSize=config["prefetchMaxSize"],
                 #lrAccession=config["firstLRAccession"],
@@ -19,6 +21,8 @@ rule reformat_LR_sra_to_fastq:
         output:
                 reformatConfirm=str(LR_PREFIX + ".fastq")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Prefetch.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 config["longReadsFolder"]
         shell:

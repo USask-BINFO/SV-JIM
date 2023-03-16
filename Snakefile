@@ -28,6 +28,10 @@ SVIM_PREFIX=str(SV_RESULTS_DIR + "/SVIM/" + REF_SAMP_NAME + ".svim")
 SVIM_ASM_PREFIX=str(SV_RESULTS_DIR + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm")
 PAV_PREFIX=str(SV_RESULTS_DIR + "/PAV/" + REF_SAMP_NAME + ".pav")
 
+#Identify Benchmarking Result Output Directory and Repeat Frequency for Rules
+BENCH_DIR=config["benchmarkDir"]
+BENCH_REPEAT=config["repeatsForBench"]
+
 #Incorporate Subrule files to be executed within this pipeline
 include: "./Rules/filter_genomes.smk"
 include: "./Rules/prefetch_sequences.smk"
@@ -38,10 +42,14 @@ include: "./Rules/sort_alignment_files.smk"
 include: "./Rules/long_read_sv_calling.smk"
 include: "./Rules/assembly_based_sv_calling.smk"
 include: "./Rules/verify_sv_filtering.smk"
-include: "./Rules/segment_sv_by_type.smk"
+include: "./Rules/segment_sv_by_type_and_size.smk"
 
 #include: "./Rules/intersect_sv_files.smk"
-include: "./Rules/truvari_bench_sv_files.smk"
+include: "./Rules/truvari_bench_sv_files_ssm.smk"
+include: "./Rules/truvari_bench_sv_files_sml.smk"
+include: "./Rules/truvari_bench_sv_files_med.smk"
+include: "./Rules/truvari_bench_sv_files_lrg.smk"
+
 include: "./Rules/combine_types_vcfs_to_all.smk"
 include: "./Rules/summarize_tool_evaluation_rates.smk"
 include: "./Rules/determine_sv_sets_min_callers.smk"
@@ -91,3 +99,4 @@ rule all:
                 str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minTwo.unique.sorted.vcf"),
                 str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minThree.unique.sorted.vcf"),
                 str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minFour.unique.sorted.vcf")
+        benchmark: repeat(str(BENCH_DIR + "/allRule.benchmarking.tsv"), BENCH_REPEAT)

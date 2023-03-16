@@ -70,3 +70,14 @@ diffRatio: 0.3
 #Truvari Bench Configurations (see truvari help menu for more details)
 overlapThreshold: 0.5 # (0.5 [or 50%] is a commonly use setting in several publications. Alternatively, svim-asm paper used 70%) 
 maxRefDistance: 2000 # (Default setting chosen based on command detailed in human SV benchmark set's README, possible alternative is 1000 used in svim-asm paper)
+
+
+#*****************************************************
+# Pipeline Benchmarking Configurations
+#*****************************************************
+#Path information for where to write benchmarking files
+benchmarkDir: "Workflow_Outputs/Benchmarking"
+
+#Frequency for how many times to repeat a task as part of benchmarking 
+#(Note, increasing this parameter will significantly increase execution time. So unless benchmarking, recommended to be left at 1)
+repeatsForBench: 1

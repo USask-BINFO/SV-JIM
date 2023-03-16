@@ -9,6 +9,8 @@ rule combine_all_callers_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/ALL/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/ALL/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/DEL"),
@@ -28,6 +30,8 @@ rule combine_cuteSV_pav_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV/ALL/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV/ALL/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV/ALL"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV/DEL"),
@@ -47,6 +51,8 @@ rule combine_pav_svim_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/PAV-SVIM/ALL/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM/ALL/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 str(config["truvariResultsFolder"] + "/PAV-SVIM/ALL"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM/DEL"),
@@ -66,6 +72,8 @@ rule combine_pav_svim_asm_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/ALL/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/ALL/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/ALL"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/DEL"),
@@ -85,6 +93,8 @@ rule combine_pav_sniffles_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles/ALL/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles/ALL/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles/ALL"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles/DEL"),
@@ -124,6 +134,8 @@ rule combine_cuteSV_sniffles_svim_svim_asm_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/Base/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/Base/FromTPCall/fn.sorted.vcf"),
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 callTPCallALL=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/Call/FromTPCall"),
                 callTPCallDEL=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DEL/Call/FromTPCall"),
@@ -170,6 +182,8 @@ rule combine_all_read_callers_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/FromTPBase/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 tpCallALL=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/FromTPCall"),
                 tpCallDEL=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DEL/FromTPCall"),
@@ -200,6 +214,8 @@ rule combine_cuteSV_svim_asm_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/ALL/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/ALL/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/ALL"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/DEL"),
@@ -223,6 +239,8 @@ rule combine_svim_svim_asm_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/ALL/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/ALL/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/ALL"),
                 str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/DEL"),
@@ -246,6 +264,8 @@ rule combine_sniffles_svim_asm_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/ALL/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/ALL/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/ALL"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/DEL"),
@@ -269,6 +289,8 @@ rule combine_cuteSV_svim_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM/ALL/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM/ALL/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM/ALL"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM/DEL"),
@@ -292,6 +314,8 @@ rule combine_cuteSV_sniffles_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/ALL/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/ALL/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/ALL"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/DEL"),
@@ -315,6 +339,8 @@ rule combine_sniffles_svim_types_to_all_directory:
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM/ALL/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM/ALL/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM/ALL"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM/DEL"),
@@ -343,6 +369,8 @@ rule combine_cuteSV_pav_svim_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/FromTPBase/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 tpCallALL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/FromTPCall"),
                 tpCallDEL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/DEL/FromTPCall"),
@@ -374,6 +402,8 @@ rule combine_pav_sniffles_svim_to_all_directory:
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/FromTPBase/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 tpCallALL=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/FromTPCall"),
                 tpCallDEL=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/DEL/FromTPCall"),
@@ -405,6 +435,8 @@ rule combine_pav_svim_svim_asm_to_all_directory:
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/FromTPBase/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 tpCallALL=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/FromTPCall"),
                 tpCallDEL=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/DEL/FromTPCall"),
@@ -436,6 +468,8 @@ rule combine_cuteSV_pav_sniffles_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/FromTPBase/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 tpCallALL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/FromTPCall"),
                 tpCallDEL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/DEL/FromTPCall"),
@@ -467,6 +501,8 @@ rule combine_cuteSV_pav_svim_asm_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/FromTPBase/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 tpCallALL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/FromTPCall"),
                 tpCallDEL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/DEL/FromTPCall"),
@@ -498,6 +534,8 @@ rule combine_pav_sniffles_svim_asm_to_all_directory:
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/FromTPBase/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 tpCallALL=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/FromTPCall"),
                 tpCallDEL=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/DEL/FromTPCall"),
@@ -533,6 +571,8 @@ rule combine_cuteSV_svim_svim_asm_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/FromTPBase/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 tpCallALL=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/FromTPCall"),
                 tpCallDEL=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/DEL/FromTPCall"),
@@ -572,6 +612,8 @@ rule combine_sniffles_svim_svim_asm_to_all_directory:
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/FromTPBase/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 tpCallALL=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/FromTPCall"),
                 tpCallDEL=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/DEL/FromTPCall"),
@@ -611,6 +653,8 @@ rule combine_cuteSV_sniffles_svim_asm_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/FromTPBase/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 tpCallALL=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/FromTPCall"),
                 tpCallDEL=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DEL/FromTPCall"),
@@ -653,6 +697,8 @@ rule combine_cuteSV_pav_sniffles_svim_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/Base/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/Base/FromTPCall/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 callTPCallALL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/Call/FromTPCall"),
                 callTPCallDEL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/DEL/Call/FromTPCall"),
@@ -696,6 +742,8 @@ rule combine_cuteSV_pav_svim_svim_asm_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/Base/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/Base/FromTPCall/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 callTPCallALL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/Call/FromTPCall"),
                 callTPCallDEL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/DEL/Call/FromTPCall"),
@@ -739,6 +787,8 @@ rule combine_pav_sniffles_svim_svim_asm_to_all_directory:
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/Base/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/Base/FromTPCall/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 callTPCallALL=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/Call/FromTPCall"),
                 callTPCallDEL=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/DEL/Call/FromTPCall"),
@@ -784,6 +834,8 @@ rule combine_cuteSV_pav_sniffles_svim_asm_to_all_directory:
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/Base/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/Base/FromTPCall/fn.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 callTPCallALL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/Call/FromTPCall"),
                 callTPCallDEL=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/DEL/Call/FromTPCall"),

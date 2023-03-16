@@ -27,6 +27,8 @@ rule truvari_bench_sniffles_w_svim:
                 sniffSVIMINVTPB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM/INV/tp-base.vcf"),
                 sniffSVIMBNDTPB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM/BND/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -74,6 +76,8 @@ rule truvari_bench_cuteSV_w_sniffles:
                 cuteSniffINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/INV/tp-base.vcf"),
                 cuteSniffBNDTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/BND/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -116,8 +120,9 @@ rule truvari_bench_cuteSV_w_svim:
                 tpDUP=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/DUP/tp-call.vcf"),
                 tpINV=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/INV/tp-call.vcf"),
                 tpBND=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/BND/tp-call.vcf")
-
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -163,6 +168,8 @@ rule truvari_bench_cuteSV_w_svim_asm:
                 tpINVB=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/INV/tp-base.vcf"),
                 tpBNDB=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/BND/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -208,6 +215,8 @@ rule truvari_bench_sniffles_w_svim_asm:
                 tpINVB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/INV/tp-base.vcf"),
                 tpBNDB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/BND/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -253,6 +262,8 @@ rule truvari_bench_svim_w_svim_asm:
                 svimSVIMASMINVTPB=str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/INV/tp-base.vcf"),
                 svimSVIMASMBNDTPB=str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/BND/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -288,6 +299,8 @@ rule truvari_bench_cuteSV_w_pav:
                 tpINSB=str(config["truvariResultsFolder"] + "/CuteSV-PAV/INS/tp-base.vcf"),
                 tpINVB=str(config["truvariResultsFolder"] + "/CuteSV-PAV/INV/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -321,6 +334,8 @@ rule truvari_bench_pav_w_sniffles:
                 tpINSB=str(config["truvariResultsFolder"] + "/PAV-Sniffles/INS/tp-base.vcf"),
                 tpINVB=str(config["truvariResultsFolder"] + "/PAV-Sniffles/INV/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -354,6 +369,8 @@ rule truvari_bench_pav_w_svim:
                 tpINSB=str(config["truvariResultsFolder"] + "/PAV-SVIM/INS/tp-base.vcf"),
                 tpINVB=str(config["truvariResultsFolder"] + "/PAV-SVIM/INV/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -387,6 +404,8 @@ rule truvari_bench_pav_w_svim_asm:
                 tpINSB=str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INS/tp-base.vcf"),
                 tpINVB=str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INV/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -455,6 +474,8 @@ rule truvari_bench_cuteSV_sniffles_svim:
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INV/FromTPBase/tp-base.vcf"),
                 tpBaseBNDTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/BND/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -506,6 +527,8 @@ rule truvari_bench_cuteSV_pav_svim:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INS/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INV/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -553,6 +576,8 @@ rule truvari_bench_pav_sniffles_svim:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INS/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INV/FromTPBase/tp-base.vcf"),
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -600,6 +625,8 @@ rule truvari_bench_pav_svim_svim_asm:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INS/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INV/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -647,6 +674,8 @@ rule truvari_bench_cuteSV_pav_sniffles:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INS/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INV/FromTPBase/tp-base.vcf"),
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -694,6 +723,8 @@ rule truvari_bench_cuteSV_pav_svim_asm:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INS/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INV/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -741,6 +772,8 @@ rule truvari_bench_pav_sniffles_svim_asm:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INS/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INV/FromTPBase/tp-base.vcf"),
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -806,6 +839,8 @@ rule truvari_bench_cuteSV_svim_svim_asm:
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/INV/FromTPBase/tp-base.vcf"),
                 tpBaseBNDTPB=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/BND/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -875,6 +910,8 @@ rule truvari_bench_sniffles_svim_svim_asm:
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/INV/FromTPBase/tp-base.vcf"),
                 tpBaseBNDTPB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/BND/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -944,6 +981,8 @@ rule truvari_bench_cuteSV_sniffles_svim_asm:
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/INV/FromTPBase/tp-base.vcf"),
                 tpBaseBNDTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/BND/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -1033,6 +1072,8 @@ rule truvari_bench_cuteSV_sniffles_svim_svim_asm:
                 baseTPCallINVTPC=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INV/Base/FromTPCall/tp-call.vcf"),
                 baseTPCallBNDTPC=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/BND/Base/FromTPCall/tp-call.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -1102,6 +1143,8 @@ rule truvari_bench_cuteSV_pav_sniffles_svim_asm:
                 baseTPCallINSTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INS/Base/FromTPCall/tp-call.vcf"),
                 baseTPCallINVTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INV/Base/FromTPCall/tp-call.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -1164,6 +1207,8 @@ rule truvari_bench_cuteSV_pav_sniffles_svim:
                 baseTPCallINSTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INS/Base/FromTPCall/tp-call.vcf"),
                 baseTPCallINVTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INV/Base/FromTPCall/tp-call.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -1226,6 +1271,8 @@ rule truvari_bench_cuteSV_pav_svim_svim_asm:
                 baseTPCallINSTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INS/Base/FromTPCall/tp-call.vcf"),
                 baseTPCallINVTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INV/Base/FromTPCall/tp-call.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -1288,6 +1335,8 @@ rule truvari_bench_pav_sniffles_svim_svim_asm:
                 baseTPCallINSTPC=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INS/Base/FromTPCall/tp-call.vcf"),
                 baseTPCallINVTPC=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INV/Base/FromTPCall/tp-call.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],
@@ -1326,6 +1375,8 @@ rule truvari_bench_cuteSV_pav_sniffles_svim_svim_asm:
                 tpINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INS/tp-call.vcf"),
                 tpINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INV/tp-call.vcf")
         threads: config["threads"]
+        benchmark:
+                repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 refGenome=REF_FILTERED,
                 minOverlap=config["overlapThreshold"],

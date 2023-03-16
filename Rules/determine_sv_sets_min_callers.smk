@@ -7,6 +7,8 @@ rule aggregate_cuteSV_min_two:
         output:
                 str(config["aggregatedResultsFolder"] + "/CuteSV/tp.minTwo.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/CuteSV"),
                 requiredCallers="minTwo"
@@ -22,6 +24,8 @@ rule aggregate_pav_min_two:
         output:
                 str(config["aggregatedResultsFolder"] + "/PAV/tp.minTwo.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/PAV"),
                 requiredCallers="minTwo"
@@ -37,6 +41,8 @@ rule aggregate_sniffles_min_two:
         output:
                 str(config["aggregatedResultsFolder"] + "/Sniffles/tp.minTwo.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/Sniffles"),
                 requiredCallers="minTwo"
@@ -52,6 +58,8 @@ rule aggregate_svim_min_two:
         output:
                 str(config["aggregatedResultsFolder"] + "/SVIM/tp.minTwo.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/SVIM"),
                 requiredCallers="minTwo"
@@ -67,6 +75,8 @@ rule aggregate_svim_asm_min_two:
         output:
                 str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minTwo.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/SVIM-ASM"),
                 requiredCallers="minTwo"
@@ -84,6 +94,8 @@ rule aggregate_svim_asm_min_three:
         output:
                 str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minThree.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/SVIM-ASM"),
                 requiredCallers="minThree"
@@ -101,6 +113,8 @@ rule aggregate_cuteSV_min_three:
         output:
                 str(config["aggregatedResultsFolder"] + "/CuteSV/tp.minThree.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/CuteSV"),
                 requiredCallers="minThree"
@@ -118,6 +132,8 @@ rule aggregate_pav_min_three:
         output:
                 str(config["aggregatedResultsFolder"] + "/PAV/tp.minThree.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/PAV"),
                 requiredCallers="minThree"
@@ -135,6 +151,8 @@ rule aggregate_sniffles_min_three:
         output:
                 str(config["aggregatedResultsFolder"] + "/Sniffles/tp.minThree.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/Sniffles"),
                 requiredCallers="minThree"
@@ -152,6 +170,8 @@ rule aggregate_svim_min_three:
         output:
                 str(config["aggregatedResultsFolder"] + "/SVIM/tp.minThree.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/SVIM"),
                 requiredCallers="minThree"
@@ -167,6 +187,8 @@ rule aggregate_cuteSV_min_four:
         output:
                 str(config["aggregatedResultsFolder"] + "/CuteSV/tp.minFour.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/CuteSV"),
                 requiredCallers="minFour"
@@ -182,6 +204,8 @@ rule aggregate_pav_min_four:
         output:
                 str(config["aggregatedResultsFolder"] + "/PAV/tp.minFour.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/PAV"),
                 requiredCallers="minFour"
@@ -197,6 +221,8 @@ rule aggregate_sniffles_min_four:
         output:
                 str(config["aggregatedResultsFolder"] + "/Sniffles/tp.minFour.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/Sniffles"),
                 requiredCallers="minFour"
@@ -212,6 +238,8 @@ rule aggregate_svim_min_four:
         output:
                 str(config["aggregatedResultsFolder"] + "/SVIM/tp.minFour.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/SVIM"),
                 requiredCallers="minFour"
@@ -227,6 +255,8 @@ rule aggregate_svim_asm_min_four:
         output:
                 str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minFour.sorted.vcf")
         threads: 1
+        benchmark:
+                repeat(str(BENCH_DIR + "/SVCalling.Aggregation.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 outputDir=str(config["aggregatedResultsFolder"] + "/SVIM-ASM"),
                 requiredCallers="minFour"
