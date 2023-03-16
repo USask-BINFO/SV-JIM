@@ -1,22 +1,27 @@
 rule prefetch_LR_reads:
+        input:
+                config["readFilesList"]
         output:
-                str(LR_PREFIX + ".sra")
+                prefetchConfirm=str(LR_PREFIX + ".sra")
         params:
                 maxFileSize=config["prefetchMaxSize"],
-                lrAccession=config["accessionLR"],
+                #lrAccession=config["firstLRAccession"],
                 readsOutDir=config["longReadsFolder"]
         shell:
-                "mkdir -p {params.readsOutDir};\n"
-                "prefetch --max-size {params.maxFileSize} -o {output} {params.lrAccession}"
+                "bash Scripts/prefetch_read_files_list.sh {params.readsOutDir} {params.maxFileSize} {input}"
+                #"mkdir -p {params.readsOutDir};\n"
+                #"prefetch --max-size {params.maxFileSize} -o {output} {params.lrAccession}"
 
 rule reformat_LR_sra_to_fastq:
         input:
-                str(LR_PREFIX + ".sra")
+                prefetchConfirm=str(LR_PREFIX + ".sra"),
+                readFilesList=config["readFilesList"]
         output:
-                str(LR_PREFIX + ".fastq")
+                reformatConfirm=str(LR_PREFIX + ".fastq")
         threads: config["threads"]
         params:
                 config["longReadsFolder"]
         shell:
-                "mkdir -p {params};\n"
-                "fasterq-dump --threads {threads} -O {params} {input}"
+                "bash ./Scripts/fasterq_dump_read_files.sh {threads} {params} {input.readFilesList}"
+                #"mkdir -p {params};\n"
+                #"fasterq-dump --threads {threads} -O {params} {input}"

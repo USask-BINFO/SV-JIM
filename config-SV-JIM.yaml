@@ -13,7 +13,8 @@ qryAssembly: "../Arabidopsis_Data/Ler.chr.all.v2.0.fasta" # Path to Query Assemb
 qrySeqsFile: "../Arabidopsis_Data/RefSeqsToInclude.txt" # File of regions to include (one per line. Ex: Chrosomes only). Can be created with grep "><CHROM_PREFIX>" <targetGenome> | tr -d ">"
 
 #Read Input Information
-accessionLR: "ERR3415826" # Accession number for Long-reads (downloaded from SRA)
+readFilesList: "../Arabidopsis_Data/ReadAccessions.txt"
+firstLRAccession: "ERR3415826" # Accession number for first file in the readFilesList (to check if requiring download from SRA)
 
 
 #*****************************************************
@@ -50,7 +51,7 @@ prefetchMaxSize: "50G" # Maximum file size that will downloaded during prefetch 
 
 #Minimap2 Aligner Configurations (for more details see minimap2 --help)
 presetForLR: "map-pb" # Predefined settings based on sequencing tech (Ex: map-ont, map-pb, map-hifi)
-presetForAssemblies: "asm20" # Predefined settings for assembly to ref alignment based on similarity (asm5, asm10, asm20) (see minimap2 --help for similarity thresholds) 
+presetForAssemblies: "asm5" # Predefined settings for assembly to ref alignment based on similarity (asm5, asm10, asm20) (see minimap2 --help for similarity thresholds) 
 minimapZDropForLR: "600,200" # Z drop score and Inversion Z drop score parameter in minimap (Default taken from cuteSV paper that compared similar tools)
 
 #SAMTools Configurations (Default settings taken from SVIM-ASM paper)
@@ -68,4 +69,4 @@ diffRatio: 0.3
 
 #Truvari Bench Configurations (see truvari help menu for more details)
 overlapThreshold: 0.5 # (0.5 [or 50%] is a commonly use setting in several publications. Alternatively, svim-asm paper used 70%) 
-maxRefDistance: 1000 # (Default setting chosen based on configuration used in svim-asm paper)
+maxRefDistance: 2000 # (Default setting chosen based on command detailed in human SV benchmark set's README, possible alternative is 1000 used in svim-asm paper)

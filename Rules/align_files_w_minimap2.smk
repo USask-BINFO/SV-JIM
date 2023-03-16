@@ -1,6 +1,6 @@
 rule align_LR_w_minimap2:
         input:
-                str(LR_PREFIX + ".fastq")
+                readFilesList=config["readFilesList"],
         output:
                 str(MNMP2_READS_PREFIX + ".sam")
         threads: 3
@@ -10,8 +10,9 @@ rule align_LR_w_minimap2:
                 refGenome=REF_FILTERED,
                 alignOutDir=ALIGN_DIR
         shell:
-                "mkdir -p {params.alignOutDir};\n"
-                "minimap2 -t {threads} --MD -a -z {params.zDrop} -x {params.mnmp2Preset} -Y {params.refGenome} {input} > {output}"
+                "bash ./Scripts/align_reads_w_minimap2.sh {threads} {params.zDrop} {params.mnmp2Preset} {params.refGenome} {output} {params.alignOutDir} {input.readFilesList}"
+                #"mkdir -p {params.alignOutDir};\n"
+                #"minimap2 -t {threads} --MD -a -z {params.zDrop} -x {params.mnmp2Preset} -Y {params.refGenome} {input} > {output}"
 
 rule align_both_assemblies_w_minimap2:
         input:

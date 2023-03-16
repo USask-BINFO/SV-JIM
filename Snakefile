@@ -2,7 +2,7 @@ configfile: "./config-SV-JIM.yaml"
 
 #Identify Long Read Input Directories and Prefixes for Rules
 LR_DIR=config["longReadsFolder"]
-LR_ACCESSION=config["accessionLR"]
+LR_ACCESSION=config["firstLRAccession"]
 LR_PREFIX=str(LR_DIR + "/" + LR_ACCESSION)
 
 #Identify Reference and Assembly Input Directories and Prefixes for Rules
