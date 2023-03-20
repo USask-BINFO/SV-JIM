@@ -132,7 +132,7 @@ rule combine_cuteSV_sniffles_svim_svim_asm_types_to_all_directory_SSm:
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-call.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/fp.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/fn.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/fn.sorted.vcf")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/FileCombining.benchmarking.tsv"), BENCH_REPEAT)

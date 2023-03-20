@@ -49,18 +49,18 @@ include: "./Rules/truvari_bench_sv_files_ssm.smk"
 include: "./Rules/truvari_bench_sv_files_sml.smk"
 include: "./Rules/truvari_bench_sv_files_med.smk"
 include: "./Rules/truvari_bench_sv_files_lrg.smk"
-
 include: "./Rules/combine_types_vcfs_to_all_ssm.smk"
 include: "./Rules/combine_types_vcfs_to_all_sml.smk"
 include: "./Rules/combine_types_vcfs_to_all_med.smk"
 include: "./Rules/combine_types_vcfs_to_all_lrg.smk"
+include: "./Rules/combine_sizes_vcfs_to_final.smk"
 
 include: "./Rules/summarize_tool_evaluation_rates_ssm.smk"
 include: "./Rules/summarize_tool_evaluation_rates_sml.smk"
 include: "./Rules/summarize_tool_evaluation_rates_med.smk"
 include: "./Rules/summarize_tool_evaluation_rates_lrg.smk"
+include: "./Rules/summarize_tool_evaluation_rates_all.smk"
 
-#include: "./Rules/combine_types_vcfs_to_all_total.smk
 include: "./Rules/determine_sv_sets_min_callers.smk"
 include: "./Rules/remove_duplicate_aggregate_file_entries.smk"
 

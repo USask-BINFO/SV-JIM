@@ -14,7 +14,7 @@ rule remove_dups_cuteSV_aggregates:
                 "uniq {input.minTwo} > {output.uniqueTwo};\n"
                 "uniq {input.minThree} > {output.uniqueThree};\n"
                 "uniq {input.minFour} > {output.uniqueFour}"
- 
+
 rule remove_dups_pav_aggregates:
         input:
                 minTwo=str(config["aggregatedResultsFolder"] + "/PAV/tp.minTwo.sorted.vcf"),

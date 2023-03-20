@@ -14,26 +14,26 @@ fi
 
 #Get size of each set contained in files (extract the numeric value in truvari summary.txt from a specific line containing an identifier)
 #Shared/Common values
-INTERSECTION_SIZE=`cat $TRUVARI_SUMMARY | grep "TP-base.:" | tr -cd [0-9.]` #`tail -n+2 $TRUVARI_SUMMARY | head -n9 | sed 's/,/\n/g' | grep "TP-base.:" | tr -cd [0-9.]`
+INTERSECTION_SIZE=$(cat $TRUVARI_SUMMARY | grep "TP-base.:" | tr -cd [0-9.]) #`tail -n+2 $TRUVARI_SUMMARY | head -n9 | sed 's/,/\n/g' | grep "TP-base.:" | tr -cd [0-9.]`
 #PRECISION_F1=`cat $TRUVARI_SUMMARY | grep "f1" | tr -cd [0-9.]`
 
 #Tool A's values
-TOOL_A_SIZE=`cat $TRUVARI_SUMMARY | grep "base cnt" | tr -cd [0-9.]`
-TOOL_A_PRECISION=`cat $TRUVARI_SUMMARY | grep "recall" | tr -cd [0-9.]`
-TOOL_A_PRECISION=`echo "scale=5;$TOOL_A_PRECISION*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,5}"`
+TOOL_A_SIZE=$(cat $TRUVARI_SUMMARY | grep "base cnt" | tr -cd [0-9.])
+TOOL_A_PRECISION=$(cat $TRUVARI_SUMMARY | grep "recall" | tr -cd [0-9.])
+TOOL_A_PRECISION=$(echo "scale=5;$TOOL_A_PRECISION*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,5}")
 if [ -z ${TOOL_A_PRECISION} ]; then
         TOOL_A_PRECISION="0.0"
 fi
-TOOL_A_UNIQUE=`cat $TRUVARI_SUMMARY | grep "FN.:" | tr -cd [0-9.]`
+TOOL_A_UNIQUE=$(cat $TRUVARI_SUMMARY | grep "FN.:" | tr -cd [0-9.])
 
 #Tool B's values
-TOOL_B_SIZE=`cat $TRUVARI_SUMMARY | grep "call cnt" | tr -cd [0-9.]`
-TOOL_B_PRECISION=`cat $TRUVARI_SUMMARY | grep "precision" | tr -cd [0-9.]`
-TOOL_B_PRECISION=`echo "scale=5;$TOOL_B_PRECISION*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,5}"`
+TOOL_B_SIZE=$(cat $TRUVARI_SUMMARY | grep "call cnt" | tr -cd [0-9.])
+TOOL_B_PRECISION=$(cat $TRUVARI_SUMMARY | grep "precision" | tr -cd [0-9.])
+TOOL_B_PRECISION=$(echo "scale=5;$TOOL_B_PRECISION*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,5}")
 if [ -z ${TOOL_B_PRECISION} ]; then
         TOOL_B_PRECISION="0.0"
 fi
-TOOL_B_UNIQUE=`cat $TRUVARI_SUMMARY | grep "FP.:" | tr -cd [0-9.]`
+TOOL_B_UNIQUE=$(cat $TRUVARI_SUMMARY | grep "FP.:" | tr -cd [0-9.])
 
 #Calculate union size and Jaccard Index value for the provided pair of tools
 UNION_SIZE=$((INTERSECTION_SIZE+TOOL_A_UNIQUE+TOOL_B_UNIQUE))
@@ -41,7 +41,7 @@ if [ -z ${UNION_SIZE} ]; then
 	UNION_SIZE="0.0"
 fi
 
-JACCARD=`echo "scale=5;$INTERSECTION_SIZE/$UNION_SIZE*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,4}[1-9]"` #$((INTERSECTION_SIZE/$UNION_SIZE))
+JACCARD=$(echo "scale=5;$INTERSECTION_SIZE/$UNION_SIZE*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,4}[1-9]") #$((INTERSECTION_SIZE/$UNION_SIZE))
 if [ -z ${JACCARD} ]; then
         JACCARD="0.0"
 fi
@@ -53,4 +53,4 @@ then
 fi
 
 #Append the entry for the pair of tools designated by arguments
-echo "$TOOL_A	$TOOL_B	$SV_TYPE	$JACCARD	$TOOL_A_PRECISION	$TOOL_B_PRECISION	$UNION_SIZE	$TOOL_A_SIZE	$TOOL_B_SIZE	$TOOL_A_UNIQUE	$INTERSECTION_SIZE	$TOOL_B_UNIQUE" >> $OUTPUT_FILE
+echo "$TOOL_A	$TOOL_B	$SV_TYPE	${JACCARD}%	${TOOL_A_PRECISION}%	${TOOL_B_PRECISION}%	$UNION_SIZE	$TOOL_A_SIZE	$TOOL_B_SIZE	$TOOL_A_UNIQUE	$INTERSECTION_SIZE	$TOOL_B_UNIQUE" >> "$OUTPUT_FILE"
