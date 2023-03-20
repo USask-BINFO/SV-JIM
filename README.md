@@ -26,10 +26,10 @@ The full list of required software is provided below and includes version inform
 
 #### Dependencies installed through the provided conda configuration file
 
-  - biopython 		(1.80)
-  - cutesv 		(2.0.2)
-  - svim 		(1.4.2)
-  - svim-asm 		(1.0.3)
+  - biopython		(1.80)
+  - cutesv		(2.0.2)
+  - svim		(1.4.2)
+  - svim-asm		(1.0.3)
   - intervaltree	(3.0.2)
   - scipy		(1.10.0)
   - mamba		(1.2.0)
@@ -44,7 +44,7 @@ The full list of required software is provided below and includes version inform
 
 #### Other dependencies
 
-  - SRA-Tools 		(3.0.2)
+  - SRA-Tools		(3.0.2)
   - Minimap2		(2.24-r1122)
   - SAMTools		(1.16.1)
   - BCFTools		(1.16)
@@ -88,21 +88,21 @@ conda file in the pipeline's config file.
  - `refSampleName`:  Short ID for user to distinguish files (EX: "NI100")
  - `refAssembly`: Path to Reference Fenome fasta file (EX: "./Genomes/Bnigra_NI100.fasta")
  - `refSeqsFile`: File of regions in the reference genome to include. For example, the chromosomes only. (EX:"./Genomes/RefSeqsToInclude.txt")
- 	- Contents of the target file should contain one region per line. 
- 	- This type of file can be created with:
+	- Contents of the target file should contain one region per line. 
+	- This type of file can be created with:
 		-  ```grep ">[Chrom_Prefix]" [genomeFasta] | tr -d ">" > [refSeqListFile]```
 
 ##### Query Sequence Information
  - `qrySampleName`:  Short ID for user to distinguish files (EX: "C2")
  - `qryAssembly`: Path to Reference Fenome fasta file (EX: "./Genomes/Bnigra_NI100.fasta")
  - `qrySeqsFile`: File of regions/contigs in the query assembly to be included. (EX:"./Genomes/QrySeqsToInclude.txt")
- 	- Contents of the target file should contain one region per line. 
- 	- This type of file can be created quickly with:
+	- Contents of the target file should contain one region per line. 
+	- This type of file can be created quickly with:
 		- ```grep ">[Chrom_Prefix]" [genomeFasta] | tr -d ">" > [qrySeqListFile]```
 
 ##### Read Input Information
- - `accessionLR`: Accession number for Long-reads downloaded from SRA (EX: "SRR11906206")
-
+ - `readFilesList`: "../Arabidopsis_Data/ReadAccessions.txt" # List of Accession numbers (one per line) for Long-reads to be included during execution (EX: "SRR11906206")
+ - `firstLRAccession`: "ERR3415826" # Accession number for first file in the readFilesList (to check if requiring download from SRA)
 
 #### Environment and Working Directory Configurations
 ##### Environment Information
@@ -177,6 +177,12 @@ Default settings inspired by thresholds used in published literature and in the 
  - `overlapThreshold`: Rate of similarity required in the sizes of the SVs locations being compared. (EX: 0.5 [or 50% which is a commonly used threshold in literature])
  - `maxRefDistance`: Maximum distance (in number of bases) permitted when comparing the reference sequence index reported for the SV locations being compared (EX: 1000) 
 
+##### Pipeline Benchmarking Configurations
+ - benchmarkDir: Path information for where to write benchmarking files.
+	- (EX: "./Benchmarking")
+ - repeatsForBench: Frequency for how many times to repeat a task as part of benchmarking. (EX: 1)
+	- Note, increasing this parameter will significantly increase execution time. So unless benchmarking, recommended to be left at 1
+
 
 ## Usage
 
@@ -184,9 +190,9 @@ Default settings inspired by thresholds used in published literature and in the 
 
  1. Update the provided SV-JIM config file to reflect the target input sequence information and update any setting values you wish to change from the defaults
  2. Create the files for the `refSeqsFile` and `qrySeqsFile` to specify only the target genome/assembly chroms/contigs to be considered during the pipeline's execution
-	- See `grep` command suggestion in the Configuration section above for assistance 
- 3. Note: If the input read files cannot/won't be fetched from SRA, please ensure the read's fastq file is unzipped and is named '<LR Accession>.fastq' consistent with the value provided in the config file to ensure 
-Snakemake will not make an attempt to prefetch them unnecessarily.
+	- See `grep` command suggestion in the Configuration section above for assistance
+ 3. Create the file for the `readFilesList` to specify which read accessions are to be included during execution.
+	- Note: If any of input read files cannot/won't be fetched from SRA, please preprocess the file name to ensure the read's fastq file is unzipped and renamed to '<Accession>.fastq' to prevent unnecessary prefetching using SRATools.
 
 #### B) Perform a dry run:
 
@@ -215,7 +221,7 @@ Note:
 ## Pipeline Test Example (Arabidopsis thaliana)
 
 #### Input data
-Due to it'ds size, the experiment's input sequence data should be obtained from the publicly accessible resources below:
+Due to size, the experiment's input sequence data should be obtained from the publicly accessible resources below:
  - Reference Genome: TAIR10
 	- Available through the NCBI's RefSeq Genomes FTP server
 	- DB Path: [/genomes/refseq/plant/Arabidopsis_thaliana/reference](https://ftp.ncbi.nlm.nih.gov/genomes/refseq/plant/Arabidopsis_thaliana/reference/)
@@ -240,6 +246,8 @@ The provided config file should already contain many of the necessary configurat
 Once configured the pipeline can be executed similar to the usage instructions above:
 
  1. Run: ```snakemake --use-conda --cores <# threads>``` 
+
+Note: For additional execution stats, Snakemake supports a `--stat <statsFile>` if further execution statistics prove helpful to the user.  
 
 ## Known issues
 
