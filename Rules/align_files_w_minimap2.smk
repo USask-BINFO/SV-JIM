@@ -10,9 +10,10 @@ rule align_LR_w_minimap2:
                 mnmp2Preset=config["presetForLR"],
                 zDrop=config["minimapZDropForLR"],
                 refGenome=REF_FILTERED,
-                alignOutDir=ALIGN_DIR
+                alignOutDir=ALIGN_DIR,
+                readsDir=LR_DIR
         shell:
-                "bash ./Scripts/align_reads_w_minimap2.sh {threads} {params.zDrop} {params.mnmp2Preset} {params.refGenome} {output} {params.alignOutDir} {input.readFilesList}"
+                "bash ./Scripts/align_reads_w_minimap2.sh {threads} {params.zDrop} {params.mnmp2Preset} {params.refGenome} {output} {params.alignOutDir} {params.readsDir} {input.readFilesList}"
                 #"mkdir -p {params.alignOutDir};\n"
                 #"minimap2 -t {threads} --MD -a -z {params.zDrop} -x {params.mnmp2Preset} -Y {params.refGenome} {input} > {output}"
 

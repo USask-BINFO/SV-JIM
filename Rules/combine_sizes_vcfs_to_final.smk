@@ -764,7 +764,7 @@ rule combine_pav_svim_svim_asm_to_final_vcf:
                 tpBaseSSm=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/SSm/FromTPBase"),
                 tpBaseSml=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/Sml/FromTPBase"),
                 tpBaseMed=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/Med/FromTPBase"),
-                tpBaseLrg=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/LrgFromTPBase")
+                tpBaseLrg=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/Lrg/FromTPBase")
         shell:
                 "bash ./Scripts/combine_vcf_files_basic.sh {params.tpCallALL} {params.tpCallSSm} {params.tpCallSml} {params.tpCallMed} {params.tpCallLrg};\n"
                 "bash ./Scripts/combine_vcf_files_basic.sh {params.tpBaseALL} {params.tpBaseSSm} {params.tpBaseSml} {params.tpBaseMed} {params.tpBaseLrg}"
@@ -953,7 +953,7 @@ rule combine_pav_sniffles_svim_asm_to_final_vcf:
                 tpCallSSm=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPCall"),
                 tpCallSml=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/Sml/FromTPCall"),
                 tpCallMed=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/Med/FromTPCall"),
-                tpCallLrg=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/LrgFromTPCall"),
+                tpCallLrg=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/Lrg/FromTPCall"),
 
                 tpBaseALL=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/FromTPBase"),
                 tpBaseSSm=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPBase"),
@@ -1089,7 +1089,7 @@ rule combine_sniffles_svim_svim_asm_to_final_vcf:
                 tpBaseSSm=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/SSm/FromTPBase"),
                 tpBaseSml=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/Sml/FromTPBase"),
                 tpBaseMed=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/Med/FromTPBase"),
-                tpBaseLrg=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/LrgFromTPBase"),
+                tpBaseLrg=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/Lrg/FromTPBase"),
         shell:
                 "bash ./Scripts/combine_vcf_files_basic.sh {params.tpCallALL} {params.tpCallSSm} {params.tpCallSml} {params.tpCallMed} {params.tpCallLrg};\n"
                 "bash ./Scripts/combine_vcf_files_basic.sh {params.tpBaseALL} {params.tpBaseSSm} {params.tpBaseSml} {params.tpBaseMed} {params.tpBaseLrg}"

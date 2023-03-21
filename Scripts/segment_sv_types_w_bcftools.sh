@@ -15,9 +15,9 @@ bcftools filter -i 'SVTYPE == "BND"' -o ${SV_FILE_PREFIX}.BND.vcf $ALL_SV_FILE
 for TYPE in DEL INS DUP
 do
         bcftools filter -e 'INFO/SVLEN > 100 || INFO/SVLEN < -100' -o ${SV_FILE_PREFIX}.${TYPE}.SSm.vcf ${SV_FILE_PREFIX}.${TYPE}.vcf
-        bcftools filter -i '(INFO/SVLEN > 100 && INFO/SVLEN <= 1000) || (INFO/SVLEN < -100 && INFO/SVLEN >= -1000' -o ${SV_FILE_PREFIX}.${TYPE}.Sml.vcf ${SV_FILE_PREFIX}.${TYPE}.vcf
-        bcftools filter -i '(INFO/SVLEN > 1000 && INFO/SVLEN <= 100000) || (INFO/SVLEN < -1000 && INFO/SVLEN >= -100000' -o ${SV_FILE_PREFIX}.${TYPE}.Med.vcf ${SV_FILE_PREFIX}.${TYPE}.vcf
-        bcftools filter -i 'INFO/SVLEN > 100000) || INFO/SVLEN < -100000' -o ${SV_FILE_PREFIX}.${TYPE}.Lrg.vcf ${SV_FILE_PREFIX}.${TYPE}.vcf
+        bcftools filter -i '(INFO/SVLEN > 100 && INFO/SVLEN <= 1000) || (INFO/SVLEN < -100 && INFO/SVLEN >= -1000)' -o ${SV_FILE_PREFIX}.${TYPE}.Sml.vcf ${SV_FILE_PREFIX}.${TYPE}.vcf
+        bcftools filter -i '(INFO/SVLEN > 1000 && INFO/SVLEN <= 100000) || (INFO/SVLEN < -1000 && INFO/SVLEN >= -100000)' -o ${SV_FILE_PREFIX}.${TYPE}.Med.vcf ${SV_FILE_PREFIX}.${TYPE}.vcf
+        bcftools filter -i 'INFO/SVLEN > 100000 || INFO/SVLEN < -100000' -o ${SV_FILE_PREFIX}.${TYPE}.Lrg.vcf ${SV_FILE_PREFIX}.${TYPE}.vcf
 done
 
 if [ "SVIM" = $TOOL_NAME || "SVIM-ASM" = $TOOL_NAME ]; then
@@ -29,5 +29,5 @@ else
         bcftools filter -e 'INFO/SVLEN > 100 || INFO/SVLEN < -100' -o ${SV_FILE_PREFIX}.INV.SSm.vcf ${SV_FILE_PREFIX}.INV.vcf
         bcftools filter -i '(INFO/SVLEN > 100 && INFO/SVLEN <= 1000) || (INFO/SVLEN < -100 && INFO/SVLEN >= -1000)' -o ${SV_FILE_PREFIX}.INV.Sml.vcf ${SV_FILE_PREFIX}.INV.vcf
         bcftools filter -i '(INFO/SVLEN > 1000 && INFO/SVLEN <= 100000) || (INFO/SVLEN < -1000 && INFO/SVLEN >= -100000)' -o ${SV_FILE_PREFIX}.INV.Med.vcf ${SV_FILE_PREFIX}.INV.vcf
-        bcftools filter -i 'INFO/SVLEN > 100000) || INFO/SVLEN < -100000' -o ${SV_FILE_PREFIX}.INV.Lrg.vcf ${SV_FILE_PREFIX}.INV.vcf
+        bcftools filter -i 'INFO/SVLEN > 100000 || INFO/SVLEN < -100000' -o ${SV_FILE_PREFIX}.INV.Lrg.vcf ${SV_FILE_PREFIX}.INV.vcf
 fi
