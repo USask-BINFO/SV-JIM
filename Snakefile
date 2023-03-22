@@ -22,6 +22,7 @@ QUALIMAP_OUTDIR=config["qualimapReportsFolder"]
 
 #Identify VCF Result Output Directories and Prefixes for Rules
 SV_RESULTS_DIR=config["svResultsFolder"]
+TOTALS_DIR=config["totalsFolder"]
 CUTESV_PREFIX=str(SV_RESULTS_DIR + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV")
 SNIFFLES_PREFIX=str(SV_RESULTS_DIR + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2")
 SVIM_PREFIX=str(SV_RESULTS_DIR + "/SVIM/" + REF_SAMP_NAME + ".svim")
@@ -63,6 +64,7 @@ include: "./Rules/summarize_tool_evaluation_rates_all.smk"
 
 include: "./Rules/determine_sv_sets_min_callers.smk"
 include: "./Rules/remove_duplicate_aggregate_file_entries.smk"
+include: "./Rules/generate_final_result_counts.smk"
 
 #Default rule containing final output file targets to ensure executiong of entire pipeline
 rule all:
@@ -107,5 +109,10 @@ rule all:
                 str(config["aggregatedResultsFolder"] + "/SVIM/tp.minFour.unique.sorted.vcf"),
                 str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minTwo.unique.sorted.vcf"),
                 str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minThree.unique.sorted.vcf"),
-                str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minFour.unique.sorted.vcf")
+                str(config["aggregatedResultsFolder"] + "/SVIM-ASM/tp.minFour.unique.sorted.vcf"),
+                str(TOTALS_DIR + "/CuteSV.summary"),
+                str(TOTALS_DIR + "/Sniffles.summary"),
+                str(TOTALS_DIR + "/SVIM.summary"),
+                str(TOTALS_DIR + "/SVIM-ASM.summary"),
+                str(TOTALS_DIR + "/PAV.summary")
         benchmark: repeat(str(BENCH_DIR + "/allRule.benchmarking.tsv"), BENCH_REPEAT)

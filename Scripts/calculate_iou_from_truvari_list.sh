@@ -16,6 +16,7 @@ TOOL_A_SIZE="0"
 TOOL_B_SIZE="0"
 TOOL_A_UNIQUE="0"
 TOOL_B_UNIQUE="0"
+UNION_SIZE="0"
 
 for TRUVARI_SUMMARY in $*
 do
@@ -37,27 +38,45 @@ do
 	TOOL_B_UNIQUE=$(( TOOL_B_UNIQUE + $(cat $TRUVARI_SUMMARY | grep "FP.:" | tr -cd [0-9.]) ))
 done
 
-#TOOL_A_PRECISION=`cat $TRUVARI_SUMMARY | grep "recall" | tr -cd [0-9.]`
-#TOOL_A_PRECISION=`echo "scale=5;$TOOL_A_PRECISION*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,5}"`
-TOOL_A_PRECISION=$(echo "scale=5;$INTERSECTION_SIZE/$TOOL_A_SIZE*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,5}")
+#Check to prevent divide by 0 for SV bins with no entries, otherwise perform calculation
+if [ "0" = $TOOL_A_SIZE ]; then
+	TOOL_A_PRECISION="0.0"
+else
+	TOOL_A_PRECISION=$(echo "scale=5;$INTERSECTION_SIZE/$TOOL_A_SIZE*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,5}")
+fi
+
 if [ -z ${TOOL_A_PRECISION} ]; then
 	TOOL_A_PRECISION="0.0"
 fi
 
-#TOOL_B_PRECISION=`cat $TRUVARI_SUMMARY | grep "precision" | tr -cd [0-9.]`
-#TOOL_B_PRECISION=`echo "scale=5;$TOOL_B_PRECISION*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,5}"`
-TOOL_B_PRECISION=$(echo "scale=5;$INTERSECTION_SIZE/$TOOL_B_SIZE*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,5}")
+#Check to prevent divide by 0 for SV bins with no entries, otherwise perform calculation
+if [ "0" = $TOOL_B_SIZE ]; then
+	TOOL_B_PRECISION="0.0"
+else
+	TOOL_B_PRECISION=$(echo "scale=5;$INTERSECTION_SIZE/$TOOL_B_SIZE*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,5}")
+fi
+
+#Guard against error in calculation's command, set to 0 if variable is empty
 if [ -z ${TOOL_B_PRECISION} ]; then
 	TOOL_B_PRECISION="0.0"
 fi
 
 #Calculate union size and Jaccard Index value for the provided pair of tools
 UNION_SIZE=$((INTERSECTION_SIZE+TOOL_A_UNIQUE+TOOL_B_UNIQUE))
+
+#Guard against error in calculation's command, set to 0 if variable is empty
 if [ -z ${UNION_SIZE} ]; then
-	UNION_SIZE="0.0"
+	UNION_SIZE="0"
 fi
 
-JACCARD=$(echo "scale=5;$INTERSECTION_SIZE/$UNION_SIZE*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,4}[1-9]")
+#Check to prevent divide by 0 for SV bins with no entries, otherwise perform calculation
+if [ "0" = $UNION_SIZE ]; then
+	JACCARD="0.0"
+else
+	JACCARD=$(echo "scale=5;$INTERSECTION_SIZE/$UNION_SIZE*100" | bc | grep -o -E "[0-9][0-9]?[0-9]?\.[0-9]{0,4}[1-9]")
+fi
+
+#Guard against error in calculation's command, set to 0 if variable is empty
 if [ -z ${JACCARD} ]; then
 	JACCARD="0.0"
 fi
@@ -65,8 +84,8 @@ fi
 #Check if script should write/overwrite a file with the new header info (should only be done for first pair of tools compared)
 if [ "$WRITE_MODE" = "W" ] || [ "$WRITE_MODE" = "w" ]
 then
-       echo "#ToolA    ToolB   Type    Jaccard%        PrecA        PrecB        Union# SizeA   SizeB   UniqueA Intersect       UniqueB" > $OUTPUT_FILE
+       echo '#ToolA	ToolB	Type	Jacc%	PrecA%	PrecB%	Union	SizeA	SizeB	UniqueA	Intersect	UniqueB' > $OUTPUT_FILE
 fi
 
 #Append the entry for the pair of tools designated by arguments
-echo "$TOOL_A   $TOOL_B $SV_TYPE        ${JACCARD}%        ${TOOL_A_PRECISION}%       ${TOOL_B_PRECISION}%       $UNION_SIZE     $TOOL_A_SIZE    $TOOL_B_SIZE    $TOOL_A_UNIQUE  $INTERSECTION_SIZE      $TOOL_B_UNIQUE" >> "$OUTPUT_FILE"
+echo "$TOOL_A	$TOOL_B	$SV_TYPE	${JACCARD}%	${TOOL_A_PRECISION}%	${TOOL_B_PRECISION}%	$UNION_SIZE	$TOOL_A_SIZE	$TOOL_B_SIZE	$TOOL_A_UNIQUE	$INTERSECTION_SIZE	$TOOL_B_UNIQUE" >> "$OUTPUT_FILE"

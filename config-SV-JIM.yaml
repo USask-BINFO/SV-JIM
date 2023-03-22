@@ -33,6 +33,7 @@ svResultsFolder: "Workflow_Outputs/SV_Calls"
 intersectResultsFolder: "Workflow_Outputs/Intersections"
 truvariResultsFolder: "Workflow_Outputs/Truvari_Results"
 aggregatedResultsFolder: "Workflow_Outputs/Aggregated_SV_Results"
+totalsFolder: "Caller_Totals"
 
 #Designated Conda Environment Information (Default YAML env file provided)(Note: Using only a single yaml file of all software reduces pipeline execution time)
 cuteSVCondaEnvYAML: "All-Env.yaml" # Path to YAML file for conda env that CuteSV is installed in"
