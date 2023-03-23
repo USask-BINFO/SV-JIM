@@ -5,7 +5,7 @@ rule evaluate_sniffles_w_svim_Lrg:
                 summaryDUP=str(config["truvariResultsFolder"] + "/Sniffles-SVIM/DUP/Lrg/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/Sniffles-SVIM/INV/Lrg/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -26,7 +26,7 @@ rule evaluate_cuteSV_w_sniffles_Lrg:
                 summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/DUP/Lrg/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/INV/Lrg/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -47,7 +47,7 @@ rule evaluate_cuteSV_w_svim_Lrg:
                 summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/DUP/Lrg/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/INV/Lrg/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -68,7 +68,7 @@ rule evaluate_cuteSV_w_svim_asm_Lrg:
                 summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/DUP/Lrg/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/INV/Lrg/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -89,7 +89,7 @@ rule evaluate_sniffles_w_svim_asm_Lrg:
                 summaryDUP=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/DUP/Lrg/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/INV/Lrg/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -110,7 +110,7 @@ rule evaluate_svim_w_svim_asm_Lrg:
                 summaryDUP=str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/DUP/Lrg/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/INV/Lrg/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -130,7 +130,7 @@ rule evaluate_cuteSV_w_pav_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV/INS/Lrg/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV/INV/Lrg/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -149,7 +149,7 @@ rule evaluate_pav_w_sniffles_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/PAV-Sniffles/INS/Lrg/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/PAV-Sniffles/INV/Lrg/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -168,7 +168,7 @@ rule evaluate_pav_w_svim_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/PAV-SVIM/INS/Lrg/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/PAV-SVIM/INV/Lrg/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-SVIM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/PAV-SVIM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -187,7 +187,7 @@ rule evaluate_pav_w_svim_asm_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INS/Lrg/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INV/Lrg/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -207,7 +207,7 @@ rule evaluate_cuteSV_sniffles_svim_Lrg:
                 summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DUP/Lrg/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INV/Lrg/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -227,7 +227,7 @@ rule evaluate_cuteSV_pav_svim_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INS/Lrg/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INV/Lrg/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -246,7 +246,7 @@ rule evaluate_pav_sniffles_svim_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INS/Lrg/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INV/Lrg/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -265,7 +265,7 @@ rule evaluate_pav_svim_svim_asm_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INS/Lrg/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INV/Lrg/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -284,7 +284,7 @@ rule evaluate_cuteSV_pav_sniffles_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INS/Lrg/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INV/Lrg/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -303,7 +303,7 @@ rule evaluate_cuteSV_pav_svim_asm_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INS/Lrg/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INV/Lrg/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -322,7 +322,7 @@ rule evaluate_pav_sniffles_svim_asm_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INS/Lrg/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INV/Lrg/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -342,7 +342,7 @@ rule evaluate_cuteSV_svim_svim_asm_Lrg:
                 summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/DUP/Lrg/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/INV/Lrg/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -363,7 +363,7 @@ rule evaluate_sniffles_svim_svim_asm_Lrg:
                 summaryDUP=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/DUP/Lrg/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/INV/Lrg/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -384,7 +384,7 @@ rule evaluate_cuteSV_sniffles_svim_asm_Lrg:
                 summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DUP/Lrg/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/INV/Lrg/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -405,7 +405,7 @@ rule evaluate_cuteSV_sniffles_svim_svim_asm_Lrg:
                 summaryDUP=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DUP/Lrg/Call/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INV/Lrg/Call/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -425,7 +425,7 @@ rule evaluate_cuteSV_pav_sniffles_svim_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INS/Lrg/Call/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INV/Lrg/Call/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -444,7 +444,7 @@ rule evaluate_cuteSV_pav_svim_svim_asm_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INS/Lrg/Call/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INV/Lrg/Call/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -463,7 +463,7 @@ rule evaluate_pav_sniffles_svim_svim_asm_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INS/Lrg/Call/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INV/Lrg/Call/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -482,7 +482,7 @@ rule evaluate_cuteSV_pav_sniffles_svim_asm_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INS/Lrg/Call/FromTPCall/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INV/Lrg/Call/FromTPCall/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
@@ -501,7 +501,7 @@ rule evaluate_cuteSV_pav_sniffles_svim_svim_asm_Lrg:
                 summaryINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INS/Lrg/summary.txt"),
                 summaryINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INV/Lrg/summary.txt")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/Lrg/calculated_rates.tsv")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/Lrg.calculated_rates.tsv")
         threads: 1
         benchmark:
                 repeat(str(BENCH_DIR + "/Evaluation.benchmarking.tsv"), BENCH_REPEAT)
