@@ -8,11 +8,11 @@ LRG_FILE=$5
 TOTAL_FILE=$6
 
 #Extract intersection size column from files into array (Ordered as: Header,#DEL,#INS,#DUP,#INV,#BND,#TOTAL)
-readarray SSM_ARRAY <(awk '{ print $11 }' $SSM_FILE)
-readarray SML_ARRAY <(awk '{ print $11 }' $SML_FILE)
-readarray MED_ARRAY <(awk '{ print $11 }' $MED_FILE)
-readarray LRG_ARRAY <(awk '{ print $11 }' $LRG_FILE)
-readarray TOTAL_ARRAY <(awk '{ print $11 }' $TOTAL_FILE)
+SSM_ARRAY=($(awk '{ print $11 }' $SSM_FILE))
+SML_ARRAY=($(awk '{ print $11 }' $SML_FILE))
+MED_ARRAY=($(awk '{ print $11 }' $MED_FILE))
+LRG_ARRAY=($(awk '{ print $11 }' $LRG_FILE))
+TOTAL_ARRAY=($(awk '{ print $11 }' $TOTAL_FILE))
 
 #Create file by adding headers
 echo "TYPE      SSM     SML     MED     LRG     TOTAL" > $OUTPUT_FILE
