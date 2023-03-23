@@ -1,25 +1,25 @@
 rule produce_cuteSV_sv_counts:
         input:
                 allVCFs=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.filtered.ALL.vcf"),
-		ssmDEL=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DEL.SSm.vcf.sorted"),
-                smlDEL=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DEL.Sml.vcf.sorted"),
-                medDEL=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DEL.Med.vcf.sorted"),
-                lrgDEL=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DEL.Lrg.vcf.sorted"),
+		ssmDEL=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DEL.SSm.vcf"),
+                smlDEL=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DEL.Sml.vcf"),
+                medDEL=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DEL.Med.vcf"),
+                lrgDEL=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DEL.Lrg.vcf"),
 
-                ssmINS=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INS.SSm.vcf.sorted"),
-                smlINS=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INS.Sml.vcf.sorted"),
-                medINS=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INS.Med.vcf.sorted"),
-                lrgINS=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INS.Lrg.vcf.sorted"),
+                ssmINS=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INS.SSm.vcf"),
+                smlINS=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INS.Sml.vcf"),
+                medINS=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INS.Med.vcf"),
+                lrgINS=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INS.Lrg.vcf"),
 
-                ssmDUP=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DUP.SSm.vcf.sorted"),
-                smlDUP=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DUP.Sml.vcf.sorted"),
-                medDUP=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DUP.Med.vcf.sorted"),
-                lrgDUP=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DUP.Lrg.vcf.sorted"),
+                ssmDUP=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DUP.SSm.vcf"),
+                smlDUP=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DUP.Sml.vcf"),
+                medDUP=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DUP.Med.vcf"),
+                lrgDUP=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.DUP.Lrg.vcf"),
 
-                ssmINV=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INV.SSm.vcf.sorted"),
-                smlINV=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INV.Sml.vcf.sorted"),
-                medINV=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INV.Med.vcf.sorted"),
-                lrgINV=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INV.Lrg.vcf.sorted")
+                ssmINV=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INV.SSm.vcf"),
+                smlINV=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INV.Sml.vcf"),
+                medINV=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INV.Med.vcf"),
+                lrgINV=str(config["svResultsFolder"] + "/CuteSV/" + REF_SAMP_NAME + ".cuteSV.INV.Lrg.vcf")
         output:
                 str(TOTALS_DIR + "/CuteSV.summary")
         threads: 1
@@ -35,25 +35,25 @@ rule produce_cuteSV_sv_counts:
 rule produce_sniffles_sv_counts:
         input:
                 allVCFs=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.filtered.ALL.vcf"),
-                ssmDEL=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DEL.SSm.vcf.sorted"),
-                smlDEL=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DEL.Sml.vcf.sorted"),
-                medDEL=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DEL.Med.vcf.sorted"),
-                lrgDEL=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DEL.Lrg.vcf.sorted"),
+                ssmDEL=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DEL.SSm.vcf"),
+                smlDEL=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DEL.Sml.vcf"),
+                medDEL=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DEL.Med.vcf"),
+                lrgDEL=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DEL.Lrg.vcf"),
 
-                ssmINS=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INS.SSm.vcf.sorted"),
-                smlINS=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INS.Sml.vcf.sorted"),
-                medINS=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INS.Med.vcf.sorted"),
-                lrgINS=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INS.Lrg.vcf.sorted"),
+                ssmINS=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INS.SSm.vcf"),
+                smlINS=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INS.Sml.vcf"),
+                medINS=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INS.Med.vcf"),
+                lrgINS=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INS.Lrg.vcf"),
 
-                ssmDUP=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DUP.SSm.vcf.sorted"),
-                smlDUP=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DUP.Sml.vcf.sorted"),
-                medDUP=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DUP.Med.vcf.sorted"),
-                lrgDUP=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DUP.Lrg.vcf.sorted"),
+                ssmDUP=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DUP.SSm.vcf"),
+                smlDUP=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DUP.Sml.vcf"),
+                medDUP=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DUP.Med.vcf"),
+                lrgDUP=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.DUP.Lrg.vcf"),
 
-                ssmINV=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INV.SSm.vcf.sorted"),
-                smlINV=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INV.Sml.vcf.sorted"),
-                medINV=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INV.Med.vcf.sorted"),
-                lrgINV=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INV.Lrg.vcf.sorted")
+                ssmINV=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INV.SSm.vcf"),
+                smlINV=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INV.Sml.vcf"),
+                medINV=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INV.Med.vcf"),
+                lrgINV=str(config["svResultsFolder"] + "/Sniffles/" + REF_SAMP_NAME + ".sniffles2.INV.Lrg.vcf")
         output:
                 str(TOTALS_DIR + "/Sniffles.summary")
         threads: 1
@@ -69,25 +69,25 @@ rule produce_sniffles_sv_counts:
 rule produce_svim_sv_counts:
         input:
                 allVCFs=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.filtered.ALL.vcf"),
-                ssmDEL=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DEL.SSm.vcf.sorted"),
-                smlDEL=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DEL.Sml.vcf.sorted"),
-                medDEL=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DEL.Med.vcf.sorted"),
-                lrgDEL=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DEL.Lrg.vcf.sorted"),
+                ssmDEL=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DEL.SSm.vcf"),
+                smlDEL=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DEL.Sml.vcf"),
+                medDEL=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DEL.Med.vcf"),
+                lrgDEL=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DEL.Lrg.vcf"),
 
-                ssmINS=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INS.SSm.vcf.sorted"),
-                smlINS=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INS.Sml.vcf.sorted"),
-                medINS=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INS.Med.vcf.sorted"),
-                lrgINS=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INS.Lrg.vcf.sorted"),
+                ssmINS=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INS.SSm.vcf"),
+                smlINS=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INS.Sml.vcf"),
+                medINS=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INS.Med.vcf"),
+                lrgINS=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INS.Lrg.vcf"),
 
-                ssmDUP=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DUP.SSm.vcf.sorted"),
-                smlDUP=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DUP.Sml.vcf.sorted"),
-                medDUP=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DUP.Med.vcf.sorted"),
-                lrgDUP=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DUP.Lrg.vcf.sorted"),
+                ssmDUP=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DUP.SSm.vcf"),
+                smlDUP=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DUP.Sml.vcf"),
+                medDUP=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DUP.Med.vcf"),
+                lrgDUP=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.DUP.Lrg.vcf"),
 
-                ssmINV=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INV.SSm.vcf.sorted"),
-                smlINV=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INV.Sml.vcf.sorted"),
-                medINV=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INV.Med.vcf.sorted"),
-                lrgINV=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INV.Lrg.vcf.sorted")
+                ssmINV=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INV.SSm.vcf"),
+                smlINV=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INV.Sml.vcf"),
+                medINV=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INV.Med.vcf"),
+                lrgINV=str(config["svResultsFolder"] + "/SVIM/" + REF_SAMP_NAME + ".svim.INV.Lrg.vcf")
         output:
                 str(TOTALS_DIR + "/SVIM.summary")
         threads: 1
@@ -103,25 +103,25 @@ rule produce_svim_sv_counts:
 rule produce_svim_asm_sv_counts:
         input:
                 allVCFs=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.filtered.ALL.vcf"),
-                ssmDEL=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DEL.SSm.vcf.sorted"),
-                smlDEL=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DEL.Sml.vcf.sorted"),
-                medDEL=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DEL.Med.vcf.sorted"),
-                lrgDEL=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DEL.Lrg.vcf.sorted"),
+                ssmDEL=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DEL.SSm.vcf"),
+                smlDEL=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DEL.Sml.vcf"),
+                medDEL=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DEL.Med.vcf"),
+                lrgDEL=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DEL.Lrg.vcf"),
 
-                ssmINS=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INS.SSm.vcf.sorted"),
-                smlINS=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INS.Sml.vcf.sorted"),
-                medINS=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INS.Med.vcf.sorted"),
-                lrgINS=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INS.Lrg.vcf.sorted"),
+                ssmINS=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INS.SSm.vcf"),
+                smlINS=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INS.Sml.vcf"),
+                medINS=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INS.Med.vcf"),
+                lrgINS=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INS.Lrg.vcf"),
 
-                ssmDUP=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DUP.SSm.vcf.sorted"),
-                smlDUP=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DUP.Sml.vcf.sorted"),
-                medDUP=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DUP.Med.vcf.sorted"),
-                lrgDUP=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DUP.Lrg.vcf.sorted"),
+                ssmDUP=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DUP.SSm.vcf"),
+                smlDUP=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DUP.Sml.vcf"),
+                medDUP=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DUP.Med.vcf"),
+                lrgDUP=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.DUP.Lrg.vcf"),
 
-                ssmINV=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INV.SSm.vcf.sorted"),
-                smlINV=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INV.Sml.vcf.sorted"),
-                medINV=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INV.Med.vcf.sorted"),
-                lrgINV=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INV.Lrg.vcf.sorted")
+                ssmINV=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INV.SSm.vcf"),
+                smlINV=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INV.Sml.vcf"),
+                medINV=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INV.Med.vcf"),
+                lrgINV=str(config["svResultsFolder"] + "/SVIM-ASM/" + REF_SAMP_NAME + ".svim-asm.INV.Lrg.vcf")
         output:
                 str(TOTALS_DIR + "/SVIM-ASM.summary")
         threads: 1
@@ -137,20 +137,20 @@ rule produce_svim_asm_sv_counts:
 rule produce_pav_sv_counts:
         input:
                 allVCFs=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.filtered.ALL.vcf"),
-                ssmDEL=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.DEL.SSm.vcf.sorted"),
-                smlDEL=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.DEL.Sml.vcf.sorted"),
-                medDEL=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.DEL.Med.vcf.sorted"),
-                lrgDEL=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.DEL.Lrg.vcf.sorted"),
+                ssmDEL=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.DEL.SSm.vcf"),
+                smlDEL=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.DEL.Sml.vcf"),
+                medDEL=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.DEL.Med.vcf"),
+                lrgDEL=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.DEL.Lrg.vcf"),
 
-                ssmINS=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INS.SSm.vcf.sorted"),
-                smlINS=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INS.Sml.vcf.sorted"),
-                medINS=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INS.Med.vcf.sorted"),
-                lrgINS=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INS.Lrg.vcf.sorted"),
+                ssmINS=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INS.SSm.vcf"),
+                smlINS=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INS.Sml.vcf"),
+                medINS=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INS.Med.vcf"),
+                lrgINS=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INS.Lrg.vcf"),
 
-                ssmINV=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INV.SSm.vcf.sorted"),
-                smlINV=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INV.Sml.vcf.sorted"),
-                medINV=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INV.Med.vcf.sorted"),
-                lrgINV=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INV.Lrg.vcf.sorted")
+                ssmINV=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INV.SSm.vcf"),
+                smlINV=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INV.Sml.vcf"),
+                medINV=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INV.Med.vcf"),
+                lrgINV=str(config["svResultsFolder"] + "/PAV/" + REF_SAMP_NAME + ".pav.INV.Lrg.vcf")
         output:
                 str(TOTALS_DIR + "/PAV.summary")
         threads: 1

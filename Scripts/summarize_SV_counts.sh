@@ -1,9 +1,12 @@
 #!/bin/bash
 
+#Grab guaranteed variables (With BND there will be less since BNDs don't come in multiple sizes)
 WRITE_MODE=$1
+SV_TYPE=$2
+OUTPUT_FILE=$3
 
 #If first to write, create header
-if [ "W" = $WRITE_MODE || "w" = $WRITE_MODE ]; then
+if [ "W" = $WRITE_MODE ] || [ "w" = $WRITE_MODE ]; then
         echo "TYPE      SSM     SML     MED     LRG     TOTAL" > $OUTPUT_FILE
 fi
 
@@ -12,7 +15,7 @@ SV_TYPE=$2
 OUTPUT_FILE=$3
 
 ALL_VCF=$4
-TOTAL_COUNT=$(grep -v "^#" $ALL_VCF | grep -c "$SV_TYPE" )
+TOTAL_COUNT=$(grep -v "^#" $ALL_VCF | grep -c "$SV_TYPE")
 
 #If the SV_TYPE is BND write the row accordingly with only one total calculated (rest 0s)
 if [ "BND" = $SV_TYPE ]; then
