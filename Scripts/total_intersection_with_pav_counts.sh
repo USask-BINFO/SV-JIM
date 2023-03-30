@@ -7,7 +7,7 @@ MED_FILE=$4
 LRG_FILE=$5
 TOTAL_FILE=$6
 
-#Extract intersection size column from files into array (Ordered as: Header,#DEL,#INS,#DUP,#INV,#BND,#TOTAL)
+#Extract intersection size column from files into array (Ordered as: Header,#DEL,#INS,#INV,#TOTAL)
 SSM_ARRAY=($(awk '{ print $11 }' $SSM_FILE))
 SML_ARRAY=($(awk '{ print $11 }' $SML_FILE))
 MED_ARRAY=($(awk '{ print $11 }' $MED_FILE))
@@ -15,7 +15,7 @@ LRG_ARRAY=($(awk '{ print $11 }' $LRG_FILE))
 TOTAL_ARRAY=($(awk '{ print $11 }' $TOTAL_FILE))
 
 #Create file by adding headers
-echo "TYPE      SSM     SML     MED     LRG     TOTAL" > $OUTPUT_FILE
+echo "TYPE	SSM	SML	MED	LRG	TOTAL" > $OUTPUT_FILE
 
 #Add DEL counts to file
 SSM_DEL_COUNT="${SSM_ARRAY[1]}"

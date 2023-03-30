@@ -7,10 +7,11 @@ READ_FILES_LIST=$3
 echo "Starting prefetching of all Accessions detailed in $READ_FILES_LIST..."
 mkdir -p $READS_DIR
 
-readarray ASCESSIONS_ARRAY < $READ_FILES_LIST
+readarray ACCESSIONS_ARRAY < $READ_FILES_LIST
 for ACCESSION in "${ACCESSIONS_ARRAY[@]}"
 do
-	prefetch --max-size $FILE_MAX -o ${ACCESSION}.sra $ACCESSION
+	STRIP_ACCESSION=$(echo $ACCESSION | tr -d "\n")
+	prefetch --max-size $FILE_MAX -o ${STRIP_ACCESSION}.sra ${STRIP_ACCESSION}
 done
 
-echo"Prefetching complete!.."
+echo "Prefetching complete!.."

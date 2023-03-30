@@ -1,6 +1,7 @@
 rule align_LR_w_minimap2:
         input:
                 readFilesList=config["readFilesList"],
+                reformatConfirm=str(LR_PREFIX + ".fastq")
         output:
                 str(MNMP2_READS_PREFIX + ".sam")
         threads: 3

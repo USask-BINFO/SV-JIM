@@ -26,7 +26,7 @@ do
 
 	#Get size of each set contained in files (extract the numeric value in truvari summary.txt from a specific line containing an identifier)
 	#Shared/Common values
-	INTERSECTION_SIZE=$(( INTERSECTION_SIZE + $(cat $TRUVARI_SUMMARY | grep "TP-base.:" | tr -cd [0-9.]) ))
+	INTERSECTION_SIZE=$(( INTERSECTION_SIZE+$(cat $TRUVARI_SUMMARY | grep "TP-base.:" | tr -cd [0-9.]) ))
 
 	#Tool A's values
 	TOOL_A_SIZE=$(( TOOL_A_SIZE +  $(cat $TRUVARI_SUMMARY | grep "base cnt" | tr -cd [0-9.]) ))
@@ -38,12 +38,14 @@ do
 done
 
 #Calculate Precision rates for pair of tools based on sums produced
-TOOL_A_PRECISION=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v ASIZE="$TOOL_A_SIZE" 'BEGIN { printf "%.2f", INTERSECT/ASIZE*100 }' </dev/null)
+#TOOL_A_PRECISION=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v ASIZE="$TOOL_A_SIZE" 'BEGIN { printf "%.2f", INTERSECT/ASIZE*100 }' </dev/null)
+TOOL_A_PRECISION=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v ASIZE="$TOOL_A_SIZE" 'BEGIN { printf "%.2f", (ASIZE>0) ? INTERSECT/ASIZE*100 : 0.0 }' </dev/null)
 if [ -z ${TOOL_A_PRECISION} ]; then
 	TOOL_A_PRECISION="0.0"
 fi
 
-TOOL_B_PRECISION=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v BSIZE="$TOOL_B_SIZE" 'BEGIN { printf "%.2f", INTERSECT/BSIZE*100 }' </dev/null)
+#TOOL_B_PRECISION=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v BSIZE="$TOOL_B_SIZE" 'BEGIN { printf "%.2f", INTERSECT/BSIZE*100 }' </dev/null)
+TOOL_B_PRECISION=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v BSIZE="$TOOL_B_SIZE" 'BEGIN { printf "%.2f", (BSIZE>0)? INTERSECT/BSIZE*100 : 0.0 }' </dev/null)
 if [ -z ${TOOL_B_PRECISION} ]; then
 	TOOL_B_PRECISION="0.0"
 fi
@@ -54,7 +56,8 @@ if [ -z ${UNION_SIZE} ]; then
 	UNION_SIZE="0.0"
 fi
 
-JACCARD=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v UNION="$UNION_SIZE" 'BEGIN { printf "%.2f", INTERSECT/UNION*100 }' </dev/null)
+#JACCARD=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v UNION="$UNION_SIZE" 'BEGIN { printf "%.2f", INTERSECT/UNION*100 }' </dev/null)
+JACCARD=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v UNION="$UNION_SIZE" 'BEGIN { printf "%.2f",  (UNION>0)? INTERSECT/UNION*100 : 0.0 }' </dev/null)
 if [ -z ${JACCARD} ]; then
 	JACCARD="0.0"
 fi

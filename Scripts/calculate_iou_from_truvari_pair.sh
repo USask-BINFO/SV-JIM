@@ -40,7 +40,8 @@ if [ -z ${UNION_SIZE} ]; then
 	UNION_SIZE="0.0"
 fi
 
-JACCARD=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v UNION="$UNION_SIZE" 'BEGIN { printf "%.2f", INTERSECT/UNION*100 }' </dev/null)
+#JACCARD=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v UNION="$UNION_SIZE" 'BEGIN { printf "%.2f", INTERSECT/UNION*100 }' </dev/null)
+JACCARD=$(awk -v INTERSECT="$INTERSECTION_SIZE" -v UNION="$UNION_SIZE" 'BEGIN { printf "%.2f",  (UNION>0)? INTERSECT/UNION*100 : 0.0 }' </dev/null)
 if [ -z ${JACCARD} ]; then
         JACCARD="0.0"
 fi

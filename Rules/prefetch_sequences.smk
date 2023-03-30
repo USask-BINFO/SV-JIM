@@ -24,8 +24,9 @@ rule reformat_LR_sra_to_fastq:
         benchmark:
                 repeat(str(BENCH_DIR + "/Prefetch.benchmarking.tsv"), BENCH_REPEAT)
         params:
-                config["longReadsFolder"]
+                maxFileSize=config["prefetchMaxSize"],
+                readsOutDir=config["longReadsFolder"]
         shell:
-                "bash ./Scripts/fasterq_dump_read_files.sh {threads} {params} {input.readFilesList}"
+                "bash ./Scripts/fasterq_dump_read_files.sh {threads} {params.readsOutDir} {input.readFilesList} {params.maxFileSize}"
                 #"mkdir -p {params};\n"
                 #"fasterq-dump --threads {threads} -O {params} {input}"

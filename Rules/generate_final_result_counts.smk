@@ -30,7 +30,7 @@ rule produce_cuteSV_sv_counts:
                 "bash ./Scripts/summarize_SV_counts.sh A INS {output} {input.allVCFs} {input.ssmINS} {input.smlINS} {input.medINS} {input.lrgINS};\n"
                 "bash ./Scripts/summarize_SV_counts.sh A DUP {output} {input.allVCFs} {input.ssmDUP} {input.smlDUP} {input.medDUP} {input.lrgDUP};\n"
                 "bash ./Scripts/summarize_SV_counts.sh A INV {output} {input.allVCFs} {input.ssmINV} {input.smlINV} {input.medINV} {input.lrgINV};\n"
-                "bash ./Scripts/summarize_SV_counts.sh A BND {output} {input.allVCFs}"
+                "bash ./Scripts/summarize_SV_counts.sh A BND {output} {input.allVCFs};\n"
                 "bash ./Scripts/total_SV_counts.sh {output}"
 
 rule produce_sniffles_sv_counts:
@@ -65,7 +65,7 @@ rule produce_sniffles_sv_counts:
                 "bash ./Scripts/summarize_SV_counts.sh A INS {output} {input.allVCFs} {input.ssmINS} {input.smlINS} {input.medINS} {input.lrgINS};\n"
                 "bash ./Scripts/summarize_SV_counts.sh A DUP {output} {input.allVCFs} {input.ssmDUP} {input.smlDUP} {input.medDUP} {input.lrgDUP};\n"
                 "bash ./Scripts/summarize_SV_counts.sh A INV {output} {input.allVCFs} {input.ssmINV} {input.smlINV} {input.medINV} {input.lrgINV};\n"
-                "bash ./Scripts/summarize_SV_counts.sh A BND {output} {input.allVCFs}"
+                "bash ./Scripts/summarize_SV_counts.sh A BND {output} {input.allVCFs};\n"
                 "bash ./Scripts/total_SV_counts.sh {output}"
 
 rule produce_svim_sv_counts:
@@ -100,7 +100,7 @@ rule produce_svim_sv_counts:
                 "bash ./Scripts/summarize_SV_counts.sh A INS {output} {input.allVCFs} {input.ssmINS} {input.smlINS} {input.medINS} {input.lrgINS};\n"
                 "bash ./Scripts/summarize_SV_counts.sh A DUP {output} {input.allVCFs} {input.ssmDUP} {input.smlDUP} {input.medDUP} {input.lrgDUP};\n"
                 "bash ./Scripts/summarize_SV_counts.sh A INV {output} {input.allVCFs} {input.ssmINV} {input.smlINV} {input.medINV} {input.lrgINV};\n"
-                "bash ./Scripts/summarize_SV_counts.sh A BND {output} {input.allVCFs}"
+                "bash ./Scripts/summarize_SV_counts.sh A BND {output} {input.allVCFs};\n"
                 "bash ./Scripts/total_SV_counts.sh {output}"
 
 rule produce_svim_asm_sv_counts:
@@ -135,7 +135,7 @@ rule produce_svim_asm_sv_counts:
                 "bash ./Scripts/summarize_SV_counts.sh A INS {output} {input.allVCFs} {input.ssmINS} {input.smlINS} {input.medINS} {input.lrgINS};\n"
                 "bash ./Scripts/summarize_SV_counts.sh A DUP {output} {input.allVCFs} {input.ssmDUP} {input.smlDUP} {input.medDUP} {input.lrgDUP};\n"
                 "bash ./Scripts/summarize_SV_counts.sh A INV {output} {input.allVCFs} {input.ssmINV} {input.smlINV} {input.medINV} {input.lrgINV};\n"
-                "bash ./Scripts/summarize_SV_counts.sh A BND {output} {input.allVCFs}"
+                "bash ./Scripts/summarize_SV_counts.sh A BND {output} {input.allVCFs};\n"
                 "bash ./Scripts/total_SV_counts.sh {output}"
 
 rule produce_pav_sv_counts:

@@ -14,7 +14,7 @@ qrySeqsFile: "../Arabidopsis_Data/RefSeqsToInclude.txt" # File of regions to inc
 
 #Read Input Information
 readFilesList: "../Arabidopsis_Data/ReadAccessions.txt"
-firstLRAccession: "ERR3415826" # Accession number for first file in the readFilesList (to check if requiring download from SRA)
+lastLRAccession: "ERR3415826" # Accession number for first file in the readFilesList (to check if requiring download from SRA)
 
 
 #*****************************************************
@@ -69,7 +69,7 @@ maxClusterBias: 100
 diffRatio: 0.3
 
 #Truvari Bench Configurations (see truvari help menu for more details)
-overlapThreshold: 0.5 # (0.5 [or 50%] is a commonly use setting in several publications. Alternatively, svim-asm paper used 70%) 
+overlapThreshold: 0.7 # (0.5 [or 50%] is a commonly use setting in several publications. Alternatively, svim-asm paper used 70% which is also truvari's default) 
 maxRefDistance: 2000 # (Default setting chosen based on command detailed in human SV benchmark set's README, possible alternative is 1000 used in svim-asm paper)
 
 

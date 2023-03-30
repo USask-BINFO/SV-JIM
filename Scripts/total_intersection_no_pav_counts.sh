@@ -15,7 +15,7 @@ LRG_ARRAY=($(awk '{ print $11 }' $LRG_FILE))
 TOTAL_ARRAY=($(awk '{ print $11 }' $TOTAL_FILE))
 
 #Create file by adding headers
-echo "TYPE      SSM     SML     MED     LRG     TOTAL" > $OUTPUT_FILE
+echo "TYPE	SSM	SML	MED	LRG	TOTAL" > $OUTPUT_FILE
 
 #Add DEL counts to file
 SSM_DEL_COUNT="${SSM_ARRAY[1]}"
@@ -55,8 +55,8 @@ echo "BND	$SSM_BND_COUNT	0	0	0	$SSM_BND_COUNT" >> $OUTPUT_FILE
 
 #Add Totals counts to file
 SSM_TOTAL_COUNT="${SSM_ARRAY[6]}"
-SML_TOTAL_COUNT="${SML_ARRAY[6]}"
-MED_TOTAL_COUNT="${MED_ARRAY[6]}"
-LRG_TOTAL_COUNT="${LRG_ARRAY[6]}"
+SML_TOTAL_COUNT="${SML_ARRAY[5]}" # One less row in sml files since they dont contain breakpoints of size 1
+MED_TOTAL_COUNT="${MED_ARRAY[5]}" # One less row in med files since they dont contain breakpoints of size 1
+LRG_TOTAL_COUNT="${LRG_ARRAY[5]}" # One less row in lrg files since they dont contain breakpoints of size 1
 TOTAL_TOTAL_COUNT="${TOTAL_ARRAY[6]}"
 echo "ALL	$SSM_TOTAL_COUNT	$SML_TOTAL_COUNT	$MED_TOTAL_COUNT	$LRG_TOTAL_COUNT	$TOTAL_TOTAL_COUNT" >> $OUTPUT_FILE
