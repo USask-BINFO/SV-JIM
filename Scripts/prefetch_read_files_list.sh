@@ -11,7 +11,7 @@ readarray ACCESSIONS_ARRAY < $READ_FILES_LIST
 for ACCESSION in "${ACCESSIONS_ARRAY[@]}"
 do
 	STRIP_ACCESSION=$(echo $ACCESSION | tr -d "\n")
-	prefetch --max-size $FILE_MAX -o ${STRIP_ACCESSION}.sra ${STRIP_ACCESSION}
+	prefetch --max-size $FILE_MAX -o ${READS_DIR}/${STRIP_ACCESSION}.sra ${STRIP_ACCESSION}
 done
 
 echo "Prefetching complete!.."
