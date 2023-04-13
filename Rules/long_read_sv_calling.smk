@@ -57,6 +57,7 @@ rule sv_calling_w_SVIM:
         params:
                 minSize=config["minSizeForSVs"],
                 maxSize=config["maxSizeForSVs"],
+                minMAPQ=config["minMAPQForSVs"],
                 refGenome=REF_FILTERED,
                 refName=REF_SAMP_NAME,
                 svOutDir=str(SV_RESULTS_DIR + "/SVIM/")
@@ -64,5 +65,5 @@ rule sv_calling_w_SVIM:
                 config["svimCondaEnvYAML"]
         shell:
                 "mkdir -p {params.svOutDir};\n"
-                "svim alignment --min_sv_size {params.minSize} --max_sv_size {params.maxSize} {params.svOutDir} {input.inputFile} {params.refGenome};"
+                "svim alignment --min_sv_size {params.minSize} --max_sv_size {params.maxSize} --min_mapq {params.minMAPQ}  {params.svOutDir} {input.inputFile} {params.refGenome};"
                 "mv {params.svOutDir}/variants.vcf {params.svOutDir}/{params.refName}.svim.ALL.unfiltered.vcf"

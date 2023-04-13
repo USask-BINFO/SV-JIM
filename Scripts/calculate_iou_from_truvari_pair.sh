@@ -47,10 +47,12 @@ if [ -z ${JACCARD} ]; then
 fi
 
 #Check if script should write/overwrite a file with the new header info (should only be done for first pair of tools compared)
-if [ $WRITE_MODE = "W" ] || [ $WRITE_MODE = "w" ]
+if [ "$WRITE_MODE" = "W" ] || [ "$WRITE_MODE" = "w" ]
 then
-	echo "#ToolA	ToolB	Type	Jaccard%	OverlapA	OverlapB	Union#	SizeA	SizeB	UniqueA	Intersect	UniqueB" > $OUTPUT_FILE
+       #echo "#ToolA    ToolB   Type    Jaccard%        PrecA        PrecB        Union# SizeA   SizeB   UniqueA Intersect       UniqueB" > $OUTPUT_FILE
+        echo -e "ToolA\tToolB\tType\tSizeA\tSizeB\tUniqueA\tUniqueB\tIntersect\tUnion\tOverlapA\tOverlapB\tJaccard" > "$OUTPUT_FILE"
 fi
 
 #Append the entry for the pair of tools designated by arguments
-echo "$TOOL_A	$TOOL_B	$SV_TYPE	${JACCARD}%	${TOOL_A_PRECISION}%	${TOOL_B_PRECISION}%	$UNION_SIZE	$TOOL_A_SIZE	$TOOL_B_SIZE	$TOOL_A_UNIQUE	$INTERSECTION_SIZE	$TOOL_B_UNIQUE" >> "$OUTPUT_FILE"
+#echo "$TOOL_A   $TOOL_B $SV_TYPE        ${JACCARD}%        ${TOOL_A_PRECISION}%       ${TOOL_B_PRECISION}%       $UNION_SIZE     $TOOL_A_SIZE    $TOOL_B_SIZE    $TOOL_A_UNIQUE  $INTERSECTION_SIZE      $TOOL_B_UNIQUE" >> "$OUTPUT_FILE"
+echo -e "$TOOL_A\t$TOOL_B\t$SV_TYPE\t$TOOL_A_SIZE\t$TOOL_B_SIZE\t$TOOL_A_UNIQUE\t$TOOL_B_UNIQUE\t$INTERSECTION_SIZE\t$UNION_SIZE\t${TOOL_A_PRECISION}%\t${TOOL_B_PRECISION}%\t${JACCARD}%" >> "$OUTPUT_FILE"
