@@ -12,7 +12,12 @@ for ACCESSION in "${ACCESSIONS_ARRAY[@]}"
 do
 	STRIP_ACCESSION=$(echo $ACCESSION | tr -d "\n")
 	#fasterq-dump --threads $THREADS -O $READS_DIR ${READS_DIR}/${STRIP_ACCESSION}.sra
-	fastq-dump -O $READS_DIR ${READS_DIR}/${STRIP_ACCESSION}.sra
+        if [[ ! -f "${READS_DIR}/${STRIP_ACCESSION}.fastq" ]]; then
+		fastq-dump -O $READS_DIR ${READS_DIR}/${STRIP_ACCESSION}.sra
+        else
+                echo "${READS_DIR}/${STRIP_ACCESSION}.fastq already Exists! Skipping fastq-dump..."
+	fi
+	#fastq-dump -O $READS_DIR ${READS_DIR}/${STRIP_ACCESSION}.sra
 done
 
 echo "Reformatting complete!.."

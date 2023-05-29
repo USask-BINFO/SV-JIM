@@ -6,8 +6,10 @@ rule sort_LR_bam_file:
         threads: config["threads"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Alignment.benchmarking.tsv"), BENCH_REPEAT)
+        params:
+                config["memSettingForAssemblySort"]
         shell:
-                "samtools sort -@ {threads} -o {output} {input}"
+                "samtools sort -m{params} -@ {threads} -o {output} {input}"
 
 rule index_sorted_LR_bam_file:
         input:
