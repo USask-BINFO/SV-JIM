@@ -4,7 +4,7 @@ rule align_LR_w_minimap2:
                 reformatConfirm=str(LR_PREFIX + ".fastq")
         output:
                 str(MNMP2_READS_PREFIX + ".sam")
-        threads: 3
+        threads: config["threads"]
         benchmark: 
                 repeat(str(BENCH_DIR + "/Alignment.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -24,7 +24,7 @@ rule align_both_assemblies_w_minimap2:
                 QRY_FILTERED
         output:
                 str(MNMP2_GENOMES_PREFIX + ".sam")
-        threads: 3
+        threads: config["threads"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Alignment.benchmarking.tsv"), BENCH_REPEAT)
         params:
