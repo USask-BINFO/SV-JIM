@@ -22,4 +22,4 @@ dependencies:
   - matplotlib-venn
   - delly
   - truvari
-prefix: /student/gwy260/.conda/envs/AllEnv
+

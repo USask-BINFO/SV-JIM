@@ -14,7 +14,7 @@ qrySeqsFile: "../Arabidopsis_Data/RefSeqsToInclude.txt" # File of regions to inc
 
 #Read Input Information
 readFilesList: "../Arabidopsis_Data/ReadAccessions.txt"
-lastLRAccession: "ERR3415826" # Accession number for first file in the readFilesList (to check if requiring download from SRA)
+lastLRAccession: "ERR3415826" # Accession number for the last file in the contents of the file named in readFilesList (to check if requiring download from SRA)
 
 
 #*****************************************************

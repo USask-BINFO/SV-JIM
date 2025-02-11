@@ -58,7 +58,7 @@ Additionally, the pipeline must be launched from an environment with Snakemake i
 As a Snakemake workflow that employs external tools, the installation only involves cloning this repository:
 
 ```
-git clone https://github.com/CMalcolmTodd/SV-JIM
+git clone https://github.com/USask-BINFO/SV-JIM
 ```
 
 After cloning the SV-JIM repository, the conda dependencies will be loaded by Snakemake automatically during execution based on the included conda env configuration file.
