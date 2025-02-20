@@ -9,10 +9,12 @@ LR_PREFIX=str(LR_DIR + "/" + LR_ACCESSION)
 GENOME_DIR=config["genomesFolder"]
 REF_SAMP_NAME=config["refSampleName"]
 REF_PREFIX=str(GENOME_DIR + "/" + REF_SAMP_NAME)
-REF_FILTERED=str(REF_PREFIX + ".filtered.fasta")
+REF_FILE_EXTENSION=config["refFileExtension"]
+REF_FILTERED=str(REF_PREFIX + ".filtered." + REF_FILE_EXTENSION)
 QRY_SAMP_NAME=config["qrySampleName"]
 QRY_PREFIX=str(GENOME_DIR + "/" + QRY_SAMP_NAME)
-QRY_FILTERED=str(QRY_PREFIX + ".filtered.fasta")
+QRY_FILE_EXTENSION=config["qryFileExtension"]
+QRY_FILTERED=str(QRY_PREFIX + ".filtered." + QRY_FILE_EXTENSION)
 
 #Identify Alignment Output Directories and Prefixes for Rules
 ALIGN_DIR=config["alignResultsFolder"]
