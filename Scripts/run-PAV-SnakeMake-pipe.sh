@@ -36,7 +36,7 @@ then
 fi
 
 #Run PAV
-./runlocal $CORES
+./runlocal #$CORES
 
 #Return to SV-JIM Working directory
 echo "Pipeline complete! Returning to $WORKING_DIR!.."

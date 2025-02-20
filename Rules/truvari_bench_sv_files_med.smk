@@ -78,7 +78,7 @@ rule truvari_bench_cuteSV_w_sniffles_Med:
                 "bash ./Scripts/compare_sv_files_w_truvari_ignore_type_pairs.sh {input.cuteSVDUP} {input.snifflesDUP} {params.refGenome} {params.minSize} {params.maxSize} {params.minOverlap} {params.maxRefDist} {params.truvariDir}/{params.toolsPrefix}/DUP/Med;\n"
                 "bash ./Scripts/compare_sv_files_w_truvari_pairs.sh {input.cuteSVINV} {input.snifflesINV} {params.refGenome} {params.minSize} {params.maxSize} {params.minOverlap} {params.maxRefDist} {params.truvariDir}/{params.toolsPrefix}/INV/Med;\n"
 
-rule truvari_bench_cuteSV_w_svi_Med:
+rule truvari_bench_cuteSV_w_svim_Med:
         input:
                 cuteSVDEL=str(CUTESV_PREFIX + ".DEL.Med.vcf"),
                 cuteSVINS=str(CUTESV_PREFIX + ".INS.Med.vcf"),
