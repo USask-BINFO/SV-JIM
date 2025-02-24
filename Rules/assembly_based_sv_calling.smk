@@ -25,22 +25,23 @@ rule sv_calling_w_pav:
                 refGenome=REF_FILTERED,
                 qryGenome=QRY_FILTERED
         output:
-                str(SV_RESULTS_DIR + "/PAV/pav_"+ QRY_SAMP_NAME + ".vcf.gz")
+                str(SV_RESULTS_DIR + "/PAV/"+ QRY_SAMP_NAME + ".vcf.gz")
+                #str(SV_RESULTS_DIR + "/PAV/pav_"+ QRY_SAMP_NAME + ".vcf.gz")
         threads: config["threads"]
         benchmark:
                 repeat(str(BENCH_DIR + "/SVCalling.Assembly.benchmarking.tsv"), BENCH_REPEAT)
         params:
                 svOutDir=str(SV_RESULTS_DIR + "/PAV/"),
                 qryID=QRY_SAMP_NAME
-        conda:
-                config["pavCondaEnvYAML"]
+        #conda:
+        #        config["pavCondaEnvYAML"]
         shell:
                 "mkdir -p {params.svOutDir};\n"
-                "bash ./Scripts/run-PAV-SnakeMake-pipe.sh {threads} {params.svOutDir} {input} {params.qryID}"
+                "bash -x ./Scripts/run-PAV-SnakeMake-pipe.sh {threads} {params.svOutDir} {input} {params.qryID} {output}"
 
 rule unzip_and_rename_pav_results:
         input:
-               str(SV_RESULTS_DIR + "/PAV/pav_"+ QRY_SAMP_NAME + ".vcf.gz")
+               str(SV_RESULTS_DIR + "/PAV/"+ QRY_SAMP_NAME + ".vcf.gz")
         output:
                str(PAV_PREFIX + ".ALL.unfiltered.vcf")
         threads: config["threads"]

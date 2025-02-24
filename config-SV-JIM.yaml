@@ -43,7 +43,7 @@ sniffles2CondaEnvYAML: "All-Env.yaml" # Path to YAML file for conda env that Sni
 svimCondaEnvYAML: "All-Env.yaml" # Path to YAML file for conda env that SVIM is installed in"
 svimASMCondaEnvYAML: "All-Env.yaml" # Path to YAML file for conda env that SVIM-ASM is installed in"
 pavCondaEnvYAML: "All-Env.yaml" # Path to YAML file for conda environment that PAV dependencies are installed in"
-
+truvariCondaEnvYAML: "All-Env.yaml" # Path to YAML file for conda environment that truvari is installed in"
 
 #*****************************************************
 # Pipeline Software Configurations

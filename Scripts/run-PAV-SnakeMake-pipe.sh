@@ -29,14 +29,23 @@ echo "$QRY_ID	$QRY_ABS_PATH" >> $ANALYSIS_DIR/assemblies.tsv
 echo "Changing directory to $ANALYSIS_DIR and starting PAV's SnakeMake pipeline!.."
 cd $ANALYSIS_DIR
 
-#Check if runlocal in ANALYSIS_DIR is successfully linked to run local in $PAV and link if not
-if [ ! -e ./runlocal ]
+
+if [ ! -e ./Snakefile ]
 then
-	ln -s $PAV/runlocal ./
+        ln -s $PAV/Snakefile ./
 fi
 
+#Check if runlocal in ANALYSIS_DIR is successfully linked to run local in $PAV and link if not
+#if [ ! -e ./runlocal ]
+#then
+#	ln -s $PAV/files/run_scripts/runlocal.sh ./
+#fi
+
+
+
 #Run PAV
-./runlocal #$CORES
+#./runlocal #$CORES
+snakemake -s ${PAV}/Snakefile --cores $CORES
 
 #Return to SV-JIM Working directory
 echo "Pipeline complete! Returning to $WORKING_DIR!.."

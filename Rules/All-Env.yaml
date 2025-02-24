@@ -15,7 +15,7 @@ dependencies:
   - numpy
   - snakemake
   - pysam
-  - sniffles=2.0
+  - sniffles=2.6.0
   - pandas=1.5.3
   - bowtie2
   - matplotlib

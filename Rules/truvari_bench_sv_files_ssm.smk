@@ -27,6 +27,8 @@ rule truvari_bench_sniffles_w_svim_SSm:
                 sniffSVIMINVTPB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM/INV/SSm/tp-base.vcf"),
                 sniffSVIMBNDTPB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM/BND/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -76,6 +78,8 @@ rule truvari_bench_cuteSV_w_sniffles_SSm:
                 cuteSniffINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/INV/SSm/tp-base.vcf"),
                 cuteSniffBNDTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/BND/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -121,6 +125,8 @@ rule truvari_bench_cuteSV_w_svim_SSm:
                 tpINV=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/INV/SSm/tp-call.vcf"),
                 tpBND=str(config["truvariResultsFolder"] + "/CuteSV-SVIM/BND/tp-call.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -168,6 +174,8 @@ rule truvari_bench_cuteSV_w_svim_asm_SSm:
                 tpINVB=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/INV/SSm/tp-base.vcf"),
                 tpBNDB=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/BND/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -215,6 +223,8 @@ rule truvari_bench_sniffles_w_svim_asm_SSm:
                 tpINVB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/INV/SSm/tp-base.vcf"),
                 tpBNDB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/BND/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -262,6 +272,8 @@ rule truvari_bench_svim_w_svim_asm_SSm:
                 svimSVIMASMINVTPB=str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/INV/SSm/tp-base.vcf"),
                 svimSVIMASMBNDTPB=str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/BND/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -299,6 +311,8 @@ rule truvari_bench_cuteSV_w_pav_SSm:
                 tpINSB=str(config["truvariResultsFolder"] + "/CuteSV-PAV/INS/SSm/tp-base.vcf"),
                 tpINVB=str(config["truvariResultsFolder"] + "/CuteSV-PAV/INV/SSm/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -334,6 +348,8 @@ rule truvari_bench_pav_w_sniffles_SSm:
                 tpINSB=str(config["truvariResultsFolder"] + "/PAV-Sniffles/INS/SSm/tp-base.vcf"),
                 tpINVB=str(config["truvariResultsFolder"] + "/PAV-Sniffles/INV/SSm/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -369,6 +385,8 @@ rule truvari_bench_pav_w_svim_SSm:
                 tpINSB=str(config["truvariResultsFolder"] + "/PAV-SVIM/INS/SSm/tp-base.vcf"),
                 tpINVB=str(config["truvariResultsFolder"] + "/PAV-SVIM/INV/SSm/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -404,6 +422,8 @@ rule truvari_bench_pav_w_svim_asm_SSm:
                 tpINSB=str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INS/SSm/tp-base.vcf"),
                 tpINVB=str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INV/SSm/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -474,6 +494,8 @@ rule truvari_bench_cuteSV_sniffles_svim_SSm:
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INV/SSm/FromTPBase/tp-base.vcf"),
                 tpBaseBNDTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/BND/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -527,6 +549,8 @@ rule truvari_bench_cuteSV_pav_svim_SSm:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INS/SSm/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INV/SSm/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -576,6 +600,8 @@ rule truvari_bench_pav_sniffles_svim_SSm:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INS/SSm/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INV/SSm/FromTPBase/tp-base.vcf"),
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -625,6 +651,8 @@ rule truvari_bench_pav_svim_svim_asm_SSm:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INS/SSm/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INV/SSm/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -674,6 +702,8 @@ rule truvari_bench_cuteSV_pav_sniffles_SSm:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INS/SSm/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INV/SSm/FromTPBase/tp-base.vcf"),
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -723,6 +753,8 @@ rule truvari_bench_cuteSV_pav_svim_asm_SSm:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INS/SSm/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INV/SSm/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -772,6 +804,8 @@ rule truvari_bench_pav_sniffles_svim_asm_SSm:
                 tpBaseINSTPB=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INS/SSm/FromTPBase/tp-base.vcf"),
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INV/SSm/FromTPBase/tp-base.vcf"),
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -839,6 +873,8 @@ rule truvari_bench_cuteSV_svim_svim_asm_SSm:
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/INV/SSm/FromTPBase/tp-base.vcf"),
                 tpBaseBNDTPB=str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/BND/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -910,6 +946,8 @@ rule truvari_bench_sniffles_svim_svim_asm_SSm:
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/INV/SSm/FromTPBase/tp-base.vcf"),
                 tpBaseBNDTPB=str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/BND/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -981,6 +1019,8 @@ rule truvari_bench_cuteSV_sniffles_svim_asm_SSm:
                 tpBaseINVTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/INV/SSm/FromTPBase/tp-base.vcf"),
                 tpBaseBNDTPB=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/BND/FromTPBase/tp-base.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -1072,6 +1112,8 @@ rule truvari_bench_cuteSV_sniffles_svim_svim_asm_SSm:
                 baseTPCallINVTPC=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Base/FromTPCall/tp-call.vcf"),
                 baseTPCallBNDTPC=str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/BND/Base/FromTPCall/tp-call.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -1143,6 +1185,8 @@ rule truvari_bench_cuteSV_pav_sniffles_svim_asm_SSm:
                 baseTPCallINSTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INS/SSm/Base/FromTPCall/tp-call.vcf"),
                 baseTPCallINVTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INV/SSm/Base/FromTPCall/tp-call.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -1207,6 +1251,8 @@ rule truvari_bench_cuteSV_pav_sniffles_svim_SSm:
                 baseTPCallINSTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INS/SSm/Base/FromTPCall/tp-call.vcf"),
                 baseTPCallINVTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INV/SSm/Base/FromTPCall/tp-call.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -1271,6 +1317,8 @@ rule truvari_bench_cuteSV_pav_svim_svim_asm_SSm:
                 baseTPCallINSTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INS/SSm/Base/FromTPCall/tp-call.vcf"),
                 baseTPCallINVTPC=str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INV/SSm/Base/FromTPCall/tp-call.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -1335,6 +1383,8 @@ rule truvari_bench_pav_sniffles_svim_svim_asm_SSm:
                 baseTPCallINSTPC=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Base/FromTPCall/tp-call.vcf"),
                 baseTPCallINVTPC=str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Base/FromTPCall/tp-call.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
@@ -1416,6 +1466,8 @@ rule truvari_bench_cuteSV_pav_sniffles_svim_svim_asm_SSm:
                 #tpINS=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INS/SSm/tp-call.vcf"),
                 #tpINV=str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INV/SSm/tp-call.vcf")
         threads: config["threads"]
+        conda:
+                config["truvariCondaEnvYAML"]
         benchmark:
                 repeat(str(BENCH_DIR + "/Truvari.benchmarking.tsv"), BENCH_REPEAT)
         params:
