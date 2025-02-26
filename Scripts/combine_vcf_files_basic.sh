@@ -9,10 +9,10 @@ FP_FILES=""
 FN_FILES=""
 for DIR in $*
 do
-	bcftools sort -o $DIR/tp-call.sorted.vcf $DIR/tp-call.vcf
-	bgzip -c $DIR/tp-call.sorted.vcf > $DIR/tp-call.sorted.vcf.gz
-	tabix $DIR/tp-call.sorted.vcf.gz
-	TP_CALL_FILES="$DIR/tp-call.sorted.vcf.gz $TP_CALL_FILES"
+	bcftools sort -o $DIR/tp-comp.sorted.vcf $DIR/tp-comp.vcf
+	bgzip -c $DIR/tp-comp.sorted.vcf > $DIR/tp-comp.sorted.vcf.gz
+	tabix $DIR/tp-comp.sorted.vcf.gz
+	TP_CALL_FILES="$DIR/tp-comp.sorted.vcf.gz $TP_CALL_FILES"
 
         bcftools sort -o $DIR/tp-base.sorted.vcf $DIR/tp-base.vcf
         bgzip -c $DIR/tp-base.sorted.vcf > $DIR/tp-base.sorted.vcf.gz
@@ -31,8 +31,8 @@ do
 done
 
 echo "Combining VCF files for each type to $OUTPUT_FILE!.."
-bcftools concat --allow-overlaps -o $TRUVARI_DIR/tp-call.vcf -O v `echo $TP_CALL_FILES`
-bcftools sort -o $TRUVARI_DIR/tp-call.sorted.vcf $TRUVARI_DIR/tp-call.vcf
+bcftools concat --allow-overlaps -o $TRUVARI_DIR/tp-comp.vcf -O v `echo $TP_CALL_FILES`
+bcftools sort -o $TRUVARI_DIR/tp-comp.sorted.vcf $TRUVARI_DIR/tp-comp.vcf
 bcftools concat --allow-overlaps -o $TRUVARI_DIR/tp-base.vcf -O v `echo $TP_BASE_FILES`
 bcftools sort -o $TRUVARI_DIR/tp-base.sorted.vcf $TRUVARI_DIR/tp-base.vcf
 bcftools concat --allow-overlaps -o $TRUVARI_DIR/fp.vcf -O v `echo $FP_FILES`

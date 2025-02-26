@@ -1,10 +1,10 @@
 rule combine_all_callers_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INS/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INV/SSm/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INS/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/INV/SSm/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/fn.sorted.vcf")
@@ -21,11 +21,11 @@ rule combine_all_callers_types_to_all_directory_SSm:
 
 rule combine_cuteSV_pav_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV/DEL/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV/INS/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV/INV/SSm/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV/DEL/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV/INS/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV/INV/SSm/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV/ALL/SSm/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV/ALL/SSm/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV/ALL/SSm/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV/ALL/SSm/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV/ALL/SSm/fn.sorted.vcf")
@@ -42,11 +42,11 @@ rule combine_cuteSV_pav_types_to_all_directory_SSm:
 
 rule combine_pav_svim_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/PAV-SVIM/DEL/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-SVIM/INS/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-SVIM/INV/SSm/summary.txt")
+                str(config["truvariResultsFolder"] + "/PAV-SVIM/DEL/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM/INS/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM/INV/SSm/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-SVIM/ALL/SSm/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM/ALL/SSm/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM/ALL/SSm/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM/ALL/SSm/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM/ALL/SSm/fn.sorted.vcf")
@@ -63,11 +63,11 @@ rule combine_pav_svim_types_to_all_directory_SSm:
 
 rule combine_pav_svim_asm_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/DEL/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INS/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INV/SSm/summary.txt")
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/DEL/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INS/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/INV/SSm/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/ALL/SSm/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/ALL/SSm/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/ALL/SSm/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/ALL/SSm/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-ASM/ALL/SSm/fn.sorted.vcf")
@@ -84,11 +84,11 @@ rule combine_pav_svim_asm_types_to_all_directory_SSm:
 
 rule combine_pav_sniffles_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles/DEL/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles/INS/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles/INV/SSm/summary.txt")
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles/DEL/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles/INS/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles/INV/SSm/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles/ALL/SSm/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles/ALL/SSm/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles/ALL/SSm/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles/ALL/SSm/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles/ALL/SSm/fn.sorted.vcf")
@@ -105,31 +105,31 @@ rule combine_pav_sniffles_types_to_all_directory_SSm:
 
 rule combine_cuteSV_sniffles_svim_svim_asm_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DUP/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/BND/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DUP/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/BND/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DUP/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/BND/Base/FromTPCall/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DUP/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/BND/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DUP/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/BND/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/DUP/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/BND/Base/FromTPCall/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/fn.sorted.vcf")
@@ -162,22 +162,22 @@ rule combine_cuteSV_sniffles_svim_svim_asm_types_to_all_directory_SSm:
 
 rule combine_all_read_callers_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DEL/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INS/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DUP/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INV/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/BND/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DEL/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INS/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DUP/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INV/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/BND/FromTPBase/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DEL/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INS/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DUP/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INV/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/BND/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DEL/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INS/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/DUP/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/INV/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/BND/FromTPBase/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/SSm/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/SSm/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/SSm/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/SSm/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/SSm/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/SSm/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/SSm/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/SSm/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/SSm/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM/ALL/SSm/FromTPBase/fn.sorted.vcf")
@@ -203,13 +203,13 @@ rule combine_all_read_callers_types_to_all_directory_SSm:
 
 rule combine_cuteSV_svim_asm_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/DEL/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/INS/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/DUP/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/INV/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/BND/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/DEL/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/INS/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/DUP/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/INV/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/BND/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/ALL/SSm/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/ALL/SSm/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/ALL/SSm/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/ALL/SSm/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-ASM/ALL/SSm/fn.sorted.vcf")
@@ -228,13 +228,13 @@ rule combine_cuteSV_svim_asm_types_to_all_directory_SSm:
 
 rule combine_svim_svim_asm_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/DEL/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/INS/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/DUP/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/INV/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/BND/summary.txt")
+                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/DEL/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/INS/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/DUP/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/INV/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/BND/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/ALL/SSm/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/ALL/SSm/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/ALL/SSm/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/ALL/SSm/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/SVIM-SVIM-ASM/ALL/SSm/fn.sorted.vcf")
@@ -253,13 +253,13 @@ rule combine_svim_svim_asm_types_to_all_directory_SSm:
 
 rule combine_sniffles_svim_asm_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/DEL/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/INS/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/DUP/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/INV/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/BND/summary.txt")
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/DEL/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/INS/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/DUP/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/INV/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/BND/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/ALL/SSm/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/ALL/SSm/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/ALL/SSm/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/ALL/SSm/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-ASM/ALL/SSm/fn.sorted.vcf")
@@ -278,13 +278,13 @@ rule combine_sniffles_svim_asm_types_to_all_directory_SSm:
 
 rule combine_cuteSV_svim_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/DEL/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/INS/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/DUP/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/INV/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/BND/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/DEL/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/INS/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/DUP/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/INV/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/BND/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/ALL/SSm/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM/ALL/SSm/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM/ALL/SSm/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM/ALL/SSm/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM/ALL/SSm/fn.sorted.vcf")
@@ -303,13 +303,13 @@ rule combine_cuteSV_svim_types_to_all_directory_SSm:
 
 rule combine_cuteSV_sniffles_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/DEL/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/INS/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/DUP/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/INV/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/BND/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/DEL/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/INS/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/DUP/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/INV/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/BND/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/ALL/SSm/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/ALL/SSm/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/ALL/SSm/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/ALL/SSm/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles/ALL/SSm/fn.sorted.vcf")
@@ -328,13 +328,13 @@ rule combine_cuteSV_sniffles_types_to_all_directory_SSm:
 
 rule combine_sniffles_svim_types_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/DEL/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/INS/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/DUP/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/INV/SSm/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/BND/summary.txt")
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/DEL/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/INS/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/DUP/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/INV/SSm/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/BND/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/ALL/SSm/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM/ALL/SSm/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM/ALL/SSm/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM/ALL/SSm/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM/ALL/SSm/fn.sorted.vcf")
@@ -353,18 +353,18 @@ rule combine_sniffles_svim_types_to_all_directory_SSm:
 
 rule combine_cuteSV_pav_svim_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/DEL/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INS/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INV/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/DEL/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INS/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INV/SSm/FromTPBase/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/DEL/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INS/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INV/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/DEL/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INS/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/INV/SSm/FromTPBase/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/SSm/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/SSm/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/SSm/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/SSm/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/SSm/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/SSm/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/SSm/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/SSm/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/SSm/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM/ALL/SSm/FromTPBase/fn.sorted.vcf")
@@ -386,18 +386,18 @@ rule combine_cuteSV_pav_svim_to_all_directory_SSm:
 
 rule combine_pav_sniffles_svim_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/DEL/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INS/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INV/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/DEL/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INS/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INV/SSm/FromTPBase/summary.txt")
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/DEL/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INS/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INV/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/DEL/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INS/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/INV/SSm/FromTPBase/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/SSm/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/SSm/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/SSm/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/SSm/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/SSm/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/SSm/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/SSm/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/SSm/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/SSm/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM/ALL/SSm/FromTPBase/fn.sorted.vcf")
@@ -419,18 +419,18 @@ rule combine_pav_sniffles_svim_to_all_directory_SSm:
 
 rule combine_pav_svim_svim_asm_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/DEL/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INS/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INV/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/DEL/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INS/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INV/SSm/FromTPBase/summary.txt")
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/DEL/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INS/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INV/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/DEL/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INS/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/INV/SSm/FromTPBase/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/fn.sorted.vcf")
@@ -452,18 +452,18 @@ rule combine_pav_svim_svim_asm_to_all_directory_SSm:
 
 rule combine_cuteSV_pav_sniffles_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/DEL/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INS/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INV/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/DEL/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INS/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INV/SSm/FromTPBase/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/DEL/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INS/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INV/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/DEL/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INS/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/INV/SSm/FromTPBase/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/SSm/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/SSm/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/SSm/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/SSm/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/SSm/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/SSm/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/SSm/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/SSm/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/SSm/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles/ALL/SSm/FromTPBase/fn.sorted.vcf")
@@ -485,18 +485,18 @@ rule combine_cuteSV_pav_sniffles_to_all_directory_SSm:
 
 rule combine_cuteSV_pav_svim_asm_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/DEL/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INS/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INV/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/DEL/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INS/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INV/SSm/FromTPBase/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/DEL/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INS/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INV/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/DEL/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INS/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/INV/SSm/FromTPBase/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/SSm/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/SSm/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/SSm/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/SSm/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/SSm/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/SSm/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/SSm/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/SSm/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/SSm/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-ASM/ALL/SSm/FromTPBase/fn.sorted.vcf")
@@ -518,18 +518,18 @@ rule combine_cuteSV_pav_svim_asm_to_all_directory_SSm:
 
 rule combine_pav_sniffles_svim_asm_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/DEL/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INS/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INV/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/DEL/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INS/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INV/SSm/FromTPBase/summary.txt")
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/DEL/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INS/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INV/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/DEL/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INS/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/INV/SSm/FromTPBase/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-ASM/ALL/SSm/FromTPBase/fn.sorted.vcf")
@@ -551,22 +551,22 @@ rule combine_pav_sniffles_svim_asm_to_all_directory_SSm:
 
 rule combine_cuteSV_svim_svim_asm_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/DEL/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/INS/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/DUP/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/INV/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/BND/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/DEL/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/INS/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/DUP/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/INV/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/BND/FromTPBase/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/DEL/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/INS/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/DUP/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/INV/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/BND/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/DEL/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/INS/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/DUP/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/INV/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/BND/FromTPBase/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/fn.sorted.vcf")
@@ -592,22 +592,22 @@ rule combine_cuteSV_svim_svim_asm_to_all_directory_SSm:
 
 rule combine_sniffles_svim_svim_asm_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/DEL/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/INS/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/DUP/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/INV/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/BND/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/DEL/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/INS/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/DUP/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/INV/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/BND/FromTPBase/summary.txt")
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/DEL/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/INS/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/DUP/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/INV/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/BND/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/DEL/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/INS/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/DUP/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/INV/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/BND/FromTPBase/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/SSm/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM-SVIM-ASM/ALL/SSm/FromTPBase/fn.sorted.vcf")
@@ -633,22 +633,22 @@ rule combine_sniffles_svim_svim_asm_to_all_directory_SSm:
 
 rule combine_cuteSV_sniffles_svim_asm_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DEL/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/INS/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DUP/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/INV/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DUP/SSm/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DEL/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/INS/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DUP/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/INV/SSm/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DUP/SSm/FromTPBase/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DEL/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/INS/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DUP/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/INV/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DUP/SSm/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DEL/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/INS/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DUP/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/INV/SSm/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/DUP/SSm/FromTPBase/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/SSm/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/SSm/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/SSm/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/SSm/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/SSm/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/SSm/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/SSm/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/SSm/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/SSm/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-Sniffles-SVIM-ASM/ALL/SSm/FromTPBase/fn.sorted.vcf")
@@ -674,25 +674,25 @@ rule combine_cuteSV_sniffles_svim_asm_to_all_directory_SSm:
 
 rule combine_cuteSV_pav_sniffles_svim_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/DEL/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INS/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INV/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/DEL/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INS/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INV/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/DEL/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INS/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INV/SSm/Base/FromTPCall/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/DEL/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INS/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INV/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/DEL/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INS/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INV/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/DEL/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INS/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/INV/SSm/Base/FromTPCall/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Call/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Call/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Call/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Call/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Call/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Call/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Call/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Call/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Call/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Call/FromTPBase/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Base/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Base/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Base/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Base/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM/ALL/SSm/Base/FromTPCall/fn.sorted.vcf")
@@ -719,25 +719,25 @@ rule combine_cuteSV_pav_sniffles_svim_to_all_directory_SSm:
 
 rule combine_cuteSV_pav_svim_svim_asm_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INS/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INV/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INS/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INV/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/DEL/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INS/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INV/SSm/Base/FromTPCall/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INS/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INV/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INS/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INV/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/DEL/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INS/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/INV/SSm/Base/FromTPCall/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/fn.sorted.vcf")
@@ -764,25 +764,25 @@ rule combine_cuteSV_pav_svim_svim_asm_to_all_directory_SSm:
 
 rule combine_pav_sniffles_svim_svim_asm_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Base/FromTPCall/summary.txt"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/DEL/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INS/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/INV/SSm/Base/FromTPCall/summary.json"),
         output:
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPCall/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Call/FromTPBase/fn.sorted.vcf"),
-                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/PAV-Sniffles-SVIM-SVIM-ASM/ALL/SSm/Base/FromTPCall/fn.sorted.vcf")
@@ -809,27 +809,27 @@ rule combine_pav_sniffles_svim_svim_asm_to_all_directory_SSm:
 
 rule combine_cuteSV_pav_sniffles_svim_asm_to_all_directory_SSm:
         input:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/DEL/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INS/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INV/SSm/Call/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/DEL/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INS/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INV/SSm/Call/FromTPBase/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/DEL/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INS/SSm/Base/FromTPCall/summary.txt"),
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INV/SSm/Base/FromTPCall/summary.txt")
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/DEL/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INS/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INV/SSm/Call/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/DEL/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INS/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INV/SSm/Call/FromTPBase/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/DEL/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INS/SSm/Base/FromTPCall/summary.json"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/INV/SSm/Base/FromTPCall/summary.json")
         output:
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Call/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Call/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Call/FromTPCall/fn.sorted.vcf"),
 
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Call/FromTPBase/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Call/FromTPBase/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Call/FromTPBase/fn.sorted.vcf"),
 
-                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-call.sorted.vcf"),
+                str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-comp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Base/FromTPCall/tp-base.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Base/FromTPCall/fp.sorted.vcf"),
                 str(config["truvariResultsFolder"] + "/CuteSV-PAV-Sniffles-SVIM-ASM/ALL/SSm/Base/FromTPCall/fn.sorted.vcf")

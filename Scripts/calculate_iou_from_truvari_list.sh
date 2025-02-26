@@ -24,7 +24,7 @@ do
 		echo "Error reading $TRUVARI_SUMMARY! Terminating..."
 	fi
 
-	#Get size of each set contained in files (extract the numeric value in truvari summary.txt from a specific line containing an identifier)
+	#Get size of each set contained in files (extract the numeric value in truvari summary.json from a specific line containing an identifier)
 	#Shared/Common values
 	INTERSECTION_SIZE=$(( INTERSECTION_SIZE+$(cat $TRUVARI_SUMMARY | grep "TP-base.:" | tr -cd [0-9.]) ))
 

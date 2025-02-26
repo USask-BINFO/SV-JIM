@@ -14,9 +14,9 @@ bcftools sort -o ${SV_FILE_A}.sorted $SV_FILE_A
 bgzip -c ${SV_FILE_A}.sorted > ${SV_FILE_A}.gz
 tabix ${SV_FILE_A}.gz
 
-bcftools sort -o ${TRUVARI_DIR}/tp-call.sorted.vcf $TRUVARI_DIR/tp-call.vcf
-bgzip -c ${TRUVARI_DIR}/tp-call.sorted.vcf > ${TRUVARI_DIR}/tp-call.sorted.vcf.gz
-tabix ${TRUVARI_DIR}/tp-call.sorted.vcf.gz
+bcftools sort -o ${TRUVARI_DIR}/tp-comp.sorted.vcf $TRUVARI_DIR/tp-comp.vcf
+bgzip -c ${TRUVARI_DIR}/tp-comp.sorted.vcf > ${TRUVARI_DIR}/tp-comp.sorted.vcf.gz
+tabix ${TRUVARI_DIR}/tp-comp.sorted.vcf.gz
 
 bcftools sort -o ${TRUVARI_DIR}/tp-base.sorted.vcf $TRUVARI_DIR/tp-base.vcf
 bgzip -c ${TRUVARI_DIR}/tp-base.sorted.vcf > ${TRUVARI_DIR}/tp-base.sorted.vcf.gz
@@ -39,5 +39,10 @@ then
 fi
 
 #Execute Truvari Bench to compare the VCF files provided in the script's arguments
-truvari bench --typeignore -o $OUTPUT_DIR/FromTPCall -f $REF_GENOME -b ${SV_FILE_A}.gz -c ${TRUVARI_DIR}/tp-call.sorted.vcf.gz -s $MIN_SIZE --sizemax $MAX_SIZE -r $MAX_REF_DIST -p 0 -P $OVERLAP -C $MAX_REF_DIST
+truvari bench --typeignore -o $OUTPUT_DIR/FromTPCall -f $REF_GENOME -b ${SV_FILE_A}.gz -c ${TRUVARI_DIR}/tp-comp.sorted.vcf.gz -s $MIN_SIZE --sizemax $MAX_SIZE -r $MAX_REF_DIST -p 0 -P $OVERLAP -C $MAX_REF_DIST
+gunzip -c $OUTPUT_DIR/FromTPCall/tp-base.vcf.gz > $OUTPUT_DIR/FromTPCall/tp-base.vcf
+gunzip -c $OUTPUT_DIR/FromTPCall/tp-comp.vcf.gz > $OUTPUT_DIR/FromTPCall/tp-comp.vcf
+
 truvari bench --typeignore -o $OUTPUT_DIR/FromTPBase -f $REF_GENOME -b ${SV_FILE_A}.gz -c ${TRUVARI_DIR}/tp-base.sorted.vcf.gz -s $MIN_SIZE --sizemax $MAX_SIZE -r $MAX_REF_DIST -p 0 -P $OVERLAP -C $MAX_REF_DIST
+gunzip -c $OUTPUT_DIR/FromTPBase/tp-base.vcf.gz > $OUTPUT_DIR/FromTPBase/tp-base.vcf
+gunzip -c $OUTPUT_DIR/FromTPBase/tp-comp.vcf.gz > $OUTPUT_DIR/FromTPBase/tp-comp.vcf
