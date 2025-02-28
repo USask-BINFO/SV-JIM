@@ -42,7 +42,11 @@ fi
 truvari bench --typeignore -o $OUTPUT_DIR/FromTPCall -f $REF_GENOME -b ${SV_FILE_A}.gz -c ${TRUVARI_DIR}/tp-comp.sorted.vcf.gz -s $MIN_SIZE --sizemax $MAX_SIZE -r $MAX_REF_DIST -p 0 -P $OVERLAP -C $MAX_REF_DIST
 gunzip -c $OUTPUT_DIR/FromTPCall/tp-base.vcf.gz > $OUTPUT_DIR/FromTPCall/tp-base.vcf
 gunzip -c $OUTPUT_DIR/FromTPCall/tp-comp.vcf.gz > $OUTPUT_DIR/FromTPCall/tp-comp.vcf
+gunzip -c $OUTPUT_DIR/FromTPCall/fp.vcf.gz > $OUTPUT_DIR/FromTPCall/fp.vcf
+gunzip -c $OUTPUT_DIR/FromTPCall/fn.vcf.gz > $OUTPUT_DIR/FromTPCall/fn.vcf
 
 truvari bench --typeignore -o $OUTPUT_DIR/FromTPBase -f $REF_GENOME -b ${SV_FILE_A}.gz -c ${TRUVARI_DIR}/tp-base.sorted.vcf.gz -s $MIN_SIZE --sizemax $MAX_SIZE -r $MAX_REF_DIST -p 0 -P $OVERLAP -C $MAX_REF_DIST
 gunzip -c $OUTPUT_DIR/FromTPBase/tp-base.vcf.gz > $OUTPUT_DIR/FromTPBase/tp-base.vcf
 gunzip -c $OUTPUT_DIR/FromTPBase/tp-comp.vcf.gz > $OUTPUT_DIR/FromTPBase/tp-comp.vcf
+gunzip -c $OUTPUT_DIR/FromTPBase/fp.vcf.gz > $OUTPUT_DIR/FromTPBase/fp.vcf
+gunzip -c $OUTPUT_DIR/FromTPBase/fn.vcf.gz > $OUTPUT_DIR/FromTPBase/fn.vcf

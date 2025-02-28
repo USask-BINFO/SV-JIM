@@ -327,7 +327,7 @@ rule combine_sniffles_svim_types_to_all_directory_Lrg:
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM/DUP/Lrg"),
                 str(config["truvariResultsFolder"] + "/Sniffles-SVIM/INV/Lrg")
         shell:
-                "bash ./Scripts/combine_vcf_files_basic.sh {params}"
+                "bash -x ./Scripts/combine_vcf_files_basic.sh {params}"
 
 rule combine_cuteSV_pav_svim_to_all_directory_Lrg:
         input:

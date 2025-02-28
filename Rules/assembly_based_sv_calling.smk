@@ -37,9 +37,9 @@ rule sv_calling_w_pav:
         #        config["pavCondaEnvYAML"]
         shell:
                 "mkdir -p {params.svOutDir};\n"
-                "bash -x ./Scripts/run-PAV-SnakeMake-pipe.sh {threads} {params.svOutDir} {input} {params.qryID} {output}"
+                "bash ./Scripts/run-PAV-SnakeMake-pipe.sh {threads} {params.svOutDir} {input} {params.qryID} {output}"
 
-rule unzip_and_rename_pav_results:
+rule unzip_rename_and_check_headers_in_pav_results:
         input:
                str(SV_RESULTS_DIR + "/PAV/"+ QRY_SAMP_NAME + ".vcf.gz")
         output:
@@ -48,6 +48,9 @@ rule unzip_and_rename_pav_results:
         benchmark:
                 repeat(str(BENCH_DIR + "/SVCalling.Assembly.benchmarking.tsv"), BENCH_REPEAT)
         params:
-               str(SV_RESULTS_DIR +"/PAV/")
+               destDir=str(SV_RESULTS_DIR +"/PAV/"),
+               headerFile=config["appendVCFHeadersFile"],
+               tempFile=str(SV_RESULTS_DIR +"/PAV/addedHeaders.vcf")
+
         shell:
-               "gunzip -c {input} > {output};"
+               "bash ./Scripts/unzip_rename_and_add_vcf_headers.sh {input} {output} {params}"

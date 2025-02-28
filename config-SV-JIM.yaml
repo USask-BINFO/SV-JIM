@@ -65,6 +65,7 @@ minMAPQForSVs: 20 # PHRED-scaled quality score (relates to probability of error 
 minSuppReadsForSVs: 10 # Evidence threshold for the number of reads the support/indicate the presence of an SV
 minSizeForSVs: 50 # Filtering for min size of the SV to be detected (50 based on common definition for SV min size in literature)
 maxSizeForSVs: 300000 # Filtering maximum size for SV detectable by tools
+appendVCFHeadersFile: "./additionalVCFHeaderLines.txt" #File path to a list of VCF headers to be appended to the a VCF file
 
 #CuteSV Configurations (Default settings taken from CuteSV paper, see CuteSV help menu or repo for more details)
 maxClusterBias: 100

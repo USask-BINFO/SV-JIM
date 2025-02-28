@@ -32,3 +32,5 @@ fi
 truvari bench --typeignore -o $OUTPUT_DIR -f $REF_GENOME -b ${SV_FILE_A}.gz -c ${SV_FILE_B}.gz -s $MIN_SIZE --sizemax $MAX_SIZE -r $MAX_REF_DIST -p 0 -P $OVERLAP -C $MAX_REF_DIST
 gunzip -c $OUTPUT_DIR/tp-base.vcf.gz > $OUTPUT_DIR/tp-base.vcf
 gunzip -c $OUTPUT_DIR/tp-comp.vcf.gz > $OUTPUT_DIR/tp-comp.vcf
+gunzip -c $OUTPUT_DIR/fp.vcf.gz > $OUTPUT_DIR/fp.vcf
+gunzip -c $OUTPUT_DIR/fn.vcf.gz > $OUTPUT_DIR/fn.vcf
