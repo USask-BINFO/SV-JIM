@@ -22,34 +22,34 @@ and aggregated SV results on the basis of minimum supporting callers (Ex: minTwo
 SV-JIM is a Snakemake pipeline that utilizes multiple third party software tools. Many of these tools are installable as conda package so the pipeline includes
 a conda configuration file for user convenience.
 
-The full list of required software is provided below and includes version information for the software versions that were used during testing:
+The full list of required software is provided below and includes version information for the software versions that were used during the February 2025 dependency update:
 
 #### Dependencies installed through the provided conda configuration file
 
-  - biopython		(1.80)
-  - cutesv		(2.0.2)
-  - svim		(1.4.2)
+  - biopython		(1.85)
+  - cutesv		(2.1.1)
+  - svim		(2.0.0)
   - svim-asm		(1.0.3)
-  - intervaltree	(3.0.2)
-  - scipy		(1.10.0)
-  - mamba		(1.2.0)
-  - numpy		(1.24.2)
-  - snakemake		(7.21.0)
-  - pysam		(0.20.0)
-  - sniffles=2.0	(2.0.7)
+  - intervaltree	(3.1.0)
+  - scipy		(1.15.2)
+  - mamba		(2.0.5)
+  - numpy		(1.26.4)
+  - snakemake		(8.29.0)
+  - pysam		(0.23.0)
+  - sniffles=2.0	(2.6.0)
   - pandas		(1.5.3)
-  - matplotlib		(3.6.3)
-  - matplotlib-venn	(0.11.7)
-  - truvari		(3.5.0)
+  - matplotlib		(3.10.3)
+  - matplotlib-venn	(1.1.1)
+  - truvari		(5.2.0)
 
 #### Other dependencies
 
-  - SRA-Tools		(3.0.2)
-  - Minimap2		(2.24-r1122)
-  - SAMTools		(1.16.1)
-  - BCFTools		(1.16)
-  - BEDTools		(2.30.0)
-  - PAV			(2.2.1)
+  - SRA-Tools		(3.2.0)
+  - Minimap2		(2.28-r1221-dirty)
+  - SAMTools		(1.21)
+  - BCFTools		(1.21)
+  - BEDTools		(2.31.1)
+  - PAV			(2.4.6)
 
 Additionally, the pipeline must be launched from an environment with Snakemake installed.
 
@@ -70,7 +70,7 @@ For configuration, SV-JIM provides a [config file template](config-SV-JIM.yaml) 
 directory information to enable execution. The provided template config file features many default values that utilize the provided working directory structure; 
 however, these values are configurable if the preference is to use alternative directories. Further details on each of the available parameters is provided in later in this section.
 
-Finally, SV-JIM includes a [conda environment file](All-Env.yaml) that permits Snakemake to install many of the pipeline's dependencies; however, the provided pipeline config file can also be 
+Finally, SV-JIM includes a [conda environment file](./Rules/All-Env.yaml) that permits Snakemake to install many of the pipeline's dependencies; however, the provided pipeline config file can also be 
 updated to use alternative conda environment files if using separate conda environments with specific/non-conflicting software versions is required.
 
 If an alternative conda environment is preferable, a conda environment file can be generated as follows:
@@ -87,6 +87,7 @@ conda file in the pipeline's config file.
 ##### Reference Sequence Information
  - `refSampleName`:  Short ID for user to distinguish files (EX: "NI100")
  - `refAssembly`: Path to Reference Fenome fasta file (EX: "./Genomes/Bnigra_NI100.fasta")
+ - `refFileExtension`: File extension information for the refAssembly file # (EX: "fasta", "fa","fna")
  - `refSeqsFile`: File of regions in the reference genome to include. For example, the chromosomes only. (EX:"./Genomes/RefSeqsToInclude.txt")
 	- Contents of the target file should contain one region per line. 
 	- This type of file can be created with:
@@ -95,6 +96,7 @@ conda file in the pipeline's config file.
 ##### Query Sequence Information
  - `qrySampleName`:  Short ID for user to distinguish files (EX: "C2")
  - `qryAssembly`: Path to Reference Fenome fasta file (EX: "./Genomes/Bnigra_NI100.fasta")
+ - `qryFileExtension`: File extension informatio for the qryAssembly file # (EX: "fasta", "fa","fna")
  - `qrySeqsFile`: File of regions/contigs in the query assembly to be included. (EX:"./Genomes/QrySeqsToInclude.txt")
 	- Contents of the target file should contain one region per line. 
 	- This type of file can be created quickly with:
@@ -166,6 +168,7 @@ For context, these default settings were taken from the supplementary informatio
  - `minSuppReadsForSVs`: Min number of reads that support/indicate the presence of an SV. (EX: 10)
  - `minSizeForSVs`: Min size of SVs to be detected [50 is the common definition in literature]. (EX: 50)
  - `maxSizeForSVs`: Filtering maximum size for SV detectable by tools (EX: 300000)
+ - `appendVCFHeadersFile`: #File path to a list of metadata headers to be appended to VCF files (EX:"./additionalVCFHeaderLines.txt")
 
 ##### CuteSV Configurations
 As with the general SV configurations above, the default settings are taken from the CuteSV publication. Please see the [CuteSV repo](https://github.com/tjiangHIT/cuteSV) for more details on the significance of these settings.
