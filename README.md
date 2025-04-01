@@ -11,8 +11,8 @@ This workflow simplifies the generation of a comprehensive evidence-based SV res
 
 SV-JIM requires genome assemblies from both a reference and query sample in FASTA format and a long-reads FASTQ file containing reads that belongs to query sample.
 The input genome assembly files must be pre-downloaded by the user and the path information must be updated in the configuration file prior to execution. Similarly,
-the read file can also be provided before execution; however, the pipeline also supports prefetching read data with SRATools based on the accession information added
-to the config file.
+the read file can also be provided before execution; however, the pipeline also supports an optional workflow to prefetch read data with SRATools based on the 
+accession information added to the config file.
 
 After execution, SV-JIM produces multiple SV result files in Variant Call Format (VCF), including the original outputs, intersections for specific tool combinations, 
 and aggregated SV results on the basis of minimum supporting callers (Ex: minTwo or minThree).
@@ -220,6 +220,12 @@ Note:
  - Adding `--rerun-incompletes` to the command may be necessary if the pipeline terminates unexpectedly during execution to restart tasks that were in progress at the time.
  - Unexpected termination may also result in a locked working directory; however, this lock can be removed by either running ```snakemake --unlock``` in the SV-JIM home directory
  or by deleting the contents of the `<PAV_Directory>/.snakemake/locks/` directory if the reported lock was applied by PAV's Snakemake pipeline.
+
+#### D) Optional Prefetch pre-work
+
+SV-JIM provides a secondary workflow to download read files from NCBI using SRA-Tools. To execute this optional pre-work step, please ensure that the read files list contains a list of all accession numbers to be downloaded and that configuration file also reflects these details. Once configured the reads can be fetched from NCBI by SV-JIM by running the following pre-work pipeline.
+
+1. Run: ```snakemake -s Snakefile-prefetch --use-conda --cores <#threads>```
 
 ## Pipeline Test Example (Arabidopsis thaliana)
 

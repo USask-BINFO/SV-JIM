@@ -1,0 +1,19 @@
+configfile: "./config-SV-JIM.yaml"
+
+#Identify Long Read Input Directories and Prefixes for Rules
+LR_DIR=config["longReadsFolder"]
+LR_ACCESSION=config["lastLRAccession"]
+LR_PREFIX=str(LR_DIR + "/" + LR_ACCESSION)
+
+#Identify Benchmarking Result Output Directory and Repeat Frequency for Rules
+BENCH_DIR=config["benchmarkDir"]
+BENCH_REPEAT=config["repeatsForBench"]
+
+#Incorporate Subrule files to be executed within this pipeline
+#include: "./Rules/filter_genomes.smk"
+include: "./Rules/prefetch_sequences.smk"
+
+#Default rule containing final output file targets to ensure executiong of entire pipeline
+rule all:
+        input:
+                   str(LR_PREFIX + ".fastq")

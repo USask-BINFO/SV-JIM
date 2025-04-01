@@ -37,7 +37,7 @@ BENCH_REPEAT=config["repeatsForBench"]
 
 #Incorporate Subrule files to be executed within this pipeline
 include: "./Rules/filter_genomes.smk"
-include: "./Rules/prefetch_sequences.smk"
+#include: "./Rules/prefetch_sequences.smk"
 
 include: "./Rules/align_files_w_minimap2.smk"
 include: "./Rules/sort_alignment_files.smk"
